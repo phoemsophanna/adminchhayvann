@@ -121,6 +121,28 @@ const LayoutNav = (props) => {
 						Career
 					</NavLink>
 				</NavItem>
+				<NavItem>
+					<NavLink
+						style={{ cursor: "pointer" }}
+						className={classnames({ active: props.router.location.pathname === "/site-setting/individual" })}
+						onClick={() => {
+							toggle("individual");
+						}}
+					>
+						Individual
+					</NavLink>
+				</NavItem>
+				<NavItem>
+					<NavLink
+						style={{ cursor: "pointer" }}
+						className={classnames({ active: props.router.location.pathname === "/site-setting/corporate" })}
+						onClick={() => {
+							toggle("corporate");
+						}}
+					>
+						Corporate
+					</NavLink>
+				</NavItem>
 			</Nav>
 		</React.Fragment>
 	);

@@ -58,6 +58,8 @@ import MainFaq from "../pages/Pages/MainFaq/MainFaq";
 import General from "../pages/Pages/SiteSetting/General";
 import Role from "../pages/Pages/Role/index";
 import RoleForm from "../pages/Pages/Role/RoleForm";
+import IndividualPage from "../pages/Pages/SiteSetting/IndividualPage";
+import CorporatePage from "../pages/Pages/SiteSetting/CorporatePage";
 
 const authProtectedRoutes = [
 	{ path: "/dashboard", component: <Dashboard />, role: "dashboard" },
@@ -121,6 +123,8 @@ const authProtectedRoutes = [
 	{ path: "/product-menu/edit/:id", component: <ProductForm />, role: "product-menu.edit" },
 	{ path: "/site-setting/services", component: <Servicepage />, role: "site-setting" },
 	{ path: "/site-setting/trading", component: <Tradingpage />, role: "site-setting" },
+	{ path: "/site-setting/individual", component: <IndividualPage />, role: "site-setting" },
+	{ path: "/site-setting/corporate", component: <CorporatePage />, role: "site-setting" },
 	{ path: "/categories", component: <Category />, role: "news-menu.view" },
 	{ path: "/main-faq", component: <MainFaq />, role: "faq.view" },
 	{ path: "/site-setting/general", component: <General />, role: "site-setting" },

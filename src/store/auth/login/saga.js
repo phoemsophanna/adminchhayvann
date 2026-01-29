@@ -59,7 +59,7 @@ function* loginAccount({ payload: { user, history } }) {
 		});
 
 		sessionStorage.setItem("authUser", JSON.stringify(response));
-		sessionStorage.setItem("permissions", JSON.stringify(response?.permission));
+		sessionStorage.setItem("permissions", JSON.stringify(response));
 
 		if (response.status === "success") {
 			yield put(loginSuccess(response.data));

@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
-import { Button, Card, CardBody, CardHeader, Col, Container, Form, Input, Label, Modal, ModalBody, ModalHeader, Row, Spinner } from "reactstrap";
+import { Button, Card, CardBody, CardHeader, Col, Container, Form, Input, Label, Modal, ModalBody, ModalHeader, Nav, NavItem, NavLink, Row, Spinner, TabContent, TabPane } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getSiteSetting, resetSiteSettingFlag, saveSiteSetting } from "../../../store/actions";
@@ -29,7 +29,10 @@ const ContactUs = () => {
 	const [phone, setPhone] = useState([]);
 	const [showModal, setShowModal] = useState(false);
 	const [edit, setEdit] = useState("");
-	
+	const [titleTap, settitleTap] = useState("ENG");
+	const titleTapToggle = (lang) => {
+		settitleTap(lang);
+	}
 	const closeModal = () => {
 		setShowModal(false);
 	}
@@ -71,6 +74,15 @@ const ContactUs = () => {
 			instagramLink: siteSetting ? siteSetting.instagramLink : "",
 			telegramLink: siteSetting ? siteSetting.telegramLink : "",
 			linkedinLink: siteSetting ? siteSetting.linkedinLink : "",
+			subtitle: siteSetting ? siteSetting?.subtitle : "",
+			subtitleKm: siteSetting ? siteSetting?.subtitleKm : "",
+			title: siteSetting ? siteSetting?.title : "",
+			titleKm: siteSetting ? siteSetting?.titleKm : "",
+			titlePopup: siteSetting ? siteSetting?.titlePopup : "",
+			titlePopupKm: siteSetting ? siteSetting?.titlePopupKm : "",
+			summaryPopup: siteSetting ? siteSetting?.summaryPopup : "",
+			summaryPopupKm: siteSetting ? siteSetting?.summaryPopupKm : "",
+			addressKm: siteSetting ? siteSetting?.addressKm : "",
 			youtube: siteSetting ? siteSetting.youtube : "",
 			appId: siteSetting ? siteSetting.appId : "",
 			pageId: siteSetting ? siteSetting.pageId : "",
@@ -189,6 +201,36 @@ const ContactUs = () => {
 									<Row>
 										<Col xl={8}>
 											<Card>
+												<CardHeader>
+													<div className="align-items-center d-flex">
+														<div className="flex-shrink-0">
+															<Nav tabs className="nav justify-content-end nav-tabs-custom rounded card-header-tabs border-bottom-0">
+																<NavItem>
+																	<NavLink
+																		style={{ cursor: "pointer" }}
+																		className={titleTap == "ENG" ? "active" : ""}
+																		onClick={() => {
+																			titleTapToggle("ENG");
+																		}}
+																	>
+																		English
+																	</NavLink>
+																</NavItem>
+																<NavItem>
+																	<NavLink
+																		style={{ cursor: "pointer" }}
+																		className={titleTap == "KHM" ? "active" : ""}
+																		onClick={() => {
+																			titleTapToggle("KHM");
+																		}}
+																	>
+																		Khmer
+																	</NavLink>
+																</NavItem>
+															</Nav>
+														</div>
+													</div>
+												</CardHeader>
 												<CardBody>
 													<Row>
 														<Col xl={6}>
@@ -289,21 +331,184 @@ const ContactUs = () => {
 															</div>
 														</Col>
 													</Row>
-													<div className="mb-3">
-														<Label className="form-label" htmlFor="address-input">
-															Address
-														</Label>
-														<textarea
-															className="form-control"
-															id="address-input"
-															rows="3"
-															placeholder="Enter address"
-															name="address"
-															onChange={settingForm.handleChange}
-															onBlur={settingForm.handleBlur}
-															value={settingForm.values.address}
-														></textarea>
-													</div>
+													
+													<TabContent activeTab={titleTap}>
+														<TabPane tabId={`ENG`} id="eng">
+															<div className="mb-3">
+																<Label className="form-label" htmlFor="address-input">
+																	Address
+																</Label>
+																<textarea
+																	className="form-control"
+																	id="address-input"
+																	rows="3"
+																	placeholder="Enter address"
+																	name="address"
+																	onChange={settingForm.handleChange}
+																	onBlur={settingForm.handleBlur}
+																	value={settingForm.values.address}
+																></textarea>
+															</div>
+															<Row>
+																<Col xl={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="subtitle-input">
+																			Subtitle
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="subtitle-input"
+																			placeholder="Enter text"
+																			name="subtitle"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.subtitle}
+																		/>
+																	</div>
+																</Col>
+																<Col xl={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="title-input">
+																			Title
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="title-input"
+																			placeholder="Enter text"
+																			name="title"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.title}
+																		/>
+																	</div>
+																</Col>
+																<Col xl={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="title-popup-input">
+																			Title Popup
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="title-popup-input"
+																			placeholder="Enter text"
+																			name="titlePopup"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.titlePopup}
+																		/>
+																	</div>
+																</Col>
+																<Col xl={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="summary-popup-input">
+																			Summary Popup
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="summary-popup-input"
+																			placeholder="Enter text"
+																			name="summaryPopup"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.summaryPopup}
+																		/>
+																	</div>
+																</Col>
+															</Row>
+														</TabPane>
+														<TabPane tabId={`KHM`} id="khm">
+															<div className="mb-3">
+																<Label className="form-label" htmlFor="address-km-input">
+																	Address Khmer
+																</Label>
+																<textarea
+																	className="form-control"
+																	id="address-km-input"
+																	rows="3"
+																	placeholder="Enter address khmer"
+																	name="addressKm"
+																	onChange={settingForm.handleChange}
+																	onBlur={settingForm.handleBlur}
+																	value={settingForm.values.addressKm}
+																></textarea>
+															</div>
+															<Row>
+																<Col xl={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="subtitle-km-input">
+																			Subtitle Khmer
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="subtitle-km-input"
+																			placeholder="Enter text khmer"
+																			name="subtitleKm"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.subtitleKm}
+																		/>
+																	</div>
+																</Col>
+																<Col xl={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="title-km-input">
+																			Title Khmer
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="title-km-input"
+																			placeholder="Enter text"
+																			name="titleKm"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.titleKm}
+																		/>
+																	</div>
+																</Col>
+																<Col xl={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="title-popup-km-input">
+																			Title Popup Khmer
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="title-popup-km-input"
+																			placeholder="Enter text khmer"
+																			name="titlePopupKm"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.titlePopupKm}
+																		/>
+																	</div>
+																</Col>
+																<Col xl={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="summary-popup-km-input">
+																			Summary Popup Khmer
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="summary-popup-km-input"
+																			placeholder="Enter text"
+																			name="summaryPopupKm"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.summaryPopupKm}
+																		/>
+																	</div>
+																</Col>
+															</Row>
+														</TabPane>
+													</TabContent>
+													
 													<div className="mb-3">
 														<Label className="form-label" htmlFor="embedMap-input">
 															Embed Map
