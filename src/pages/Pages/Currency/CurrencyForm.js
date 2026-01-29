@@ -277,7 +277,7 @@ const CurrencyForm = (props) => {
 											<Col md={6}>
 												<div className="mb-3">
 													<Label className="form-label" htmlFor="currency-rate-input">
-														Currency Main Rate <small className="text-danger">(Required)</small>
+														Currency Rate (1 USD = ?)<small className="text-danger">(Required)</small>
 													</Label>
 													<Input
 														type="text"
@@ -296,7 +296,7 @@ const CurrencyForm = (props) => {
 												</div>
 											</Col>
 										</Row>
-										<div className="container-currency" style={{padding: 10, backgroundColor: "#f4f4f4", borderRadius: 5}}>
+										<div className="container-currency" style={{padding: 10, backgroundColor: "#f4f4f4", borderRadius: 5}} hidden>
 											<div className="header-currency" style={{position: "relative", marginBottom: 10}}>
 												<div className="content-currency">
 													<Input type="text" onChange={(e) => selectCurrency(e.target.value)} />

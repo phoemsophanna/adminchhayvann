@@ -94,6 +94,8 @@ const HowTrade = () => {
 
 	useEffect(() => {
 		if (siteSetting) {
+			setContentDesc(siteSetting?.des);
+			setContentKmDesc(siteSetting?.desKm);
 			if (siteSetting.thumbnail) {
 				setFile([
 					{
@@ -193,19 +195,19 @@ const HowTrade = () => {
 																/>
 															</div>
 															<div className="mb-3">
-																<Label className="form-label" htmlFor="companyName-input">
+																<Label className="form-label" htmlFor="title-input">
 																	Title
 																</Label>
 																<Input
 																	type="text"
 																	className="form-control"
-																	id="companyName-input"
+																	id="title-input"
 																	placeholder="Enter text"
-																	name="companyName"
+																	name="title"
 																	onChange={settingForm.handleChange}
 																	onBlur={settingForm.handleBlur}
-																	value={settingForm.values.companyName}
-																	invalid={settingForm.touched.companyName && settingForm.errors.companyName ? true : false}
+																	value={settingForm.values.title}
+																	invalid={settingForm.touched.title && settingForm.errors.title ? true : false}
 																/>
 															</div>
 															<div className="mb-3">
@@ -237,13 +239,13 @@ const HowTrade = () => {
 																<Input
 																	type="text"
 																	className="form-control"
-																	id="companyName-km-input"
+																	id="titleKm-input"
 																	placeholder="Enter text"
-																	name="companyNameKm"
+																	name="titleKm"
 																	onChange={settingForm.handleChange}
 																	onBlur={settingForm.handleBlur}
-																	value={settingForm.values.companyNameKm}
-																	invalid={settingForm.touched.companyNameKm && settingForm.errors.companyNameKm ? true : false}
+																	value={settingForm.values.titleKm}
+																	invalid={settingForm.touched.titleKm && settingForm.errors.titleKm ? true : false}
 																/>
 															</div>
 															<div className="mb-3">

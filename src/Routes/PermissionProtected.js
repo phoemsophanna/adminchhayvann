@@ -35,11 +35,17 @@ const PermissionProtected = (props) => {
   if (hasPermission) {
     return <>{children}</>;
   } else {
-    const [roles, action] = rolePermission.permission[0].split('.');
-    const redirect = rolePermission.permission?.includes("dashboard") ? "/index" : `/${roles}`;
-    return (
-      <Navigate to={{ pathname: redirect, state: { from: props.location } }} />
-    );
+    if(rolePermission.permission) {
+      const [roles, action] = rolePermission.permission[0].split('.');
+      const redirect = rolePermission.permission?.includes("dashboard") ? "/index" : `/${roles}`;
+      return (
+        <Navigate to={{ pathname: redirect, state: { from: props.location } }} />
+      );
+    } else {
+      return (
+        <Navigate to={{ pathname: "/index", state: { from: props.location } }} />
+      );
+    }
   }
 };
 
