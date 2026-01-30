@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
-import { Button, Card, CardBody, Col, Container, Form, Input, Label, Row, Spinner } from "reactstrap";
+import { Button, Card, CardBody, CardHeader, Col, Container, Form, Input, Label, Nav, NavItem, NavLink, Row, Spinner, TabContent, TabPane } from "reactstrap";
 import { api } from "../../../config";
 import { useDispatch, useSelector } from "react-redux";
 // Import React FilePond
@@ -25,6 +25,11 @@ const PrivacyPolicy = () => {
 	const dispatch = useDispatch();
 	const [file, setFile] = useState([]);
 	const [contentDesc, setContentDesc] = useState("");
+	const [contentDescKm, setContentDescKm] = useState("");
+	const [titleTap, settitleTap] = useState("ENG");
+	const titleTapToggle = (lang) => {
+		settitleTap(lang);
+	}
 
 	const siteSettingSelector = createSelector(
 		(state) => state.SiteSettingReducer,
@@ -40,6 +45,10 @@ const PrivacyPolicy = () => {
 
 	const handleEditorChange = (e) => {
 		setContentDesc(e.target.getContent());
+	};
+
+	const handleEditorChangeKm = (e) => {
+		setContentDescKm(e.target.getContent());
 	};
 
 	useEffect(() => {
@@ -60,11 +69,13 @@ const PrivacyPolicy = () => {
 		initialValues: {
 			type: "PRIVACY_POLICY",
 			description: siteSetting ? siteSetting.description : "",
+			descriptionKm: siteSetting ? siteSetting.descriptionKm : "",
 			thumbnail: siteSetting ? siteSetting.thumbnail : "",
 		},
 		onSubmit: (values) => {
 			values.thumbnail = file?.length > 0 ? file[0]?.serverId : siteSetting.thumbnail;
 			values.description = contentDesc;
+			values.descriptionKm = contentDescKm;
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
 				refreshForm();
@@ -75,6 +86,7 @@ const PrivacyPolicy = () => {
 	useEffect(() => {
 		if (siteSetting) {
 			setContentDesc(siteSetting.description);
+			setContentDescKm(siteSetting?.descriptionKm);
 			if (siteSetting.thumbnail) {
 				setFile([
 					{
@@ -89,6 +101,7 @@ const PrivacyPolicy = () => {
 			}
 		} else {
 			setContentDesc("");
+			setContentDescKm("");
 		}
 	}, [siteSetting]);
 
@@ -109,6 +122,36 @@ const PrivacyPolicy = () => {
 							>
 								{/* <h5 className="fs-14 mb-3">General</h5> */}
 								<Card>
+									<CardHeader>
+										<div className="align-items-center d-flex">
+											<div className="flex-shrink-0">
+												<Nav tabs className="nav justify-content-end nav-tabs-custom rounded card-header-tabs border-bottom-0">
+													<NavItem>
+														<NavLink
+															style={{ cursor: "pointer" }}
+															className={titleTap == "ENG" ? "active" : ""}
+															onClick={() => {
+																titleTapToggle("ENG");
+															}}
+														>
+															English
+														</NavLink>
+													</NavItem>
+													<NavItem>
+														<NavLink
+															style={{ cursor: "pointer" }}
+															className={titleTap == "KHM" ? "active" : ""}
+															onClick={() => {
+																titleTapToggle("KHM");
+															}}
+														>
+															Khmer
+														</NavLink>
+													</NavItem>
+												</Nav>
+											</div>
+										</div>
+									</CardHeader>
 									<CardBody>
 										{isLoading ? (
 											<span className="d-flex align-items-center">
@@ -122,7 +165,7 @@ const PrivacyPolicy = () => {
 												<Col xl={12}>
 													<div className="mb-3">
 														<Label className="form-label" htmlFor="thumbnail-input">
-															Thumbnail
+															Banner <small className="text-danger">(1920x400 pixel)</small>
 														</Label>
 														<div className="position-relative d-block mx-auto">
 															<div style={{ width: "100%" }}>
@@ -141,12 +184,24 @@ const PrivacyPolicy = () => {
 													</div>
 												</Col>
 												<Col xl={12}>
-													<div className="mb-3">
-														<Label className="form-label" htmlFor="description-input">
-															Description
-														</Label>
-														<TinymceEditor onUploadImage={handleEditorChange} initDataValue={contentDesc} />
-													</div>
+													<TabContent activeTab={titleTap} >
+														<TabPane tabId={`ENG`} id="eng">
+															<div className="mb-3">
+																<Label className="form-label" htmlFor="description-input">
+																	Description
+																</Label>
+																<TinymceEditor onUploadImage={handleEditorChange} initDataValue={contentDesc} />
+															</div>
+														</TabPane>
+														<TabPane tabId={`KHM`} id="khm">
+															<div className="mb-3">
+																<Label className="form-label" htmlFor="description-input">
+																	Description Khmer
+																</Label>
+																<TinymceEditor onUploadImage={handleEditorChangeKm} initDataValue={contentDescKm} />
+															</div>
+														</TabPane>
+													</TabContent>
 												</Col>
 											</Row>
 										)}

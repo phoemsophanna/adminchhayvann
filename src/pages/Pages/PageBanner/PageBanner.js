@@ -186,6 +186,9 @@ const PageBanner = () => {
 						autoComplete="off"
 					>
 						<div className="text-center">
+							<Label htmlFor="name" className="form-label">
+								Banner <small className="text-danger">(1920x400 pixel)</small>
+							</Label>
 							<div style={{ width: "100%" }}>
 								<FilePond
 									labelIdle='<span class="filepond--label-action">Choose Profile Image</span>'
@@ -219,7 +222,7 @@ const PageBanner = () => {
 								disabled
 							/>
 						</div>
-						<div className="mb-2">
+						<div className="mb-2" hidden>
 							<Label htmlFor="metaKeyword" className="form-label">
 								Meta Keyword
 							</Label>
@@ -234,7 +237,7 @@ const PageBanner = () => {
 								value={pageBannerValidation.values.metaKeyword || ""}
 							/>
 						</div>
-						<div className="mb-2">
+						<div className="mb-2" hidden>
 							<Label htmlFor="metaDesc" className="form-label">
 								Meta Description
 							</Label>
@@ -250,7 +253,7 @@ const PageBanner = () => {
 							/>
 						</div>
 
-						<div className="form-check form-switch form-switch-md mb-2" dir="ltr">
+						<div className="form-check form-switch form-switch-md mb-2" dir="ltr" hidden>
 							<Input
 								type="checkbox"
 								className="form-check-input"

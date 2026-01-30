@@ -71,21 +71,21 @@ const TableList = ({ onShowDetail, onDeletePageBanner }) => {
 					</>
 				),
 			},
-			{
-				// End Table
-				Header: "Status",
-				accessor: "isActive",
-				filterable: false,
-				Cell: (PageBanner) => (
-					<>
-						{PageBanner.row.original.isActive ? (
-							<span className="badge bg-success-subtle text-success">ACTIVE</span>
-						) : (
-							<span className="badge bg-danger-subtle text-danger">IN-ACTIVE</span>
-						)}
-					</>
-				),
-			},
+			// {
+			// 	// End Table
+			// 	Header: "Status",
+			// 	accessor: "isActive",
+			// 	filterable: false,
+			// 	Cell: (PageBanner) => (
+			// 		<>
+			// 			{PageBanner.row.original.isActive ? (
+			// 				<span className="badge bg-success-subtle text-success">ACTIVE</span>
+			// 			) : (
+			// 				<span className="badge bg-danger-subtle text-danger">IN-ACTIVE</span>
+			// 			)}
+			// 		</>
+			// 	),
+			// },
 			{
 				Header: "Action",
 				Cell: (cellProps) => {
