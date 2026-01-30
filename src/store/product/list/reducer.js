@@ -9,6 +9,7 @@ const initialState = {
 };
 
 const ProductListReducer = (state = initialState, action) => {
+	console.log(action.payload);
 	switch (action.type) {
 		case PRODUCT_LIST:
 			state = {

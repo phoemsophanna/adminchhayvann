@@ -46,6 +46,8 @@ const ProductMenu = () => {
 		}
 	};
 
+	console.log(isLoading);
+
 	useEffect(() => {
 		dispatch(fetchProductList());
 	}, [dispatch]);

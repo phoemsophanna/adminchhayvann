@@ -9,7 +9,7 @@ function* fetchProductListSaga() {
 	try {
 		const response = yield call(getProductList);
 		if (response) {
-			yield put(fetchProductListSuccess(response.data));
+			yield put(fetchProductListSuccess(response.products));
 		} else {
 			yield put(fetchProductListFail(response));
 		}
