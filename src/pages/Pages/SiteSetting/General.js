@@ -63,6 +63,7 @@ const General = () => {
 			summary: siteSetting ? siteSetting.summary : "",
 			summaryKm: siteSetting ? siteSetting.summaryKm : "",
 			keyword: siteSetting ? siteSetting.keyword : "",
+			onlineTrading: siteSetting ? siteSetting.onlineTrading : "",
 			logo_header: siteSetting ? siteSetting.logo_header : "", 
 			logo_footer: siteSetting ? siteSetting.logo_footer : "",
 		},
@@ -262,6 +263,22 @@ const General = () => {
 															onBlur={settingForm.handleBlur}
 															value={settingForm.values.keyword}
 															invalid={settingForm.touched.keyword && settingForm.errors.keyword ? true : false}
+														/>
+													</div>
+													<div className="mb-3">
+														<Label className="form-label" htmlFor="online-trading-input">
+															Online Trading
+														</Label>
+														<Input
+															type="text"
+															className="form-control"
+															id="online-trading-input"
+															placeholder="Enter link"
+															name="onlineTrading"
+															onChange={settingForm.handleChange}
+															onBlur={settingForm.handleBlur}
+															value={settingForm.values.onlineTrading}
+															invalid={settingForm.touched.onlineTrading && settingForm.errors.onlineTrading ? true : false}
 														/>
 													</div>
 												</Col>
