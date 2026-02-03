@@ -102,7 +102,36 @@ const Navdata = () => {
 				e.preventDefault();
 			},
 		},
-
+		{
+			id: "application-menu",
+			label: "Job Applications",
+			icon: "mdi mdi-file-account-outline",
+			link: "/application-form",
+			role: useCan("application-form.view"),
+			click: function (e) {
+				e.preventDefault();
+			},
+		},
+		{
+			id: "corporate-menu",
+			label: "Corporate Account",
+			icon: "mdi mdi-card-account-details-outline",
+			link: "/corporate-form",
+			role: useCan("corporate-form.view"),
+			click: function (e) {
+				e.preventDefault();
+			},
+		},
+		{
+			id: "individual-menu",
+			label: "Individual Account",
+			icon: "mdi mdi-card-account-details-outline",
+			link: "/individual-form",
+			role: useCan("individual-form.view"),
+			click: function (e) {
+				e.preventDefault();
+			},
+		},
 		{
 			label: "pages",
 			isHeader: true,

@@ -203,7 +203,7 @@ const CareerMenu = () => {
 									<div>
 										{!isLoading ? (
 											<TableContainer
-												columns={columns}
+												columns={columnsCheck}
 												data={careers || []}
 												isGlobalFilter={true}
 												isAddUserList={false}

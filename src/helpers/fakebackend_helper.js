@@ -210,3 +210,18 @@ export const getPageBannerList = () => api.get(url.PAGE_BANNER_URI, null);
 export const postCreatePageBanner = (body) => api.create(url.PAGE_BANNER_URI, body);
 export const getPageBannerShowDetail = (param) => api.get(`${url.PAGE_BANNER_URI}/detail`, param);
 export const deletePageBanner = (userId) => api.delete(`${url.PAGE_BANNER_URI}/delete/${userId}`, null);
+// Application Job Management
+export const getApplicationList = () => api.get(url.APPLICATION, null);
+export const postCreateApplication = (body) => api.create(url.APPLICATION, body);
+export const getApplicationShowDetail = (param) => api.get(`${url.APPLICATION}/detail`, param);
+export const deleteApplication = (userId) => api.delete(`${url.APPLICATION}/delete/${userId}`, null);
+// Corporate Management
+export const getCorporateList = () => api.get(url.CORPORATES, null);
+export const postCreateCorporate = (body) => api.create(url.CORPORATES, body);
+export const getCorporateShowDetail = (param) => api.get(`${url.CORPORATES}/detail`, param);
+export const deleteCorporate = (userId) => api.delete(`${url.CORPORATES}/delete/${userId}`, null);
+// Individual Management
+export const getIndividualList = () => api.get(url.INDIVIDUALS, null);
+export const postCreateIndividual = (body) => api.create(url.INDIVIDUALS, body);
+export const getIndividualShowDetail = (param) => api.get(`${url.INDIVIDUALS}/detail`, param);
+export const deleteIndividual = (userId) => api.delete(`${url.INDIVIDUALS}/delete/${userId}`, null);

@@ -517,3 +517,57 @@ input:-webkit-autofill:active {
   display: flex;
   gap: 10px;
 }
+
+.file-uploads {
+  width: 100%;
+}
+
+.file-upload {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+  border: 1px dashed #c6c6c6;
+  height: 160px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sample-excel {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: start;
+  text-align: start;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #c6c6c6;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.sample-excel .content-Image img {
+  width: 40px;
+  margin-bottom: 10px;
+}
+
+.file-upload .content-Image img {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.file-upload .content-text span {
+  color: rgb(0, 89, 255);
+  text-decoration: 1px underline solid rgb(0, 89, 255);
+}
+
+.file-upload .content-text h6 {
+  color: #444;
+}
+
+.file-upload .content-text p {
+  font-size: 11px;
+}

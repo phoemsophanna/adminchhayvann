@@ -60,6 +60,9 @@ import Role from "../pages/Pages/Role/index";
 import RoleForm from "../pages/Pages/Role/RoleForm";
 import IndividualPage from "../pages/Pages/SiteSetting/IndividualPage";
 import CorporatePage from "../pages/Pages/SiteSetting/CorporatePage";
+import CareerApplyMenu from "../pages/Pages/CareerApply";
+import CorporateMenu from "../pages/Pages/Corporate";
+import IndividualMenu from "../pages/Pages/Individual";
 
 const authProtectedRoutes = [
 	{ path: "/dashboard", component: <Dashboard />, role: "dashboard" },
@@ -131,6 +134,9 @@ const authProtectedRoutes = [
 	{ path: "/role-menu", component: <Role />, role: "role-menu.view"},
 	{ path: "/role-menu/create", component: <RoleForm />, role: "role-menu.create"},
 	{ path: "/role-menu/edit/:id", component: <RoleForm />, role: "role-menu.edit"},
+	{ path: "/application-form", component: <CareerApplyMenu />, role: "application-form.view" },
+	{ path: "/corporate-form", component: <CorporateMenu />, role: "corporate-form.view" },
+	{ path: "/individual-form", component: <IndividualMenu />, role: "individual-form.view" },
 
 	// this route should be at the end of all other routes
 	// eslint-disable-next-line react/display-name

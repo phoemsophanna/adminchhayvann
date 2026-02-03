@@ -466,6 +466,45 @@ const RoleForm = (props) => {
 															/> <label htmlFor="check-user-management">User Management</label>
 														</div>
 													</div>
+													<div className="mb-3">
+														<div className="form-checkbox">
+															<Input
+																type="checkbox"
+																id={`check-application-form`}
+																className="checkPermission"
+																name={`check-application-form`}
+																value={`application-form`}
+																checked={activePermission?.some((q) => q.includes("application-form")) || false}
+																onChange={(e) => addGroupPermission(e)}
+															/> <label htmlFor="check-application-form">Application Job</label>
+														</div>
+													</div>
+													<div className="mb-3">
+														<div className="form-checkbox">
+															<Input
+																type="checkbox"
+																id={`check-corporate-form`}
+																className="checkPermission"
+																name={`check-corporate-form`}
+																value={`corporate-form`}
+																checked={activePermission?.some((q) => q.includes("corporate-form")) || false}
+																onChange={(e) => addGroupPermission(e)}
+															/> <label htmlFor="check-corporate-form">Corporate Register List</label>
+														</div>
+													</div>
+													<div className="mb-3">
+														<div className="form-checkbox">
+															<Input
+																type="checkbox"
+																id={`check-individual-form`}
+																className="checkPermission"
+																name={`check-individual-form`}
+																value={`individual-form`}
+																checked={activePermission?.some((q) => q.includes("individual-form")) || false}
+																onChange={(e) => addGroupPermission(e)}
+															/> <label htmlFor="check-individual-form">Individual Register List</label>
+														</div>
+													</div>
 												</TabPane>
 												<TabPane tabId={"KHM"} id="khm">
 													<div className="mb-3">
@@ -861,6 +900,75 @@ const RoleForm = (props) => {
 															<div className="mb-3 mt-1 subPermission">
 																{
 																	permission[`user-management`]?.map((q,index) => {
+																		return <div key={index} className="subItemPermission">
+																			<Input
+																				type="checkbox"
+																				id={`check-${q}`}
+																				className="checkPermission"
+																				name={`check-${q}`}
+																				value={q}
+																				onChange={(e) => addActionPermission(e)}
+																				checked={activePermission?.includes(q) || false}
+																			/> <label htmlFor={`check-${q}`} style={{textTransform: "capitalize"}}>{q?.replaceAll("-"," ")?.replaceAll(".", " ")}</label>
+																		</div>;
+																	})
+																}
+															</div>
+														</div>
+													</div>
+
+													<div className="mb-3">
+														<div className="form-checkbox">
+															<h6 htmlFor="check-application-form">Application Job</h6>
+															<div className="mb-3 mt-1 subPermission">
+																{
+																	permission[`application-form`]?.map((q,index) => {
+																		return <div key={index} className="subItemPermission">
+																			<Input
+																				type="checkbox"
+																				id={`check-${q}`}
+																				className="checkPermission"
+																				name={`check-${q}`}
+																				value={q}
+																				onChange={(e) => addActionPermission(e)}
+																				checked={activePermission?.includes(q) || false}
+																			/> <label htmlFor={`check-${q}`} style={{textTransform: "capitalize"}}>{q?.replaceAll("-"," ")?.replaceAll(".", " ")}</label>
+																		</div>;
+																	})
+																}
+															</div>
+														</div>
+													</div>
+													
+													<div className="mb-3">
+														<div className="form-checkbox">
+															<h6 htmlFor="check-corporate-form">Corporate Register List</h6>
+															<div className="mb-3 mt-1 subPermission">
+																{
+																	permission[`corporate-form`]?.map((q,index) => {
+																		return <div key={index} className="subItemPermission">
+																			<Input
+																				type="checkbox"
+																				id={`check-${q}`}
+																				className="checkPermission"
+																				name={`check-${q}`}
+																				value={q}
+																				onChange={(e) => addActionPermission(e)}
+																				checked={activePermission?.includes(q) || false}
+																			/> <label htmlFor={`check-${q}`} style={{textTransform: "capitalize"}}>{q?.replaceAll("-"," ")?.replaceAll(".", " ")}</label>
+																		</div>;
+																	})
+																}
+															</div>
+														</div>
+													</div>
+
+													<div className="mb-3">
+														<div className="form-checkbox">
+															<h6 htmlFor="check-individual-form">Individual Register List</h6>
+															<div className="mb-3 mt-1 subPermission">
+																{
+																	permission[`individual-form`]?.map((q,index) => {
 																		return <div key={index} className="subItemPermission">
 																			<Input
 																				type="checkbox"

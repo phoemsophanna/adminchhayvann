@@ -84,3 +84,12 @@ export * from "./pageBanner/detail/actions";
 export * from "./role/list/actions";
 export * from "./role/create/actions";
 export * from "./role/detail/actions";
+// Application Job
+export * from "./applicationJob/detail/actions";
+export * from "./applicationJob/list/actions";
+// Corporate
+export * from "./corporate/detail/actions";
+export * from "./corporate/list/actions";
+// Individual'
+export * from "./individual/detail/actions";
+export * from "./individual/list/actions";

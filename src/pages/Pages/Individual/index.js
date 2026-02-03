@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
+import { Button, Card, CardBody, CardHeader, Col, Container, Modal, ModalBody, ModalHeader, Row } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import { useMemo } from "react";
 import TableContainer from "../../../Components/Common/TableContainer";
@@ -7,48 +7,58 @@ import Loader from "../../../Components/Common/Loader";
 import { Link } from "react-router-dom";
 import { createSelector } from "reselect";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCareer, fetchCareerList, refreshCareerList } from "../../../store/actions";
+import { deleteApplication, deleteCareer, deleteCorporate, deleteIndividual, fetchApplicationDetail, fetchApplicationList, fetchCareerList, fetchCorporateDetail, fetchCorporateList, fetchIndividualDetail, fetchIndividualList, refreshCareerList, refreshCorporateList, refreshIndividualList } from "../../../store/actions";
 import { api } from "../../../config";
 import DeleteModal from "../../../Components/Common/DeleteModal";
 import { useCan, useCanMultiple } from "../../../Components/Common/Permission";
 
-const CareerMenu = () => {
-	document.title = "Career | Admin & Dashboards";
+const IndividualMenu = () => {
+	document.title = "Individual Register List | Admin & Dashboards";
 	const [UID, setUID] = useState(null);
+	const [modal_backdrop, setModel_backdrop] = useState(false);
 	const [deleteModal, setDeleteModal] = useState(false);
 
+	const closeModal = () => {
+		setModel_backdrop(false);
+	}
+	
 	const careerListSelector = createSelector(
-		(state) => state.CareerListReducer,
+		(state) => state.IndividualListReducer,
 		(layout) => ({
-			careers: layout.careers,
+			individuals: layout.individuals,
 			isLoading: layout.isLoading,
 		})
 	);
-	const { careers, isLoading } = useSelector(careerListSelector);
-	const deleteCareerSelector = createSelector(
-		(state) => state.CareerListReducer,
-		(layout) => layout
-	);
-	const careerSelector = useSelector(deleteCareerSelector);
+	const { individuals, isLoading } = useSelector(careerListSelector);
 	const dispatch = useDispatch();
 
 	const handleRefresh = () => {
-		dispatch(refreshCareerList());
+		dispatch(refreshIndividualList());
 	};
+
+	const detailIndividualSelector = createSelector(
+		(state) => state.IndividualDetailReducer,
+		(layout) => ({
+			individual: layout.individual,
+			isLoading: layout.isLoading
+		})
+	);
+
+	const detailIndividual = useSelector(detailIndividualSelector);
 
 	const handleDelete = () => {
 		if (UID) {
-			dispatch(deleteCareer(UID));
-			if (!careerSelector.isLoading) {
-				dispatch(fetchCareerList());
-				setDeleteModal(false);
-			}
+			dispatch(deleteIndividual(UID));
+			dispatch(fetchIndividualList());
+			setDeleteModal(false);
 		}
 	};
 
 	useEffect(() => {
-		dispatch(fetchCareerList());
+		dispatch(fetchIndividualList());
 	}, [dispatch]);
+
+	console.log(detailIndividual);
 
 	const columns = useMemo(
 		() => [
@@ -59,88 +69,106 @@ const CareerMenu = () => {
 				filterable: false,
 			},
 			{
-				Header: "Career",
-				accessor: "title",
+				Header: "Fullname",
+				accessor: "fullname",
 				filterable: false,
 				Cell: (career) => (
 					<div className="d-flex align-items-center">
 						<div className="flex-grow-1">
 							<h5 className="fs-14 mb-1">
 								<Link to="#" className="text-body">
-									{career.row.original.title}
+									{career.row.original.firstname} {career.row.original.lastname}
 								</Link>
 							</h5>
-							<p className="text-muted mb-0 text-truncate" style={{ width: "250px" }}>
-								<span className="fw-medium ">{career.row.original.summary}</span>
-							</p>
 						</div>
 					</div>
 				),
 			},
 			{
-				Header: "Location",
-				accessor: "location",
+				Header: "National ID",
+				accessor: "nationalID",
 				filterable: false,
 				Cell: (career) => (
 					<div className="d-flex align-items-center">
 						<div className="flex-grow-1">
 							<h5 className="fs-14 mb-1">
-								{career.row.original.location}
+								<Link to="#" className="text-body">
+									{career.row.original.nidNumber}
+								</Link>
 							</h5>
 						</div>
 					</div>
 				),
 			},
 			{
-				Header: "Deadline",
-				accessor: "deadline",
+				Header: "Phone Number",
+				accessor: "phoneNumber",
 				filterable: false,
 				Cell: (career) => (
 					<div className="d-flex align-items-center">
 						<div className="flex-grow-1">
 							<h5 className="fs-14 mb-1">
-								{career.row.original.deadline}
+								{career.row.original.phone}
 							</h5>
 						</div>
 					</div>
 				),
 			},
 			{
-				Header: "Status",
-				accessor: "isActive",
+				Header: "Register Date",
+				accessor: "create_at",
 				filterable: false,
 				Cell: (career) => (
-					<>
-						{career.row.original.isActive ? (
-							<span className="badge bg-success-subtle text-success">ACTIVE</span>
-						) : (
-							<span className="badge bg-danger-subtle text-danger">IN-ACTIVE</span>
-						)}
-					</>
+					<div className="d-flex align-items-center">
+						<div className="flex-grow-1">
+							<h5 className="fs-14 mb-1">
+								{career.row.original.create_at}
+							</h5>
+						</div>
+					</div>
 				),
 			},
+			// {
+			// 	Header: "Status",
+			// 	accessor: "isActive",
+			// 	filterable: false,
+			// 	Cell: (career) => (
+			// 		<>
+			// 			{career.row.original.isActive ? (
+			// 				<span className="badge bg-success-subtle text-success">ACTIVE</span>
+			// 			) : (
+			// 				<span className="badge bg-danger-subtle text-danger">IN-ACTIVE</span>
+			// 			)}
+			// 		</>
+			// 	),
+			// },
 
-			{
-				Header: "Ordering",
-				accessor: "ordering",
-				filterable: false,
-			},
+			// {
+			// 	Header: "Ordering",
+			// 	accessor: "ordering",
+			// 	filterable: false,
+			// },
 			{
 				Header: "Action",
 				Cell: (cellProps) => {
 					return (
 						<ul className="list-inline hstack gap-2 mb-0">
 							{
-								useCan("career-menu.edit") ? (
+								useCan("corporate-form.view") ? (
 									<li className="list-inline-item" title="Edit">
-										<Link className="edit-item-btn" to={`/career-menu/edit/${cellProps.row.original.id}`}>
-											<i className="ri-pencil-fill align-bottom text-muted"></i>
+										<Link className="edit-item-btn" to={`#`}
+											onClick={() => {
+												setModel_backdrop(true);
+												dispatch(fetchIndividualDetail(cellProps.row.original?.id));
+											}}
+										>
+											<i className="mdi mdi-eye-outline"></i>
 										</Link>
 									</li>
 								) : ""
 							}
 							{
-								useCan("career-menu.delete") ? (
+								useCan("corporate-form.delete") ? (
 									<li className="list-inline-item" title="Delete">
 										<Link
 											className="remove-item-btn"
@@ -164,27 +192,18 @@ const CareerMenu = () => {
 		[]
 	);
 
-	const columnsCheck = useCanMultiple(["career-menu.edit", "career-menu.delete"]) ? columns : columns.filter((q,index) => index != columns.length - 1);
+	// const columnsCheck = useCanMultiple(["career-menu.edit", "career-menu.delete"]) ? columns : columns.filter((q,index) => index != columns.length - 1);
 
 	return (
 		<React.Fragment>
 			<div className="page-content">
 				<Container fluid>
-					<BreadCrumb title="Career Menu" pageTitle="Home" />
+					<BreadCrumb title="Corporate Register List Menu" pageTitle="Home" />
 					<Row>
 						<Col lg={12}>
 							<Card>
 								<CardHeader>
 									<Row className="justify-content-between align-items-center gy-3">
-										{
-											useCan("career-menu.create") ? (
-												<Col lg={3}>
-													<Link className="btn add-btn btn-primary" to="/career-menu/create">
-														<i className="ri-add-fill me-1 align-bottom"></i> Create New
-													</Link>
-												</Col>
-											) : ""
-										}
 										<Col className="col-lg-auto">
 											<div className="d-md-flex text-nowrap gap-2">
 												<Button color="dark" className="btn" outline onClick={handleRefresh}>
@@ -204,7 +223,7 @@ const CareerMenu = () => {
 										{!isLoading ? (
 											<TableContainer
 												columns={columns}
-												data={careers || []}
+												data={individuals || []}
 												isGlobalFilter={true}
 												isAddUserList={false}
 												customPageSize={8}
@@ -226,9 +245,103 @@ const CareerMenu = () => {
 					</Row>
 				</Container>
 			</div>
-			<DeleteModal show={deleteModal} onDeleteClick={handleDelete} onCloseClick={() => setDeleteModal(false)} isLoading={careerSelector.isLoading} />
+			<DeleteModal show={deleteModal} onDeleteClick={handleDelete} onCloseClick={() => setDeleteModal(false)} />
+			<Modal
+				isOpen={modal_backdrop}
+				toggle={() => {
+					closeModal();
+				}}
+				backdrop={"static"}
+				id="staticBackdrop"
+				size="lg"
+				centered
+			>
+				<ModalHeader className="bg-light p-3 text-light" toggle={closeModal}>
+					<div className="align-items-center d-flex" style={{gap: 15}}>
+						{"Individual Register Details"}
+					</div>
+				</ModalHeader>
+
+				<ModalBody>
+					<Row>
+						<Col lg={6}>
+							{
+								detailIndividual?.individual?.frontCard ? (
+									<div>
+										<img
+											src={api.FILE_URI + detailIndividual?.individual?.frontCard}
+											width="100%"
+											style={{overflowY: "hidden"}}
+										/>
+										<a href={api.FILE_URI + detailIndividual?.individual?.frontCard} className="btn btn-success mt-1 w-100" target="_blank">Download Image</a>
+									</div>
+								) : ""
+							}
+
+							{
+								detailIndividual?.individual?.backCard ? (
+									<div className="mt-2">
+										<img
+											src={api.FILE_URI + detailIndividual?.individual?.backCard}
+											width="100%"
+											style={{overflowY: "hidden"}}
+										/>
+										<a href={api.FILE_URI + detailIndividual?.individual?.backCard} className="btn btn-success mt-1 w-100" target="_blank">Download Image</a>
+									</div>
+								) : ""
+							}
+						</Col>
+						
+						<Col lg={6}>
+							<h5>Individual Register Details</h5>
+							<ul style={{listStyle: "none", paddingLeft: 0}}>
+								<li>
+									<h6>National Identification Number: {detailIndividual?.individual?.nidNumber}</h6>
+								</li>
+								<li>
+									<h6>Fullname: {detailIndividual?.individual?.lastname} {detailIndividual?.individual?.firstname}</h6>
+								</li>
+								{
+									detailIndividual?.individual?.date ? (
+										<li>
+											<h6>Date of Birth: {detailIndividual?.individual?.date}</h6>
+										</li>
+									) : ""
+								}
+								{
+									detailIndividual?.individual?.phone ? (
+										<li>
+											<h6>Phone Number: {detailIndividual?.individual?.phone}</h6>
+										</li>
+									) : ""
+								}
+								{
+									detailIndividual?.individual?.email ? (
+										<li>
+											<h6>Email: {detailIndividual?.individual?.email}</h6>
+										</li>
+									) : ""
+								}
+								<li>
+									<h6>Register Date: {detailIndividual?.individual?.create_at}</h6>
+								</li>
+								<li>
+									<h6>Terms and Conditions:</h6>
+									<ul style={{paddingLeft: 15}}>
+										{
+											JSON.parse(detailIndividual?.individual?.privacy ? detailIndividual?.individual?.privacy : "[]").map((q,i) =>{
+												return <li key={i}>{q}</li>;
+											})
+										}
+									</ul>
+								</li>
+							</ul>
+						</Col>
+					</Row>
+				</ModalBody>
+			</Modal>
 		</React.Fragment>
 	);
 };
 
-export default CareerMenu;
+export default IndividualMenu;

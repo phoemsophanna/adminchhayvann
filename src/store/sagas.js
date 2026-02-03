@@ -66,6 +66,12 @@ import CategoryListSaga from "./category/list/saga";
 import CreateRoleMainSaga from "./role/create/saga";
 import RoleDetailSaga from "./role/detail/saga";
 import RoleListSaga from "./role/list/saga";
+import ApplicationDetailSaga from "./applicationJob/detail/saga";
+import ApplicationListSaga from "./applicationJob/list/saga";
+import CorporateListSaga from "./corporate/list/saga";
+import CorporateDetailSaga from "./corporate/detail/saga";
+import IndividualDetailSaga from "./individual/detail/saga";
+import IndividualListSaga from "./individual/list/saga";
 
 export default function* rootSaga() {
 	yield all([
@@ -138,6 +144,15 @@ export default function* rootSaga() {
 
 		fork(CreateRoleMainSaga),
 		fork(RoleDetailSaga),
-		fork(RoleListSaga)
+		fork(RoleListSaga),
+
+		fork(ApplicationDetailSaga),
+		fork(ApplicationListSaga),
+		
+		fork(CorporateListSaga),
+		fork(CorporateDetailSaga),
+
+		fork(IndividualDetailSaga),
+		fork(IndividualListSaga)
 	]);
 }

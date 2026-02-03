@@ -69,6 +69,12 @@ import CategoryListReducer from "./category/list/reducer";
 import CreateRoleReducer from "./role/create/reducer";
 import RoleListReducer from "./role/list/reducer";
 import RoleDetailReducer from "./role/detail/reducer";
+import ApplicationDetailReducer from "./applicationJob/detail/reducer";
+import ApplicationListReducer from "./applicationJob/list/reducer";
+import CorporateDetailReducer from "./corporate/detail/reducer";
+import CorporateListReducer from "./corporate/list/reducer";
+import IndividualDetailReducer from "./individual/detail/reducer";
+import IndividualListReducer from "./individual/list/reducer";
 
 const rootReducer = combineReducers({
 	// public
@@ -146,7 +152,16 @@ const rootReducer = combineReducers({
 
 	CreateRoleReducer,
 	RoleListReducer,
-	RoleDetailReducer
+	RoleDetailReducer,
+
+	ApplicationDetailReducer,
+	ApplicationListReducer,
+
+	CorporateDetailReducer,
+	CorporateListReducer,
+
+	IndividualDetailReducer,
+	IndividualListReducer
 });
 
 export default rootReducer;

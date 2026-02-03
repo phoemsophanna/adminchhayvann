@@ -48,3 +48,6 @@ export const TRADING = "/tradings";
 export const CATEGORY = "/categories";
 
 export const ROLE = "/roles";
+export const APPLICATION = "/careers/application";
+export const CORPORATES = "/corporates";
+export const INDIVIDUALS = "/individuals";

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
+import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Modal, ModalBody, ModalHeader, Row, Spinner } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import { useMemo } from "react";
 import TableContainer from "../../../Components/Common/TableContainer";
@@ -11,11 +11,25 @@ import { deleteExchange, fetchExchangeList, refreshExchangeList } from "../../..
 import { api } from "../../../config";
 import DeleteModal from "../../../Components/Common/DeleteModal";
 import { useCan, useCanMultiple } from "../../../Components/Common/Permission";
+import logoExcel from "../../../assets/images/excel.png";
+import simpleExcel from "../../../assets/images/exchangeImportExcel.xlsx";
+import * as XLSX from "xlsx";
+import axios from "axios";
+import { useProfile } from "../../../Components/Hooks/UserHooks";
 
 const ExchangeMenu = () => {
 	document.title = "Exchange Rate | Admin & Dashboards";
 	const [UID, setUID] = useState(null);
+	const { token } = useProfile();
 	const [deleteModal, setDeleteModal] = useState(false);
+	const [modal_backdrop, setModel_backdrop] = useState(false);
+	const [excelData, setExcelData] = useState([]);
+	const [insertExcel, setInsertExcel] = useState(false);
+
+	const closeModal = () => {
+		setModel_backdrop(false);
+		setExcelData([]);
+	}
 
 	const exchangeListSelector = createSelector(
 		(state) => state.ExchangeListReducer,
@@ -50,6 +64,26 @@ const ExchangeMenu = () => {
 		dispatch(fetchExchangeList());
 	}, [dispatch]);
 
+	const handleFileUpload = (e) => {
+		const file = e.target.files[0];
+		if (file) {
+			const reader = new FileReader();
+			reader.onload = (evt) => {
+				const bstr = evt.target.result;
+				const workbook = XLSX.read(bstr, { type: "binary" });
+
+				// Get first sheet
+				const sheetName = workbook.SheetNames[0];
+				const worksheet = workbook.Sheets[sheetName];
+
+				// Convert to JSON
+				const jsonData = XLSX.utils.sheet_to_json(worksheet);
+				setExcelData(jsonData);
+			};
+			reader.readAsBinaryString(file);
+		}
+	};
+
 	const columns = useMemo(
 		() => [
 			{
@@ -68,7 +102,7 @@ const ExchangeMenu = () => {
 							<div className="flex-shrink-0 me-3">
 								<div className="avatar-sm bg-light rounded p-1 d-flex align-items-center">
 									{exchange.row.original.image ? (
-										<img src={api.FILE_URI + exchange.row.original.image} alt="" className="img-fluid d-block" />
+										<img src={(exchange.row.original.image?.includes("http") ? exchange.row.original.image : api.FILE_URI + exchange.row.original.image)} alt="" className="img-fluid d-block" />
 									) : (
 										<div className="mx-auto w-100 h-100">
 											<div className="avatar-title bg-success-subtle text-success fs-24">
@@ -159,6 +193,23 @@ const ExchangeMenu = () => {
 
 	const columnsCheck = useCanMultiple(["exchange-menu.edit", "exchange-menu.delete"]) ? columns : columns.filter((q,index) => index != columns.length - 1);
 
+	const importExcelData = () => {
+		setInsertExcel(true);
+		axios.post(`${api.BASE_URL}/exchanges/import`, {exchanges: excelData}, {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`
+			}
+		}).then((res) => {
+			if(res?.status == "success") {
+				setInsertExcel(false);
+				dispatch(fetchExchangeList());
+				setExcelData([]);
+				setModel_backdrop(false);
+			}
+		});
+	}
+
 	return (
 		<React.Fragment>
 			<div className="page-content">
@@ -171,11 +222,17 @@ const ExchangeMenu = () => {
 									<Row className="justify-content-between align-items-center gy-3">
 										{
 											useCan("exchange-menu.create") ? (
-												<Col lg={3}>
-													<Link className="btn add-btn btn-primary" to="/exchange-menu/create">
-														<i className="ri-add-fill me-1 align-bottom"></i> Create New
-													</Link>
-												</Col>
+												<>
+													<Col lg={6}>
+														<Link className="btn add-btn btn-primary" to="/exchange-menu/create">
+															<i className="ri-add-fill me-1 align-bottom"></i> Create New
+														</Link>
+														<Link className="btn add-btn btn-success" onClick={() => setModel_backdrop(true)} style={{marginLeft: 10}} to="#">
+															<i className="ri-add-fill me-1 align-bottom"></i> Import Excel
+														</Link>
+													</Col>
+												</>
+
 											) : ""
 										}
 										<Col className="col-lg-auto">
@@ -220,6 +277,111 @@ const ExchangeMenu = () => {
 				</Container>
 			</div>
 			<DeleteModal show={deleteModal} onDeleteClick={handleDelete} onCloseClick={() => setDeleteModal(false)} isLoading={exchangeSelector.isLoading} />
+			<Modal
+				isOpen={modal_backdrop}
+				toggle={() => {
+					closeModal();
+				}}
+				backdrop={"static"}
+				id="staticBackdrop"
+				size="lg"
+				centered
+			>
+				<ModalHeader className="bg-light p-3 text-light" toggle={closeModal}>
+					<div className="align-items-center d-flex" style={{gap: 15}}>
+						{"Import Exchange Excel"}
+					</div>
+				</ModalHeader>
+
+				<ModalBody>
+					<Row>
+						<div className="mb-3">
+							<Label className="form-label file-uploads" htmlFor="exchange-rate-to-input">
+							<div className="file-upload">
+								<div className="content-Image">
+									<img src={logoExcel} alt={logoExcel} />
+								</div>
+								<div className="content-text">
+									Drag&Drop file here or <span>Choose File</span>
+								</div>
+							</div>
+							</Label>
+							<small className="text-danger">Supported format: .xlsx</small>
+							<Input
+								type="file"
+								className="form-control"
+								id="exchange-rate-to-input"
+								placeholder="Enter exchange rate to"
+								name="to"
+								onChange={(e) => handleFileUpload(e)}
+								style={{visibility: "hidden", position: "absolute"}}
+								accept=".xlsx,.xls"
+							/>
+							{
+								excelData?.length > 0 ? (
+									<div className="list-exchnage-rate mt-2">
+										{
+											insertExcel ? (
+												<Button color="success" className="btn-load mb-2">
+													<span className="d-flex align-items-center">
+														<Spinner size="sm" className="flex-shrink-0">
+															Loading...
+														</Spinner>
+														<span className="flex-grow-1 ms-2">Loading...</span>
+													</span>
+												</Button>
+											) : (
+												<button className="btn btn-success mb-2" onClick={() => importExcelData()}>
+													<i className="ri-add-fill me-1 align-bottom"></i>Import
+												</button>
+											)
+										}
+										<table className="table table-bordered">
+											<thead>
+												<tr>
+													<th>No.</th>
+													<th>Image</th>
+													<th>From</th>
+													<th>To</th>
+													<th>Buy</th>
+													<th>Sell</th>
+												</tr>
+											</thead>
+											<tbody>
+												{
+													excelData.map((q,i) => {
+														return <tr key={i}>
+															<td>{i + 1}</td>
+															<td><img src={q?.image} alt={q?.image} width={70} style={{paddingLeft: 0}} /></td>
+															<td>{q?.from}</td>
+															<td>{q?.to}</td>
+															<td>{q?.buy}</td>
+															<td>{q?.sell}</td>
+														</tr>
+													})
+												}
+											</tbody>
+										</table>
+									</div>
+									
+								) : ""
+							}
+							<div className="sample-excel mt-2">
+								<div className="content-Image">
+									<img src={logoExcel} alt={logoExcel} />
+								</div>
+								<div className="content-text">
+									<h6 style={{marginBottom: 5, lineHeight: 1}}>Simple Template</h6>
+									<p style={{fontSize: 12,marginBottom: 5}}>
+										You can download template as starting point for your own file.
+									</p>
+									<a className="btn btn-success" href={simpleExcel} download={`sample.xlsx`}>Download</a>
+								</div>
+							</div>
+						</div>
+					</Row>
+				</ModalBody>
+			</Modal>
 		</React.Fragment>
 	);
 };
