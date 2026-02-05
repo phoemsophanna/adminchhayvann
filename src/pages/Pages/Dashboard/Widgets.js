@@ -1,12 +1,27 @@
-import React from "react";
-import { projectsWidgets } from "../../../common/data";
+import React, { useEffect, useState } from "react";
+// import { projectsWidgets } from "../../../common/data";
 import CountUp from "react-countup";
 
 //Import Icons
 import FeatherIcon from "feather-icons-react";
 import { Card, CardBody, Col, Row } from "reactstrap";
+import axios from "axios";
+import { api } from "../../../config";
 
 const Widgets = () => {
+	const [projectsWidgets, setProjectsWidgets] = useState([]);
+
+	useEffect(() => {
+		axios.get(`${api.BASE_URL}/dashboard`,{
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		}).then((res) => {
+			setProjectsWidgets(res?.model);
+		});
+	},[]);
+
 	return (
 		<React.Fragment>
 			<Row>
@@ -30,10 +45,10 @@ const Widgets = () => {
 													</span>
 												))}
 											</h4>
-											<span className={"fs-12 badge bg-" + item.badgeClass + "-subtle text-" + item.badgeClass}>
+											{/* <span className={"fs-12 badge bg-" + item.badgeClass + "-subtle text-" + item.badgeClass}>
 												<i className={"fs-13 align-middle me-1 " + item.icon}></i>
 												{item.percentage}
-											</span>
+											</span> */}
 										</div>
 										<p className="text-muted text-truncate mb-0">{item.caption}</p>
 									</div>
