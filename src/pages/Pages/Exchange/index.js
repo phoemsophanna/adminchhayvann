@@ -16,6 +16,8 @@ import simpleExcel from "../../../assets/images/exchangeImportExcel.xlsx";
 import * as XLSX from "xlsx";
 import axios from "axios";
 import { useProfile } from "../../../Components/Hooks/UserHooks";
+import UploadImage from "./UploadImage";
+import { toast } from "react-toastify";
 
 const ExchangeMenu = () => {
 	document.title = "Exchange Rate | Admin & Dashboards";
@@ -23,6 +25,7 @@ const ExchangeMenu = () => {
 	const { token } = useProfile();
 	const [deleteModal, setDeleteModal] = useState(false);
 	const [modal_backdrop, setModel_backdrop] = useState(false);
+	const [modal_image, setModel_image] = useState(false);
 	const [excelData, setExcelData] = useState([]);
 	const [insertExcel, setInsertExcel] = useState(false);
 
@@ -210,6 +213,30 @@ const ExchangeMenu = () => {
 		});
 	}
 
+	const exportToExcel = () => {
+		if(exchanges.length > 0){
+			try {
+				const items = exchanges.map((q) => {
+					return {
+						from: q.from,
+						to: q.to,
+						buy: q.buy,
+						sell: q.sell,
+						image: q.image.split(":").length > 1 ? q.image : api.FILE_URI + q.image
+					};
+				});
+				const worksheet = XLSX.utils.json_to_sheet(items);
+				const workbook = XLSX.utils.book_new();
+				XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+				XLSX.writeFile(workbook, "export_excel.xlsx");
+			} catch (error) {
+				console.log(error);
+			}
+		} else {
+			toast.warning("Not have data to export!");
+		}
+	}
+
 	return (
 		<React.Fragment>
 			<div className="page-content">
@@ -223,12 +250,18 @@ const ExchangeMenu = () => {
 										{
 											useCan("exchange-menu.create") ? (
 												<>
-													<Col lg={6}>
+													<Col lg={8}>
 														<Link className="btn add-btn btn-primary" to="/exchange-menu/create">
 															<i className="ri-add-fill me-1 align-bottom"></i> Create New
 														</Link>
 														<Link className="btn add-btn btn-success" onClick={() => setModel_backdrop(true)} style={{marginLeft: 10}} to="#">
-															<i className="ri-add-fill me-1 align-bottom"></i> Import Excel
+															<span className="mdi mdi-import"></span> Import Excel
+														</Link>
+														<Link className="btn add-btn btn-danger" onClick={() => setModel_image(true)} style={{marginLeft: 10}} to="#">
+															<span className="mdi mdi-image"></span> Image Exchange
+														</Link>
+														<Link className="btn add-btn btn-info" onClick={() => exportToExcel()} style={{marginLeft: 10}} to="#">
+															<span className="mdi mdi-export"></span> Export
 														</Link>
 													</Col>
 												</>
@@ -382,6 +415,7 @@ const ExchangeMenu = () => {
 					</Row>
 				</ModalBody>
 			</Modal>
+			<UploadImage modal={modal_image} setModal={setModel_image} />
 		</React.Fragment>
 	);
 };
