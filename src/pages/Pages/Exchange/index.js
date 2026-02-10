@@ -222,7 +222,8 @@ const ExchangeMenu = () => {
 						to: q.to,
 						buy: q.buy,
 						sell: q.sell,
-						image: q.image.split(":").length > 1 ? q.image : api.FILE_URI + q.image
+						image: q.image.split(":").length > 1 ? q.image : api.FILE_URI + q.image,
+						ordering: q.ordering
 					};
 				});
 				const worksheet = XLSX.utils.json_to_sheet(items);
