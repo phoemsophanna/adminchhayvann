@@ -101,6 +101,7 @@ const ExchangeForm = (props) => {
 			buy: exchange ? exchange.buy : "",
 			status: exchange ? (exchange.status === 1 ? true : false) : "",
 			image: exchange ? exchange.image : "",
+			ordering: exchange ? exchange.ordering : 0,
 		},
 		validationSchema: Yup.object({
 			from: Yup.string().required("Please Enter From"),
@@ -149,64 +150,7 @@ const ExchangeForm = (props) => {
 						<Row>
 							<Col lg={8}>
 								<Card>
-									{/* <CardHeader>
-										<div className="align-items-center d-flex">
-											<div className="flex-shrink-0">
-												<Nav tabs className="nav justify-content-end nav-tabs-custom rounded card-header-tabs border-bottom-0">
-													<NavItem>
-														<NavLink
-															style={{ cursor: "pointer" }}
-															className={titleTap == "ENG" ? "active" : ""}
-															onClick={() => {
-																titleTapToggle("ENG");
-															}}
-														>
-															English
-														</NavLink>
-													</NavItem>
-													<NavItem>
-														<NavLink
-															style={{ cursor: "pointer" }}
-															className={titleTap == "KHM" ? "active" : ""}
-															onClick={() => {
-																titleTapToggle("KHM");
-															}}
-														>
-															Khmer
-														</NavLink>
-													</NavItem>
-												</Nav>
-											</div>
-										</div>
-									</CardHeader> */}
 									<CardBody>
-										{/* <TabContent activeTab={titleTap}>
-											<TabPane tabId={"ENG"} id="eng">
-												<div className="mb-3">
-													<Label className="form-label" htmlFor="exchange-title-input">
-														Exchange Title <small className="text-danger">(Required)</small>
-													</Label>
-													<Input
-														type="text"
-														className="form-control"
-														id="exchange-title-input"
-														placeholder="Enter exchange title"
-														name="title"
-														onChange={exchangeValidation.handleChange}
-														onBlur={exchangeValidation.handleBlur}
-														value={exchangeValidation.values.title}
-														invalid={exchangeValidation.touched.title && exchangeValidation.errors.title ? true : false}
-													/>
-													{exchangeValidation.touched.title && exchangeValidation.errors.title ? (
-														<FormFeedback type="invalid">{exchangeValidation.errors.title}</FormFeedback>
-													) : null}
-												</div>
-												<div className="mb-3">
-													<Label>Content</Label>
-													<TinymceEditor onUploadImage={handleEditorChange} initDataValue={contentDesc} />
-												</div>
-											</TabPane>
-										</TabContent> */}
 										<Row>
 											<Col md={6}>
 												<div className="mb-3">
@@ -313,7 +257,6 @@ const ExchangeForm = (props) => {
 								</Card>
 							</Col>
 							<Col lg={4}>
-								
 								<Card>
 									<CardHeader>
 										<div className="fw-bold">Published</div>
@@ -333,20 +276,22 @@ const ExchangeForm = (props) => {
 												Status: <span className="fw-bolder">{exchangeValidation.values.status ? "Active" : "In-Active"}</span>
 											</Label>
 										</div>
-										{/* <div className="form-check form-switch form-switch-md" dir="ltr">
+										<div className="mb-3">
+											<Label className="form-label" htmlFor="exchange-rate-ordering-input">
+												Ordering
+											</Label>
 											<Input
-												type="checkbox"
-												className="form-check-input"
-												id="isDisplayHomepage"
-												name="isDisplayHomepage"
+												type="text"
+												className="form-control"
+												id="exchange-rate-ordering-input"
+												placeholder="Enter exchange rate ordering"
+												name="ordering"
 												onChange={exchangeValidation.handleChange}
 												onBlur={exchangeValidation.handleBlur}
-												checked={exchangeValidation.values.isDisplayHomepage}
+												value={exchangeValidation.values.ordering}
+												invalid={exchangeValidation.touched.ordering && exchangeValidation.errors.ordering ? true : false}
 											/>
-											<Label className="form-check-label" for="isDisplayHomepage">
-												Display Homepage: <span className="fw-bolder">{exchangeValidation.values.isDisplayHomepage ? "Show" : "Hide"}</span>
-											</Label>
-										</div> */}
+										</div>
 									</CardBody>
 								</Card>
 							</Col>
