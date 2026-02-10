@@ -607,3 +607,7 @@ input:-webkit-autofill:active {
 .uploadPhotoLink:hover {
   text-decoration: none;
 }
+
+.filepond--drop-label label {
+  cursor: pointer;
+}

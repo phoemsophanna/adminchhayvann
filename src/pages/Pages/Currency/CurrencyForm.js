@@ -143,6 +143,7 @@ const CurrencyForm = (props) => {
 			subCurrency: currency ? currency.subCurrency : "",
 			status: currency ? (currency.status == 1 ? true : false) : true,
 			image: currency ? currency.image : "",
+			ordering: currency ? currency.ordering : 0,
 		},
 		validationSchema: Yup.object({
 			currency: Yup.string().required("Please Enter currency"),
@@ -296,7 +297,7 @@ const CurrencyForm = (props) => {
 												</div>
 											</Col>
 										</Row>
-										<div className="container-currency" style={{padding: 10, backgroundColor: "#f4f4f4", borderRadius: 5}} hidden>
+										<div className="container-currency" style={{padding: 10, backgroundColor: "#f4f4f4", borderRadius: 5}}>
 											<div className="header-currency" style={{position: "relative", marginBottom: 10}}>
 												<div className="content-currency">
 													<Input type="text" onChange={(e) => selectCurrency(e.target.value)} />
@@ -317,8 +318,6 @@ const CurrencyForm = (props) => {
 																<img src={`${api.FILE_URI}/${q.image}`} width={25} style={{marginRight: 10}} />
 																{q.type} - {q.title}
 															</div>
-															<span style={{flex: "17%", maxWidth: "17%",fontSize: 14,lineHeight: 1}}>({currencyValidation.values.type}) {currencyValidation.values.rate} = </span>
-															<Input style={{flex: "15%", maxWidth: "15%"}} type="text" value={q.rate} onChange={(e) =>  updateSubCurrency(q.id, e.target.value)}/>
 															<span onClick={() => deleteSubCurrency(q.id)} style={{flex: "10%", maxWidth: "10%", borderRadius: "5px", cursor: "pointer", background: "#ca0000",color: "#fff", textAlign: "center", padding: "0.5rem", fontSize: 20,lineHeight: 1}} className="mdi mdi-delete-empty"></span>
 														</div>
 													))
@@ -349,6 +348,22 @@ const CurrencyForm = (props) => {
 												Status: <span className="fw-bolder">{currencyValidation.values.status ? "Active" : "In-Active"}</span>
 											</Label>
 										</div>
+										<div className="mb-3">
+											<Label className="form-label" htmlFor="ordering-input">
+												Ordering
+											</Label>
+											<Input
+												type="text"
+												className="form-control"
+												id="ordering-input"
+												placeholder="Enter ordering"
+												name="ordering"
+												onChange={currencyValidation.handleChange}
+												onBlur={currencyValidation.handleBlur}
+												value={currencyValidation.values.ordering}
+												invalid={currencyValidation.touched.ordering && currencyValidation.errors.ordering ? true : false}
+											/>
+										</div>
 										{/* <div className="form-check form-switch form-switch-md" dir="ltr">
 											<Input
 												type="checkbox"
@@ -374,7 +389,7 @@ const CurrencyForm = (props) => {
 											<div className="position-relative d-block mx-auto">
 												<div style={{ width: "100%" }}>
 													<FilePond
-														labelIdle='<span class="filepond--label-action">Choose Image</span>'
+														labelIdle='Choose Image'
 														files={file}
 														onupdatefiles={setFile}
 														allowMultiple={false}
