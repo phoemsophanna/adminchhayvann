@@ -12,7 +12,7 @@ import { api } from "../../../config";
 import DeleteModal from "../../../Components/Common/DeleteModal";
 import { useCan, useCanMultiple } from "../../../Components/Common/Permission";
 import logoExcel from "../../../assets/images/excel.png";
-import simpleExcel from "../../../assets/images/exchangeImportExcel.xlsx";
+import simpleExcel from "../../../assets/exchangeImportExcel.xlsx";
 import * as XLSX from "xlsx";
 import axios from "axios";
 import { useProfile } from "../../../Components/Hooks/UserHooks";
@@ -379,6 +379,7 @@ const ExchangeMenu = () => {
 													<th>To</th>
 													<th>Buy</th>
 													<th>Sell</th>
+													<th>Ordering</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -391,6 +392,7 @@ const ExchangeMenu = () => {
 															<td>{q?.to}</td>
 															<td>{q?.buy}</td>
 															<td>{q?.sell}</td>
+															<td>{q?.ordering}</td>
 														</tr>
 													})
 												}
