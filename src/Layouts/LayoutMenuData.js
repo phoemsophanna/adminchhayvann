@@ -73,6 +73,16 @@ const Navdata = () => {
 			},
 		},
 		{
+			id: "faq",
+			label: "FAQ's",
+			icon: "mdi mdi-help-circle-outline",
+			link: "/faq",
+			role: useCan("faq.view"),
+			click: function (e) {
+				e.preventDefault();
+			},
+		},
+		{
 			id: "partner-menu",
 			label: "Partner",
 			icon: "mdi mdi-handshake-outline",
@@ -143,16 +153,6 @@ const Navdata = () => {
 			icon: "mdi mdi-comment-quote-outline",
 			link: "/testimonial",
 			role: useCan("testimonial.view"),
-			click: function (e) {
-				e.preventDefault();
-			},
-		},
-		{
-			id: "faq",
-			label: "Faq",
-			icon: "mdi mdi-help-circle-outline",
-			link: "/faq",
-			role: useCan("faq.view"),
 			click: function (e) {
 				e.preventDefault();
 			},

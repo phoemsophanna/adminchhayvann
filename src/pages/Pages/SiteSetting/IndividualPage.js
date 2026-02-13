@@ -71,10 +71,14 @@ const Careerpage = () => {
 			values.privacy = privacy;
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
-				refreshForm();
+				setTimeout(() => {
+					refreshForm();
+				}, 100);
 			}
 		},
 	});
+
+	
 
 	const refreshForm = () => {
 		dispatch(getSiteSetting("INDIVIDUAL"));
@@ -106,7 +110,7 @@ const Careerpage = () => {
 
 	const findPrivacy = (id) => {
 		const privacyFind = privacy.find((q, index) => index == id);
-		setEdit(id);
+		setEdit(id + 1);
 		setShowModal(true);
 		setPrivacyStatement(privacyFind?.title);
 		setPrivacyStatementKm(privacyFind?.titleKm);
@@ -114,7 +118,7 @@ const Careerpage = () => {
 
 	const editPrivacy = (id) => {
 		const privacyEdit = privacy.map((q, index) => {
-			if(index == edit){
+			if((index + 1) == edit){
 				return {
 					...q,
 					title: privacyStatement,
@@ -124,6 +128,7 @@ const Careerpage = () => {
 				return q;
 			}
 		});
+
 		setPrivacy(privacyEdit);
 		setEdit("");
 		setShowModal(false);
