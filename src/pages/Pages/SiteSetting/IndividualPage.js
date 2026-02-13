@@ -308,6 +308,9 @@ const Careerpage = () => {
 																	<div className="content-btn text-center">
 																		<span className="btn-primary" onClick={() => {
 																			setShowModal(true);
+																			setPrivacyStatement("");
+																			setPrivacyStatementKm("");
+																			setEdit("");
 																		}}>Add Privacy</span>
 																	</div>
 																</li>
