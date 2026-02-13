@@ -71,7 +71,9 @@ const CorporatePage = () => {
 			values.privacy = privacy;
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
-				refreshForm();
+				setTimeout(() => {
+					refreshForm();
+				}, 100);
 			}
 		},
 	});
@@ -106,7 +108,7 @@ const CorporatePage = () => {
 
 	const findPrivacy = (id) => {
 		const privacyFind = privacy.find((q, index) => index == id);
-		setEdit(id);
+		setEdit(id + 1);
 		setShowModal(true);
 		setPrivacyStatement(privacyFind?.title);
 		setPrivacyStatementKm(privacyFind?.titleKm);
@@ -114,7 +116,7 @@ const CorporatePage = () => {
 
 	const editPrivacy = (id) => {
 		const privacyEdit = privacy.map((q, index) => {
-			if(index == edit){
+			if((index + 1) == edit){
 				return {
 					...q,
 					title: privacyStatement,
