@@ -27,6 +27,7 @@ const General = () => {
 	const dispatch = useDispatch();
 	const [file, setFile] = useState([]);
 	const [fileTwo, setFileTwo] = useState([]);
+	const [fileThree, setFileThree] = useState([]);
 	const [titleTap, settitleTap] = useState("ENG");
 	const titleTapToggle = (lang) => {
 		settitleTap(lang);
@@ -66,10 +67,12 @@ const General = () => {
 			onlineTrading: siteSetting ? siteSetting.onlineTrading : "",
 			logo_header: siteSetting ? siteSetting.logo_header : "", 
 			logo_footer: siteSetting ? siteSetting.logo_footer : "",
+			popup_thumbnail: siteSetting ? siteSetting.popup_thumbnail : "",
 		},
 		onSubmit: (values) => {
 			values.logo_header = file?.length > 0 ? file[0]?.serverId : "";
 			values.logo_footer = fileTwo?.length > 0 ? fileTwo[0]?.serverId : "";
+			values.popup_thumbnail = fileThree?.length > 0 ? fileThree[0]?.serverId : "";
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
 				refreshForm();
@@ -110,13 +113,25 @@ const General = () => {
 			} else {
 				setFileTwo([]);
 			}
+
+			if (siteSetting.popup_thumbnail) {
+				setFileTwo([
+					{
+						source: siteSetting.popup_thumbnail,
+						options: {
+							type: "local",
+						},
+					},
+				]);
+			} else {
+				setFileTwo([]);
+			}
 		} else {
 			setFile([]);
 			setFileTwo([]);
+			setFileThree([]);
 		}
 	}, [siteSetting]);
-
-	console.log(siteSetting);
 
 	return (
 		<React.Fragment>
@@ -327,6 +342,40 @@ const General = () => {
 													</div>
 												</Col>											
 											</Row>
+										)}
+									</CardBody>
+								</Card>
+								<Card>
+									<CardBody>
+										{isLoading ? (
+											<span className="d-flex align-items-center">
+												<Spinner size="sm" className="flex-shrink-0">
+													Loading...
+												</Spinner>
+												<span className="flex-grow-1 ms-2">Loading...</span>
+											</span>
+										) : (
+											<Col xl={12}>
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="thumbnail-input">
+														Popup Poster
+													</Label>
+													<div className="position-relative d-block mx-auto">
+														<div style={{ width: "100%" }}>
+															<FilePond
+																labelIdle='<span class="filepond--label-action">Choose Image</span>'
+																files={fileThree}
+																onupdatefiles={setFileThree}
+																allowMultiple={false}
+																maxFiles={1}
+																name="file"
+																server={`${api.BASE_URL}/save-image/site-setting`}
+																className="filepond filepond-input-multiple"
+															/>
+														</div>
+													</div>
+												</div>
+											</Col>
 										)}
 									</CardBody>
 								</Card>

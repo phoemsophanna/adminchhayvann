@@ -69,11 +69,15 @@ const ContactUs = () => {
 			address: siteSetting ? siteSetting.address : "",
 			working1: siteSetting ? siteSetting.working1 : "",
 			working2: siteSetting ? siteSetting.working2 : "",
+			working3: siteSetting ? siteSetting.working3 : "",
 			embedMap: siteSetting ? siteSetting.embedMap : "",
 			facebookLink: siteSetting ? siteSetting.facebookLink : "",
 			instagramLink: siteSetting ? siteSetting.instagramLink : "",
 			telegramLink: siteSetting ? siteSetting.telegramLink : "",
 			linkedinLink: siteSetting ? siteSetting.linkedinLink : "",
+			line: siteSetting ? siteSetting.line : "",
+			whatsapp: siteSetting ? siteSetting.whatsapp : "",
+			messenger: siteSetting ? siteSetting.messenger : "",
 			subtitle: siteSetting ? siteSetting?.subtitle : "",
 			subtitleKm: siteSetting ? siteSetting?.subtitleKm : "",
 			title: siteSetting ? siteSetting?.title : "",
@@ -87,6 +91,9 @@ const ContactUs = () => {
 			appId: siteSetting ? siteSetting.appId : "",
 			pageId: siteSetting ? siteSetting.pageId : "",
 			contactFormEmail: siteSetting ? siteSetting.contactFormEmail : "",
+			sendingCareer: siteSetting ? siteSetting.sendingCareer : "",
+			sendingCorporate: siteSetting ? siteSetting.sendingCorporate : "",
+			sendingIndividual: siteSetting ? siteSetting.sendingIndividual : "",
 			thumbnail: siteSetting ? siteSetting.thumbnail : "",
 		},
 		onSubmit: (values) => {
@@ -327,6 +334,23 @@ const ContactUs = () => {
 																	onChange={settingForm.handleChange}
 																	onBlur={settingForm.handleBlur}
 																	value={settingForm.values.working2}
+																/>
+															</div>
+														</Col>
+														<Col xl={6}>
+															<div className="mb-3">
+																<Label className="form-label" htmlFor="working3-input">
+																	Working Time 3
+																</Label>
+																<Input
+																	type="text"
+																	className="form-control"
+																	id="working3-input"
+																	placeholder="Enter text"
+																	name="working3"
+																	onChange={settingForm.handleChange}
+																	onBlur={settingForm.handleBlur}
+																	value={settingForm.values.working3}
 																/>
 															</div>
 														</Col>
@@ -602,6 +626,42 @@ const ContactUs = () => {
 														/>
 														<i className="ri-youtube-line"></i>
 													</div>
+													<div className="form-icon mb-3">
+														<Input
+															type="text"
+															className="form-control form-control-icon"
+															placeholder="Enter link"
+															name="line"
+															onChange={settingForm.handleChange}
+															onBlur={settingForm.handleBlur}
+															value={settingForm.values.line || ""}
+														/>
+														<i className="ri-line-line"></i>
+													</div>
+													<div className="form-icon mb-3">
+														<Input
+															type="text"
+															className="form-control form-control-icon"
+															placeholder="Enter link"
+															name="whatsapp"
+															onChange={settingForm.handleChange}
+															onBlur={settingForm.handleBlur}
+															value={settingForm.values.whatsapp || ""}
+														/>
+														<i className="ri-whatsapp-line"></i>
+													</div>
+													<div className="form-icon mb-3">
+														<Input
+															type="text"
+															className="form-control form-control-icon"
+															placeholder="Enter link"
+															name="messenger"
+															onChange={settingForm.handleChange}
+															onBlur={settingForm.handleBlur}
+															value={settingForm.values.messenger || ""}
+														/>
+														<i className="ri-messenger-line"></i>
+													</div>
 												</CardBody>
 											</Card>
 											<Card hidden>
@@ -661,6 +721,52 @@ const ContactUs = () => {
 															value={settingForm.values.contactFormEmail || ""}
 														/>
 													</div>
+													<div className="input-group mb-3">
+														<span className="input-group-text" id="sendingCareer">
+															Send Career To
+														</span>
+														<Input
+															type="text"
+															className="form-control"
+															id="sendingCareer-input"
+															aria-describedby="sendingCareer"
+															name="sendingCareer"
+															onChange={settingForm.handleChange}
+															onBlur={settingForm.handleBlur}
+															value={settingForm.values.sendingCareer || ""}
+														/>
+													</div>
+													<div className="input-group mb-3">
+														<span className="input-group-text" id="sendingCorporate">
+															Send Corporate To
+														</span>
+														<Input
+															type="text"
+															className="form-control"
+															id="sendingCorporate-input"
+															aria-describedby="sendingCorporate"
+															name="sendingCorporate"
+															onChange={settingForm.handleChange}
+															onBlur={settingForm.handleBlur}
+															value={settingForm.values.sendingCorporate || ""}
+														/>
+													</div>
+													<div className="input-group mb-3">
+														<span className="input-group-text" id="sendingIndividual">
+															Send Individual To
+														</span>
+														<Input
+															type="text"
+															className="form-control"
+															id="sendingIndividual-input"
+															aria-describedby="sendingIndividual"
+															name="sendingIndividual"
+															onChange={settingForm.handleChange}
+															onBlur={settingForm.handleBlur}
+															value={settingForm.values.sendingIndividual || ""}
+														/>
+													</div>
+
 													<div className="mb-3">
 														<Label className="form-label" htmlFor="thumbnail-input">
 															Thumbnail
