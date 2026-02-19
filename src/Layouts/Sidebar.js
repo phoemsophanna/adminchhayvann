@@ -40,14 +40,14 @@ const Sidebar = ({ layoutType }) => {
 						<span className="logo-sm">
 							<img src={logoSm} alt="" height="22" />
 						</span>
-						<span className="logo-lg fs-3 fw-bold">CHHAY VANN</span>
+						<span className="logo-lg fs-3 fw-bold">Chhayvann</span>
 					</Link>
 
 					<Link to="/" className="logo logo-light">
 						<span className="logo-sm">
 							<img src={logoSm} alt="" height="22" />
 						</span>
-						<span className="logo-lg fs-3 fw-bold">CHHAY VANN</span>
+						<span className="logo-lg fs-3 fw-bold">Chhayvann</span>
 					</Link>
 					<button
 						onClick={addEventListenerOnSmHoverMenu}
