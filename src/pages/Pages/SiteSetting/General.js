@@ -115,7 +115,7 @@ const General = () => {
 			}
 
 			if (siteSetting.popup_thumbnail) {
-				setFileTwo([
+				setFileThree([
 					{
 						source: siteSetting.popup_thumbnail,
 						options: {
@@ -124,7 +124,7 @@ const General = () => {
 					},
 				]);
 			} else {
-				setFileTwo([]);
+				setFileThree([]);
 			}
 		} else {
 			setFile([]);
