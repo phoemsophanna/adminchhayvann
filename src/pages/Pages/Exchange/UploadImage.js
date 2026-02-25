@@ -299,7 +299,7 @@ const UploadImage = ({modal, setModal}) => {
                             <Col md={10}>
                                 <div className="mb-3">
                                     <Label className="form-label" htmlFor="exchange-title-input">
-                                        Image <small className="text-danger">(300x300 pixel)</small>
+                                        Image <small className="text-danger">(Image is *.png, and size 300x300 pixel)</small>
                                     </Label>
                                     <Input
                                         type="file"
@@ -307,7 +307,7 @@ const UploadImage = ({modal, setModal}) => {
                                         id="exchange-rate-to-input"
                                         placeholder="Enter exchange rate to"
                                         onChange={(e) => handleFileUpload(e)}
-                                        accept=".png"
+                                        accept="image/png"
                                     />
                                 </div>
                                 <div className="mb-3">

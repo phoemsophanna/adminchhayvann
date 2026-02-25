@@ -85,7 +85,7 @@ const LayoutNav = (props) => {
 							toggle("services");
 						}}
 					>
-						Services
+						Exchange Rate
 					</NavLink>
 				</NavItem>
 				<NavItem>
