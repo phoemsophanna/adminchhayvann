@@ -100,6 +100,7 @@ const ExchangeForm = (props) => {
 			sell: exchange ? exchange.sell : "",
 			buy: exchange ? exchange.buy : "",
 			status: exchange ? (exchange.status === 1 ? true : false) : "",
+			isMultiply: exchange ? (exchange.isMultiply === 1 ? true : false) : "",
 			image: exchange ? exchange.image : "",
 			ordering: exchange ? exchange.ordering : 0,
 		},
@@ -274,6 +275,20 @@ const ExchangeForm = (props) => {
 											/>
 											<Label className="form-check-label" for="isActive">
 												Status: <span className="fw-bolder">{exchangeValidation.values.status ? "Active" : "In-Active"}</span>
+											</Label>
+										</div>
+										<div className="form-check form-switch form-switch-md mb-3" dir="ltr">
+											<Input
+												type="checkbox"
+												className="form-check-input"
+												id="isMultiply"
+												name="isMultiply"
+												onChange={exchangeValidation.handleChange}
+												onBlur={exchangeValidation.handleBlur}
+												checked={exchangeValidation.values.isMultiply}
+											/>
+											<Label className="form-check-label" for="isMultiply">
+												isMultiply: <span className="fw-bolder">{exchangeValidation.values.isMultiply ? "Active" : "In-Active"}</span>
 											</Label>
 										</div>
 										<div className="mb-3">
