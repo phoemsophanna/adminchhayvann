@@ -216,14 +216,15 @@ const ExchangeMenu = () => {
 	const exportToExcel = () => {
 		if(exchanges.length > 0){
 			try {
-				const items = exchanges.map((q) => {
+				const items = exchanges.map((q,index) => {
 					return {
 						from: q.from,
 						to: q.to,
 						buy: q.buy,
 						sell: q.sell,
-						image: q.image.split(":").length > 1 ? q.image : api.FILE_URI + q.image,
-						ordering: q.ordering
+						isMultiply: q.isMultiply,
+						ordering: q.ordering ? q.ordering : index + 1,
+						image: q.image.split(":").length > 1 ? q.image : api.FILE_URI + q.image
 					};
 				});
 				const worksheet = XLSX.utils.json_to_sheet(items);
@@ -379,6 +380,7 @@ const ExchangeMenu = () => {
 													<th>To</th>
 													<th>Buy</th>
 													<th>Sell</th>
+													<th>Is Multiply</th>
 													<th>Ordering</th>
 												</tr>
 											</thead>
@@ -392,6 +394,7 @@ const ExchangeMenu = () => {
 															<td>{q?.to}</td>
 															<td>{q?.buy}</td>
 															<td>{q?.sell}</td>
+															<td>{q?.isMultiply}</td>
 															<td>{q?.ordering}</td>
 														</tr>
 													})

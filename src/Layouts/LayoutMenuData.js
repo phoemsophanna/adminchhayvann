@@ -232,16 +232,16 @@ const Navdata = () => {
 				e.preventDefault();
 			},
 		},
-		{
-			id: "currency-convert",
-			label: "Currency Convert",
-			icon: "mdi mdi-currency-usd",
-			link: "/currency-menu",
-			role: useCan("currency-menu.view"),
-			click: function (e) {
-				e.preventDefault();
-			},
-		},
+		// {
+		// 	id: "currency-convert",
+		// 	label: "Currency Convert",
+		// 	icon: "mdi mdi-currency-usd",
+		// 	link: "/currency-menu",
+		// 	role: useCan("currency-menu.view"),
+		// 	click: function (e) {
+		// 		e.preventDefault();
+		// 	},
+		// },
 		{
 			id: "page-banner",
 			label: "Page Setting",

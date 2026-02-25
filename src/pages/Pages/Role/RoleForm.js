@@ -414,7 +414,7 @@ const RoleForm = (props) => {
 															/> <label htmlFor="check-exchange-menu">Exchange Rate</label>
 														</div>
 													</div>
-													<div className="mb-3">
+													{/* <div className="mb-3">
 														<div className="form-checkbox">
 															<Input
 																type="checkbox"
@@ -426,7 +426,7 @@ const RoleForm = (props) => {
 																onChange={(e) => addGroupPermission(e)}
 															/> <label htmlFor="check-currency-menu">Currency Convert</label>
 														</div>
-													</div>
+													</div> */}
 													<div className="mb-3">
 														<div className="form-checkbox">
 															<Input
@@ -828,7 +828,7 @@ const RoleForm = (props) => {
 															</div>
 														</div>
 													</div>
-													<div className="mb-3">
+													{/* <div className="mb-3">
 														<div className="form-checkbox">
 															<h6 htmlFor="check-currency-menu">Currency Convert</h6>
 															<div className="mb-3 mt-1 subPermission">
@@ -849,7 +849,7 @@ const RoleForm = (props) => {
 																}
 															</div>
 														</div>
-													</div>
+													</div> */}
 													<div className="mb-3">
 														<div className="form-checkbox">
 															<h6 htmlFor="check-page-banner">Page Setting</h6>
