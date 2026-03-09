@@ -26,6 +26,7 @@ const ContactUs = () => {
 	const dispatch = useDispatch();
 	const [file, setFile] = useState([]);
 	const [phoneNumber, setPhoneNumber] = useState("");
+	const [phoneNumberKm, setPhoneNumberKm] = useState("");
 	const [phone, setPhone] = useState([]);
 	const [showModal, setShowModal] = useState(false);
 	const [edit, setEdit] = useState("");
@@ -134,9 +135,10 @@ const ContactUs = () => {
 
 	const addPhoneNumber = (event) => {
 		if (phoneNumber) {
-			setPhone([...phone, { number: phoneNumber }]);
+			setPhone([...phone, { number: phoneNumber, numberKm: phoneNumberKm }]);
 			setShowModal(false);
 			setPhoneNumber("");
+			setPhoneNumberKm("");
 		}
 	}
 
@@ -150,6 +152,7 @@ const ContactUs = () => {
 		setEdit(id);
 		setShowModal(true);
 		setPhoneNumber(phoneFind.number);
+		setPhoneNumberKm(phoneFind.numberKm);
 	}
 
 	const editPhoneNumber = (id) => {
@@ -157,7 +160,8 @@ const ContactUs = () => {
 			if(index == edit){
 				return {
 					...q,
-					number: phoneNumber
+					number: phoneNumber,
+					numberKm: phoneNumberKm
 				}
 			} else {
 				return q;
@@ -294,7 +298,7 @@ const ContactUs = () => {
 																			phone.map((q, index) => (
 																				<li key={index}>
 																					<span style={{flex: "5%",maxWidth: "5%", textAlign: "center"}}>{index + 1}</span>
-																					<h5>{q.number}</h5>
+																					<h5>{titleTap == "KHM" ? q.numberKm : q.number}</h5>
 																					<div className="content-btn">
 																						<span className="mdi mdi-file-edit" onClick={() => findPhoneNumber(index)}></span>
 																						<span className="mdi mdi-delete-empty" onClick={() => deletePhoneNumber(index)}></span>
@@ -308,7 +312,7 @@ const ContactUs = () => {
 														</Col>
 														<TabContent activeTab={titleTap}>
 															<TabPane tabId={`ENG`} id="eng">
-																<Col xl={6}>
+																<Col xl={12}>
 																	<div className="mb-3">
 																		<Label className="form-label" htmlFor="working1-input">
 																			Working Time 1
@@ -325,7 +329,7 @@ const ContactUs = () => {
 																		/>
 																	</div>
 																</Col>
-																<Col xl={6}>
+																<Col xl={12}>
 																	<div className="mb-3">
 																		<Label className="form-label" htmlFor="working2-input">
 																			Working Time 2
@@ -342,7 +346,7 @@ const ContactUs = () => {
 																		/>
 																	</div>
 																</Col>
-																<Col xl={6}>
+																<Col xl={12}>
 																	<div className="mb-3">
 																		<Label className="form-label" htmlFor="working3-input">
 																			Working Time 3
@@ -361,7 +365,7 @@ const ContactUs = () => {
 																</Col>
 															</TabPane>
 															<TabPane tabId={`KHM`} id="khm">
-																<Col xl={6}>
+																<Col xl={12}>
 																	<div className="mb-3">
 																		<Label className="form-label" htmlFor="working1-km-input">
 																			Working Time 1 Khmer
@@ -378,7 +382,7 @@ const ContactUs = () => {
 																		/>
 																	</div>
 																</Col>
-																<Col xl={6}>
+																<Col xl={12}>
 																	<div className="mb-3">
 																		<Label className="form-label" htmlFor="working2-km-input">
 																			Working Time 2 Khmer
@@ -395,7 +399,7 @@ const ContactUs = () => {
 																		/>
 																	</div>
 																</Col>
-																<Col xl={6}>
+																<Col xl={12}>
 																	<div className="mb-3">
 																		<Label className="form-label" htmlFor="working3-km-input">
 																			Working Time 3 Khmer
