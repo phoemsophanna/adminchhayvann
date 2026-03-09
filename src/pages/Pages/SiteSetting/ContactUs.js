@@ -70,6 +70,9 @@ const ContactUs = () => {
 			working1: siteSetting ? siteSetting.working1 : "",
 			working2: siteSetting ? siteSetting.working2 : "",
 			working3: siteSetting ? siteSetting.working3 : "",
+			working1_Km: siteSetting ? siteSetting.working1_Km : "",
+			working2_Km: siteSetting ? siteSetting.working2_Km : "",
+			working3_Km: siteSetting ? siteSetting.working3_Km : "",
 			embedMap: siteSetting ? siteSetting.embedMap : "",
 			facebookLink: siteSetting ? siteSetting.facebookLink : "",
 			instagramLink: siteSetting ? siteSetting.instagramLink : "",
@@ -303,57 +306,114 @@ const ContactUs = () => {
 																</div>
 															</div>
 														</Col>
-														<Col xl={6}>
-															<div className="mb-3">
-																<Label className="form-label" htmlFor="working1-input">
-																	Working Time 1
-																</Label>
-																<Input
-																	type="text"
-																	className="form-control"
-																	id="working1-input"
-																	placeholder="Enter text"
-																	name="working1"
-																	onChange={settingForm.handleChange}
-																	onBlur={settingForm.handleBlur}
-																	value={settingForm.values.working1}
-																/>
-															</div>
-														</Col>
-														<Col xl={6}>
-															<div className="mb-3">
-																<Label className="form-label" htmlFor="working2-input">
-																	Working Time 2
-																</Label>
-																<Input
-																	type="text"
-																	className="form-control"
-																	id="working2-input"
-																	placeholder="Enter text"
-																	name="working2"
-																	onChange={settingForm.handleChange}
-																	onBlur={settingForm.handleBlur}
-																	value={settingForm.values.working2}
-																/>
-															</div>
-														</Col>
-														<Col xl={6}>
-															<div className="mb-3">
-																<Label className="form-label" htmlFor="working3-input">
-																	Working Time 3
-																</Label>
-																<Input
-																	type="text"
-																	className="form-control"
-																	id="working3-input"
-																	placeholder="Enter text"
-																	name="working3"
-																	onChange={settingForm.handleChange}
-																	onBlur={settingForm.handleBlur}
-																	value={settingForm.values.working3}
-																/>
-															</div>
-														</Col>
+														<TabContent activeTab={titleTap}>
+															<TabPane tabId={`ENG`} id="eng">
+																<Col xl={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="working1-input">
+																			Working Time 1
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="working1-input"
+																			placeholder="Enter text"
+																			name="working1"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.working1}
+																		/>
+																	</div>
+																</Col>
+																<Col xl={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="working2-input">
+																			Working Time 2
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="working2-input"
+																			placeholder="Enter text"
+																			name="working2"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.working2}
+																		/>
+																	</div>
+																</Col>
+																<Col xl={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="working3-input">
+																			Working Time 3
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="working3-input"
+																			placeholder="Enter text"
+																			name="working3"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.working3}
+																		/>
+																	</div>
+																</Col>
+															</TabPane>
+															<TabPane tabId={`KHM`} id="khm">
+																<Col xl={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="working1-km-input">
+																			Working Time 1 Khmer
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="working1-km-input"
+																			placeholder="Enter text"
+																			name="working1_Km"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.working1_Km}
+																		/>
+																	</div>
+																</Col>
+																<Col xl={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="working2-km-input">
+																			Working Time 2 Khmer
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="working2-km-input"
+																			placeholder="Enter text"
+																			name="working2_Km"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.working2_Km}
+																		/>
+																	</div>
+																</Col>
+																<Col xl={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="working3-km-input">
+																			Working Time 3 Khmer
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="working3-km-input"
+																			placeholder="Enter text"
+																			name="working3_Km"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.working3_Km}
+																		/>
+																	</div>
+																</Col>
+															</TabPane>
+														</TabContent>
 													</Row>
 													
 													<TabContent activeTab={titleTap}>
