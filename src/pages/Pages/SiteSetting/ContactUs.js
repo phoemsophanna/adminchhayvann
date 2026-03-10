@@ -105,7 +105,9 @@ const ContactUs = () => {
 			values.phoneNumber = phone ? JSON.stringify(phone) : JSON.stringify([]);
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
-				refreshForm();
+				setTimeout(() => {
+					refreshForm();
+				}, 500);
 			}
 		},
 	});
@@ -149,7 +151,7 @@ const ContactUs = () => {
 
 	const findPhoneNumber = (id) => {
 		const phoneFind = phone.find((q, index) => index == id);
-		setEdit(id);
+		setEdit(id + 1);
 		setShowModal(true);
 		setPhoneNumber(phoneFind.number);
 		setPhoneNumberKm(phoneFind.numberKm);
@@ -157,7 +159,7 @@ const ContactUs = () => {
 
 	const editPhoneNumber = (id) => {
 		const phoneEdit = phone.map((q, index) => {
-			if(index == edit){
+			if((index + 1) == edit){
 				return {
 					...q,
 					number: phoneNumber,
@@ -291,6 +293,8 @@ const ContactUs = () => {
 																			<div className="content-btn">
 																				<span className="btn-primary" onClick={() => {
 																					setShowModal(true);
+																					setPhoneNumber("");
+																					setPhoneNumberKm("");
 																				}}>Add Number</span>
 																			</div>
 																		</li>
@@ -915,6 +919,20 @@ const ContactUs = () => {
 								name="phoneNumber"
 								onChange={(e) => setPhoneNumber(e.target.value)}
 								value={phoneNumber}
+							/>
+						</div>
+						<div className="mb-3">
+							<Label className="form-label" htmlFor="phoneNumber1-km-input">
+								Phone Number Khmer
+							</Label>
+							<Input
+								type="text"
+								className="form-control"
+								id="phoneNumber1-km-input"
+								placeholder="Enter text"
+								name="phoneNumberKm"
+								onChange={(e) => setPhoneNumberKm(e.target.value)}
+								value={phoneNumberKm}
 							/>
 						</div>
 						<div className="text-start">
