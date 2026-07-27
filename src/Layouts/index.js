@@ -134,6 +134,11 @@ const Layout = (props) => {
 		}
 	}
 
+	useEffect(() => {
+		const container = document.querySelector(".cjs-container");
+		container?.remove();
+	}, []);
+
 	return (
 		<React.Fragment>
 			<div id="layout-wrapper">
