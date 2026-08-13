@@ -106,6 +106,9 @@ const Platformpage = () => {
 			titleKm: siteSetting ? siteSetting.titleKm : "",
 			description: siteSetting ? siteSetting?.description : "",
 			descriptionKm: siteSetting ? siteSetting?.descriptionKm : "",
+			label: siteSetting ? siteSetting?.label : "",
+			labelKm: siteSetting ? siteSetting?.labelKm : "",
+			linkTo: siteSetting ? siteSetting?.linkTo : "",
 			image: siteSetting ? siteSetting?.image : "",
 			service_title_eng: siteSetting ? siteSetting?.service_title_eng : "",
 			service_title_km: siteSetting ? siteSetting?.service_title_km : "",
@@ -395,6 +398,38 @@ const Platformpage = () => {
 																<TinymceEditor onUploadImage={handleChange} initDataValue={content} />
 															</div>
 															<div className="mb-3">
+																<Label className="form-label" htmlFor="label-input">
+																	Label
+																</Label>
+																<Input
+																	type="text"
+																	className="form-control"
+																	id="label-input"
+																	placeholder="Enter text"
+																	name="label"
+																	onChange={settingForm.handleChange}
+																	onBlur={settingForm.handleBlur}
+																	value={settingForm.values.label}
+																	invalid={settingForm.touched.label && settingForm.errors.label ? true : false}
+																/>
+															</div>
+															<div className="mb-3">
+																<Label className="form-label" htmlFor="linkTo-input">
+																	Link
+																</Label>
+																<Input
+																	type="text"
+																	className="form-control"
+																	id="linkTo-input"
+																	placeholder="Enter text"
+																	name="linkTo"
+																	onChange={settingForm.handleChange}
+																	onBlur={settingForm.handleBlur}
+																	value={settingForm.values.linkTo}
+																	invalid={settingForm.touched.linkTo && settingForm.errors.linkTo ? true : false}
+																/>
+															</div>
+															<div className="mb-3">
 																<Label className="form-label" htmlFor="service-title-eng">
 																	Service Title (English)
 																</Label>
@@ -462,6 +497,38 @@ const Platformpage = () => {
 																	Description Khmer
 																</Label>
 																<TinymceEditor onUploadImage={handleChangeKm} initDataValue={contentKm} />
+															</div>
+															<div className="mb-3">
+																<Label className="form-label" htmlFor="labelKm-input">
+																	Label Khmer
+																</Label>
+																<Input
+																	type="text"
+																	className="form-control"
+																	id="labelKm-input"
+																	placeholder="Enter text"
+																	name="labelKm"
+																	onChange={settingForm.handleChange}
+																	onBlur={settingForm.handleBlur}
+																	value={settingForm.values.labelKm}
+																	invalid={settingForm.touched.labelKm && settingForm.errors.labelKm ? true : false}
+																/>
+															</div>
+															<div className="mb-3">
+																<Label className="form-label" htmlFor="linkTo-input">
+																	Link
+																</Label>
+																<Input
+																	type="text"
+																	className="form-control"
+																	id="linkTo-input"
+																	placeholder="Enter text"
+																	name="linkTo"
+																	onChange={settingForm.handleChange}
+																	onBlur={settingForm.handleBlur}
+																	value={settingForm.values.linkTo}
+																	invalid={settingForm.touched.linkTo && settingForm.errors.linkTo ? true : false}
+																/>
 															</div>
 															<div className="mb-3">
 																<Label className="form-label" htmlFor="service-title-km">
