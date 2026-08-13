@@ -35,6 +35,16 @@ const TeamForm = (props) => {
 		}
 	};
 
+	const [contentDesc, setContentDesc] = useState("");
+	const [contentDescKm, setContentDescKm] = useState("");
+
+	const handleEditorChange = (e) => {
+		setContentDesc(e.target.getContent());
+	};
+
+	const handleEditorChangeKm = (e) => {
+		setContentDescKm(e.target.getContent());
+	};
 
 	const createTeamSelector = createSelector(
 		(state) => state.CreateTeamReducer,
@@ -72,6 +82,8 @@ const TeamForm = (props) => {
 			} else {
 				setFile([]);
 			}
+			setContentDesc(team?.description);
+			setContentDescKm(team?.descriptionKm);
 		}
 	}, [team]);
 
@@ -86,6 +98,8 @@ const TeamForm = (props) => {
 			positionKm: team ? team.positionKm : "",
 			experience: team ? team.experience : "",
 			experienceKm: team ? team.experienceKm : "",
+			description: team ? team?.description : "",
+			descriptionKm: team ? team?.descriptionKm : "",
 			facebook: team ? team.facebook : "",
 			telegram: team ? team.telegram : "",
 			linkedin: team ? team.linkedin : "",
@@ -98,7 +112,9 @@ const TeamForm = (props) => {
 			name: Yup.string().required("Please Enter Name"),
 		}),
 		onSubmit: (values) => {
-			values.image = file?.length > 0 ? file[0]?.serverId : "";
+			values.image = file?.length > 0 ? (file[0]?.serverId ? file[0]?.serverId : file[0]?.source) : "";
+			values.description = contentDesc;
+			values.descriptionKm = contentDescKm;
 			dispatch(createTeam(values, props.router.navigate));
 		},
 	});
@@ -223,6 +239,10 @@ const TeamForm = (props) => {
 														value={teamValidation.values.experience}
 													></textarea>
 												</div>
+												<div className="mb-3">
+													<Label>Content</Label>
+													<TinymceEditor onUploadImage={handleEditorChange} initDataValue={contentDesc} />
+												</div>
 											</TabPane>
 											<TabPane tabId={"KHM"} id="khm">
 												<div className="mb-3">
@@ -272,6 +292,10 @@ const TeamForm = (props) => {
 														value={teamValidation.values.experienceKm}
 													></textarea>
 												</div>
+												<div className="mb-3">
+													<Label>Content Khmer</Label>
+													<TinymceEditor onUploadImage={handleEditorChangeKm} initDataValue={contentDescKm} />
+												</div>
 											</TabPane>
 										</TabContent>
 										<div className="mb-3">
@@ -292,7 +316,7 @@ const TeamForm = (props) => {
 										</div>
 										<div className="mb-3">
 											<Label className="form-label" htmlFor="thumbnail-input">
-												Thumbnail <small className="text-danger">(150x150 pixel)</small>
+												Thumbnail <small className="text-danger">(800x800 pixel)</small>
 											</Label>
 											<div className="position-relative d-block mx-auto">
 												<div style={{ width: "100%" }}>

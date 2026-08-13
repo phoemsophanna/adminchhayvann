@@ -26,7 +26,7 @@ const Widgets = () => {
 		<React.Fragment>
 			<Row>
 				{(projectsWidgets || []).map((item, key) => (
-					<Col xl={4} key={key}>
+					<Col xl={6} key={key}>
 						<Card className="card-animate">
 							<CardBody>
 								<div className="d-flex align-items-center">

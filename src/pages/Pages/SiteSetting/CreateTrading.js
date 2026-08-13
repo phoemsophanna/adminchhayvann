@@ -20,6 +20,7 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 const CreateTrading = ({show, setShow, id, useCreateTrading, setEdit_id}) => {
     const dispatch = useDispatch();
     const [titleTap, settitleTap] = useState("ENG");
+    const [image, setImage] = useState([]);
     const titleTapToggle = (lang) => {
         settitleTap(lang);
     }
@@ -50,12 +51,15 @@ const CreateTrading = ({show, setShow, id, useCreateTrading, setEdit_id}) => {
             stepKm: trading ? trading.stepKm : "",
             title: trading ? trading.title : "",
             titleKm: trading ? trading.titleKm : "",
+            image: trading ? trading.image : "",
             summary: trading ? trading.summary : "",
             summaryKm: trading ? trading.summaryKm : "",
+            type: trading ? trading?.type : "MOBILE",
             ordering: trading ? trading.ordering : "",
             status: trading ? trading.status ? true : false : true
         },
         onSubmit: (values) => {
+            values.image = image.length > 0 ? (image[0].serverId ? image[0].serverId : image[0].source) : "";
             dispatch(createTrading(values));
         },
     });
@@ -70,8 +74,27 @@ const CreateTrading = ({show, setShow, id, useCreateTrading, setEdit_id}) => {
     useEffect(() => {
         if(id){
             dispatch(fetchTradingDetail(id));
+        } else {
+            setImage([]);
         }
     }, [dispatch,id]);
+
+    useEffect(() => {
+        if(trading){
+            if(trading?.image) {
+                setImage([
+                    {
+                        source: trading?.image,
+                        options: {
+                            type: "local"
+                        }
+                    }
+                ]);
+            } else {
+                setImage([]);
+            }
+        }
+    },[trading]);
 
     return (
         <React.Fragment>
@@ -123,6 +146,21 @@ const CreateTrading = ({show, setShow, id, useCreateTrading, setEdit_id}) => {
 						action="#"
 						autoComplete="off"
 					>
+                        <div className="mb-3">
+                            <Label className="form-label" htmlFor="step-input">
+                                Image <small className="text-danger">(800 x 800 pixel)</small>
+                            </Label>
+                            <FilePond
+                                labelIdle='<span class="filepond--label-action">Choose Image</span>'
+                                files={image}
+                                onupdatefiles={setImage}
+                                allowMultiple={false}
+                                maxFiles={1}
+                                name="file"
+                                server={`${api.BASE_URL}/save-image/sites-settings`}
+                                stylePanelLayout="compact"
+                            />
+                        </div>
 						<TabContent activeTab={titleTap}>
                             <TabPane tabId={"ENG"} id="eng">
                                 <div className="mb-3">
@@ -235,6 +273,21 @@ const CreateTrading = ({show, setShow, id, useCreateTrading, setEdit_id}) => {
 								onBlur={tradingForm.handleBlur}
 								value={tradingForm.values.ordering || ""}
 							/>
+						</div>
+                        <div className="mb-2">
+							<Label htmlFor="type-input" className="form-label">
+								Type
+							</Label>
+							<select
+                                name="type"
+                                className="form-control"
+                                id="type-input"
+                                onChange={(e) => tradingForm.setFieldValue("type", e.target.value)}
+                                value={tradingForm.values.type}
+                            >
+                                <option value={"PC"}>PC</option>
+                                <option value={"MOBILE"}>MOBILE</option>
+                            </select>
 						</div>
 						<div className="form-check form-switch form-switch-md mb-2" dir="ltr">
 							<Input

@@ -63,6 +63,9 @@ import CorporatePage from "../pages/Pages/SiteSetting/CorporatePage";
 import CareerApplyMenu from "../pages/Pages/CareerApply";
 import CorporateMenu from "../pages/Pages/Corporate";
 import IndividualMenu from "../pages/Pages/Individual";
+import HistoryPage from "../pages/Pages/SiteSetting/HistoryPage";
+import Teampage from "../pages/Pages/SiteSetting/Teampage";
+import Platformpage from "../pages/Pages/SiteSetting/Platformpage";
 
 const authProtectedRoutes = [
 	{ path: "/dashboard", component: <Dashboard />, role: "dashboard" },
@@ -101,8 +104,11 @@ const authProtectedRoutes = [
 	{ path: "/site-setting/homepage", component: <Homepage />, role: "site-setting" },
 	{ path: "/site-setting/how-trade", component: <HowTrade />, role: "site-setting" },
 	{ path: "/site-setting/why-choose", component: <WhyChoose />, role: "site-setting" },
+	{ path: "/site-setting/history", component: <HistoryPage />, role: "site-setting" },
+	{ path: "/site-setting/team", component: <Teampage />, role: "site-setting" },
 
 	// New
+	{ path: "/site-setting/platform", component: <Platformpage />, role: "site-setting" },
 	{ path: "/partners-menu", component: <Partner />, role: "partners-menu.view" },
 	{ path: "/award-menu", component: <Award />, role: "award-menu.view" },
 	{ path: "/award-menu/create", component: <AwardForm />, role: "award-menu.create" },

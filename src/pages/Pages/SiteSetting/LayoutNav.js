@@ -47,6 +47,28 @@ const LayoutNav = (props) => {
 				<NavItem>
 					<NavLink
 						style={{ cursor: "pointer" }}
+						className={classnames({ active: props.router.location.pathname === "/site-setting/history" })}
+						onClick={() => {
+							toggle("history");
+						}}
+					>
+						History
+					</NavLink>
+				</NavItem>
+				<NavItem>
+					<NavLink
+						style={{ cursor: "pointer" }}
+						className={classnames({ active: props.router.location.pathname === "/site-setting/team" })}
+						onClick={() => {
+							toggle("team");
+						}}
+					>
+						Co-Founder
+					</NavLink>
+				</NavItem>
+				<NavItem>
+					<NavLink
+						style={{ cursor: "pointer" }}
 						className={classnames({ active: props.router.location.pathname === "/site-setting/contact-us" })}
 						onClick={() => {
 							toggle("contact-us");
@@ -88,7 +110,7 @@ const LayoutNav = (props) => {
 						Exchange Rate
 					</NavLink>
 				</NavItem>
-				<NavItem>
+				{/* <NavItem>
 					<NavLink
 						style={{ cursor: "pointer" }}
 						className={classnames({ active: props.router.location.pathname === "/site-setting/trading" })}
@@ -98,7 +120,7 @@ const LayoutNav = (props) => {
 					>
 						Trading Page
 					</NavLink>
-				</NavItem>
+				</NavItem> */}
 				<NavItem>
 					<NavLink
 						style={{ cursor: "pointer" }}
@@ -129,10 +151,21 @@ const LayoutNav = (props) => {
 							toggle("individual");
 						}}
 					>
-						Individual
+						Open Account
 					</NavLink>
 				</NavItem>
 				<NavItem>
+					<NavLink
+						style={{ cursor: "pointer" }}
+						className={classnames({ active: props.router.location.pathname === "/site-setting/platform" })}
+						onClick={() => {
+							toggle("platform");
+						}}
+					>
+						Platform
+					</NavLink>
+				</NavItem>
+				{/* <NavItem>
 					<NavLink
 						style={{ cursor: "pointer" }}
 						className={classnames({ active: props.router.location.pathname === "/site-setting/corporate" })}
@@ -142,7 +175,7 @@ const LayoutNav = (props) => {
 					>
 						Corporate
 					</NavLink>
-				</NavItem>
+				</NavItem> */}
 			</Nav>
 		</React.Fragment>
 	);

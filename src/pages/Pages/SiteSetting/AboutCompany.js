@@ -140,7 +140,7 @@ const AboutCompany = () => {
 			image5: siteSetting ? siteSetting.image5 : "",
 		},
 		onSubmit: (values) => {
-			values.thumbnail = file?.length > 0 ? file[0]?.serverId : "";
+			values.thumbnail = file?.length > 0 ? file?.map((q) => q?.serverId ? q?.serverId : q?.source) : [];
 			values.aboutCompany = contentDesc ? contentDesc : "";
 			values.aboutCompanyKm = contentKmDesc ? contentKmDesc : "";
 			values.desVision = contentTwoDesc ? contentTwoDesc : "";
@@ -180,14 +180,12 @@ const AboutCompany = () => {
 	useEffect(() => {
 		if (siteSetting) {
 			if (siteSetting.thumbnail) {
-				setFile([
-					{
-						source: siteSetting.thumbnail,
-						options: {
-							type: "local",
-						},
+				setFile(siteSetting.thumbnail?.map((q) => ({
+					source: q,
+					options: {
+						type: "local",
 					},
-				]);
+				})));
 			} else {
 				setFile([]);
 			}
@@ -424,8 +422,8 @@ const AboutCompany = () => {
 																	labelIdle='<span class="filepond--label-action">Choose Image</span>'
 																	files={file}
 																	onupdatefiles={setFile}
-																	allowMultiple={false}
-																	maxFiles={1}
+																	allowMultiple={true}
+																	maxFiles={10}
 																	name="file"
 																	server={`${api.BASE_URL}/save-image/site-setting`}
 																	className="filepond filepond-input-multiple"

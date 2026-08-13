@@ -122,19 +122,19 @@ const Navdata = () => {
 				e.preventDefault();
 			},
 		},
-		{
-			id: "corporate-menu",
-			label: "Corporate Account",
-			icon: "mdi mdi-card-account-details-outline",
-			link: "/corporate-form",
-			role: useCan("corporate-form.view"),
-			click: function (e) {
-				e.preventDefault();
-			},
-		},
+		// {
+		// 	id: "corporate-menu",
+		// 	label: "Corporate Account",
+		// 	icon: "mdi mdi-card-account-details-outline",
+		// 	link: "/corporate-form",
+		// 	role: useCan("corporate-form.view"),
+		// 	click: function (e) {
+		// 		e.preventDefault();
+		// 	},
+		// },
 		{
 			id: "individual-menu",
-			label: "Individual Account",
+			label: "Open Account",
 			icon: "mdi mdi-card-account-details-outline",
 			link: "/individual-form",
 			role: useCan("individual-form.view"),
@@ -179,7 +179,7 @@ const Navdata = () => {
 		},
 		{
 			id: "team-menu",
-			label: "Team",
+			label: "Co-Founder",
 			icon: "mdi mdi-account-group",
 			link: "/team-menu",
 			role: useCan("team-menu.view"),
