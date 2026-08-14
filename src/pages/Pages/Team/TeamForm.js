@@ -316,7 +316,7 @@ const TeamForm = (props) => {
 										</div>
 										<div className="mb-3">
 											<Label className="form-label" htmlFor="thumbnail-input">
-												Thumbnail <small className="text-danger">(800x800 pixel)</small>
+												Thumbnail <small className="text-danger">(765 x 945 pixel)</small>
 											</Label>
 											<div className="position-relative d-block mx-auto">
 												<div style={{ width: "100%" }}>
