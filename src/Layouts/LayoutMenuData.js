@@ -136,7 +136,7 @@ const Navdata = () => {
 			id: "individual-menu",
 			label: "Open Account",
 			icon: "mdi mdi-card-account-details-outline",
-			link: "/individual-form",
+			link: "/open-account",
 			role: useCan("individual-form.view"),
 			click: function (e) {
 				e.preventDefault();

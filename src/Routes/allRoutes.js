@@ -142,7 +142,7 @@ const authProtectedRoutes = [
 	{ path: "/role-menu/edit/:id", component: <RoleForm />, role: "role-menu.edit"},
 	{ path: "/application-form", component: <CareerApplyMenu />, role: "application-form.view" },
 	{ path: "/corporate-form", component: <CorporateMenu />, role: "corporate-form.view" },
-	{ path: "/individual-form", component: <IndividualMenu />, role: "individual-form.view" },
+	{ path: "/open-account", component: <IndividualMenu />, role: "individual-form.view" },
 
 	// this route should be at the end of all other routes
 	// eslint-disable-next-line react/display-name

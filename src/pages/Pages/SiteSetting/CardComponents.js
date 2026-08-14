@@ -142,7 +142,7 @@ const CardComponents = () => {
                             <CardBody>
                                 <div className="d-flex justify-content-between align-items-center mb-3">
                                     <h5 className="mb-0">Service Details Cards</h5>
-                                    <Button color="primary" onClick={() => { setEditId(null); setShowModal(true); }}>Add Card</Button>
+                                    <Button color="primary" onClick={() => { setEditId(null); form.resetForm(); setShowModal(true); }}>Add Card</Button>
                                 </div>
 
                                 {loading ? (

@@ -13,7 +13,7 @@ import DeleteModal from "../../../Components/Common/DeleteModal";
 import { useCan, useCanMultiple } from "../../../Components/Common/Permission";
 
 const IndividualMenu = () => {
-	document.title = "Individual Register List | Admin & Dashboards";
+	document.title = "Open Account Register List | Admin & Dashboards";
 	const [UID, setUID] = useState(null);
 	const [modal_backdrop, setModel_backdrop] = useState(false);
 	const [deleteModal, setDeleteModal] = useState(false);
@@ -85,15 +85,15 @@ const IndividualMenu = () => {
 				),
 			},
 			{
-				Header: "National ID",
-				accessor: "nationalID",
+				Header: "Email",
+				accessor: "email",
 				filterable: false,
 				Cell: (career) => (
 					<div className="d-flex align-items-center">
 						<div className="flex-grow-1">
 							<h5 className="fs-14 mb-1">
 								<Link to="#" className="text-body">
-									{career.row.original.nidNumber}
+									{career.row.original.email}
 								</Link>
 							</h5>
 						</div>
@@ -109,20 +109,6 @@ const IndividualMenu = () => {
 						<div className="flex-grow-1">
 							<h5 className="fs-14 mb-1">
 								{career.row.original.phone}
-							</h5>
-						</div>
-					</div>
-				),
-			},
-			{
-				Header: "Register Date",
-				accessor: "create_at",
-				filterable: false,
-				Cell: (career) => (
-					<div className="d-flex align-items-center">
-						<div className="flex-grow-1">
-							<h5 className="fs-14 mb-1">
-								{career.row.original.create_at}
 							</h5>
 						</div>
 					</div>
@@ -198,7 +184,7 @@ const IndividualMenu = () => {
 		<React.Fragment>
 			<div className="page-content">
 				<Container fluid>
-					<BreadCrumb title="Corporate Register List Menu" pageTitle="Home" />
+					<BreadCrumb title="Open Account Register List Menu" pageTitle="Home" />
 					<Row>
 						<Col lg={12}>
 							<Card>
@@ -258,13 +244,13 @@ const IndividualMenu = () => {
 			>
 				<ModalHeader className="bg-light p-3 text-light" toggle={closeModal}>
 					<div className="align-items-center d-flex" style={{gap: 15}}>
-						{"Individual Register Details"}
+						{"Open Account Register Details"}
 					</div>
 				</ModalHeader>
 
 				<ModalBody>
 					<Row>
-						<Col lg={6}>
+						{/* <Col lg={6}>
 							{
 								detailIndividual?.individual?.frontCard ? (
 									<div>
@@ -290,24 +276,14 @@ const IndividualMenu = () => {
 									</div>
 								) : ""
 							}
-						</Col>
+						</Col> */}
 						
-						<Col lg={6}>
-							<h5>Individual Register Details</h5>
+						<Col lg={12}>
+							<h5>Open Account Register Details</h5>
 							<ul style={{listStyle: "none", paddingLeft: 0}}>
-								<li>
-									<h6>National Identification Number: {detailIndividual?.individual?.nidNumber}</h6>
-								</li>
 								<li>
 									<h6>Fullname: {detailIndividual?.individual?.lastname} {detailIndividual?.individual?.firstname}</h6>
 								</li>
-								{
-									detailIndividual?.individual?.date ? (
-										<li>
-											<h6>Date of Birth: {detailIndividual?.individual?.date}</h6>
-										</li>
-									) : ""
-								}
 								{
 									detailIndividual?.individual?.phone ? (
 										<li>
@@ -322,9 +298,6 @@ const IndividualMenu = () => {
 										</li>
 									) : ""
 								}
-								<li>
-									<h6>Register Date: {detailIndividual?.individual?.create_at}</h6>
-								</li>
 								<li>
 									<h6>Terms and Conditions:</h6>
 									<ul style={{paddingLeft: 15}}>
