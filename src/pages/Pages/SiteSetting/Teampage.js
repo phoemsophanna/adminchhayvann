@@ -27,6 +27,10 @@ const Teampage = () => {
 	const dispatch = useDispatch();
 	const [file, setFile] = useState([]);
 	const [fileTwo, setFileTwo] = useState([]);
+	const [titleTap, settitleTap] = useState("ENG");
+	const titleTapToggle = (lang) => {
+		settitleTap(lang);
+	}
 
 	const siteSettingSelector = createSelector(
 		(state) => state.SiteSettingReducer,
@@ -53,6 +57,13 @@ const Teampage = () => {
 
 		initialValues: {
 			type: "TEAMPAGE",
+			// SEO
+			seo_title_eng: siteSetting ? siteSetting?.seo_title_eng : "",
+			seo_title_km: siteSetting ? siteSetting?.seo_title_km : "",
+			seo_description_eng: siteSetting ? siteSetting?.seo_description_eng : "",
+			seo_description_km: siteSetting ? siteSetting?.seo_description_km : "",
+			seo_keywords: siteSetting ? siteSetting?.seo_keywords : "",
+			// END
 			background: siteSetting ? siteSetting?.background : "",
 			backgroundCover: siteSetting ? siteSetting?.backgroundCover : "",
 		},
@@ -124,6 +135,36 @@ const Teampage = () => {
 							>
 								{/* <h5 className="fs-14 mb-3">General</h5> */}
 								<Card>
+									<CardHeader>
+										<div className="align-items-center d-flex">
+											<div className="flex-shrink-0">
+												<Nav tabs className="nav justify-content-end nav-tabs-custom rounded card-header-tabs border-bottom-0">
+													<NavItem>
+														<NavLink
+															style={{ cursor: "pointer" }}
+															className={titleTap == "ENG" ? "active" : ""}
+															onClick={() => {
+																titleTapToggle("ENG");
+															}}
+														>
+															English
+														</NavLink>
+													</NavItem>
+													<NavItem>
+														<NavLink
+															style={{ cursor: "pointer" }}
+															className={titleTap == "KHM" ? "active" : ""}
+															onClick={() => {
+																titleTapToggle("KHM");
+															}}
+														>
+															Khmer
+														</NavLink>
+													</NavItem>
+												</Nav>
+											</div>
+										</div>
+									</CardHeader>
 									<CardBody>
 										{isLoading ? (
 											<span className="d-flex align-items-center">
@@ -134,6 +175,89 @@ const Teampage = () => {
 											</span>
 										) : (
 											<Row>
+												<Col xl={12}>
+													<TabContent activeTab={titleTap}>
+														<TabPane tabId={"ENG"} id="eng">
+															<div className="mb-3">
+																<Label className="form-label" htmlFor="seo_title_eng-input">
+																	SEO Title
+																</Label>
+																<Input
+																	type="text"
+																	className="form-control"
+																	id="seo_title_eng-input"
+																	placeholder="Enter text"
+																	name="seo_title_eng"
+																	onChange={settingForm.handleChange}
+																	onBlur={settingForm.handleBlur}
+																	value={settingForm.values.seo_title_eng}
+																/>
+															</div>
+															<div className="mb-3">
+																<Label className="form-label" htmlFor="seo_description_eng-input">
+																	SEO Description
+																</Label>
+																<Input
+																	type="textarea"
+																	className="form-control"
+																	id="seo_description_eng-input"
+																	placeholder="Enter text"
+																	name="seo_description_eng"
+																	onChange={settingForm.handleChange}
+																	onBlur={settingForm.handleBlur}
+																	value={settingForm.values.seo_description_eng}
+																/>
+															</div>
+														</TabPane>
+														<TabPane tabId={"KHM"} id="khm">
+															<div className="mb-3">
+																<Label className="form-label" htmlFor="seo_title_km-input">
+																	SEO Title Khmer
+																</Label>
+																<Input
+																	type="text"
+																	className="form-control"
+																	id="seo_title_km-input"
+																	placeholder="Enter text"
+																	name="seo_title_km"
+																	onChange={settingForm.handleChange}
+																	onBlur={settingForm.handleBlur}
+																	value={settingForm.values.seo_title_km}
+																/>
+															</div>
+															<div className="mb-3">
+																<Label className="form-label" htmlFor="seo_description_km-input">
+																	SEO Description Khmer
+																</Label>
+																<Input
+																	type="textarea"
+																	className="form-control"
+																	id="seo_description_km-input"
+																	placeholder="Enter text"
+																	name="seo_description_km"
+																	onChange={settingForm.handleChange}
+																	onBlur={settingForm.handleBlur}
+																	value={settingForm.values.seo_description_km}
+																/>
+															</div>
+														</TabPane>
+													</TabContent>
+													<div className="mb-3">
+														<Label className="form-label" htmlFor="seo_keywords-input">
+															Keywords
+														</Label>
+														<Input
+															type="text"
+															className="form-control"
+															id="seo_keywords-input"
+															placeholder="Enter text"
+															name="seo_keywords"
+															onChange={settingForm.handleChange}
+															onBlur={settingForm.handleBlur}
+															value={settingForm.values.seo_keywords}
+														/>
+													</div>
+												</Col>
 												<Col xl={8}>
 													<div className="mb-3">
 														<Label className="form-label" htmlFor="thumbnail-input">

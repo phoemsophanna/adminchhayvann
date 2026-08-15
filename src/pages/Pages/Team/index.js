@@ -13,7 +13,7 @@ import DeleteModal from "../../../Components/Common/DeleteModal";
 import { useCan, useCanMultiple } from "../../../Components/Common/Permission";
 
 const TeamMenu = () => {
-	document.title = "Team | Admin & Dashboards";
+	document.title = "Co-Founder | Admin & Dashboards";
 	const [UID, setUID] = useState(null);
 	const [deleteModal, setDeleteModal] = useState(false);
 
@@ -153,7 +153,7 @@ const TeamMenu = () => {
 		<React.Fragment>
 			<div className="page-content">
 				<Container fluid>
-					<BreadCrumb title="Team Menu" pageTitle="Home" />
+					<BreadCrumb title="Co-Founder Menu" pageTitle="Home" />
 					<Row>
 						<Col lg={12}>
 							<Card>

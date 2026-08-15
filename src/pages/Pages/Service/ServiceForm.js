@@ -102,6 +102,12 @@ const ServiceForm = (props) => {
 			contentKm: service ? service.contentKm : "",
 			metaKeyword: service ? service.metaKeyword : "",
 			metaDesc: service ? service.metaDesc : "",
+			slug: service ? service?.slug : "",
+			seo_title_eng: service ? service?.seo_title_eng : "",
+			seo_title_km: service ? service?.seo_title_km : "",
+			seo_description_eng: service ? service?.seo_description_eng : "",
+			seo_description_km: service ? service?.seo_description_km : "",
+			keywords: service ? service?.keywords : "",
 			ordering: service ? service.ordering : 0,
 			isActive: service ? (service.isActive === 1 ? true : false) : true,
 			isDisplayHomepage: service ? (service.isDisplayHomepage === 1 ? true : false) : false,
@@ -199,7 +205,12 @@ const ServiceForm = (props) => {
 														placeholder="Enter service title"
 														name="title"
 														onChange={serviceValidation.handleChange}
-														onBlur={serviceValidation.handleBlur}
+														onBlur={(e) => {
+															serviceValidation.handleBlur(e);
+															if (!serviceValidation.values.seo_title_eng) {
+																serviceValidation.setFieldValue("seo_title_eng", e.target.value);
+															}
+														}}
 														value={serviceValidation.values.title}
 														invalid={serviceValidation.touched.title && serviceValidation.errors.title ? true : false}
 													/>
@@ -263,7 +274,6 @@ const ServiceForm = (props) => {
 								</Card>
 							</Col>
 							<Col lg={4}>
-								
 								<Card>
 									<CardHeader>
 										<div className="fw-bold">Published</div>
@@ -316,34 +326,86 @@ const ServiceForm = (props) => {
 												value={serviceValidation.values.ordering}
 											/>
 										</div>
-										<div className="mb-2" hidden>
-											<Label htmlFor="metaKeyword" className="form-label">
-												Meta Keyword
+										<TabContent activeTab={titleTap}>
+											<TabPane tabId={"ENG"} id="eng">
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-title-input">
+														SEO Service Title
+													</Label>
+													<Input
+														type="text"
+														className="form-control"
+														id="service-seo_title_eng-input"
+														placeholder="Enter service seo title"
+														name="seo_title_eng"
+														onChange={serviceValidation.handleChange}
+														onBlur={serviceValidation.handleBlur}
+														value={serviceValidation.values.seo_title_eng}
+														invalid={serviceValidation.touched.seo_title_eng && serviceValidation.errors.seo_title_eng ? true : false}
+													/>
+												</div>
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-seo_description_eng-input">
+														SEO Service Description
+													</Label>
+													<Input
+														type="textarea"
+														className="form-control"
+														id="service-seo_description_eng-input"
+														placeholder="Enter service seo description"
+														name="seo_description_eng"
+														onChange={serviceValidation.handleChange}
+														onBlur={serviceValidation.handleBlur}
+														value={serviceValidation.values.seo_description_eng}
+													/>
+												</div>
+											</TabPane>
+											<TabPane tabId={"KHM"} id="khm">
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-seo_title_km-input">
+														SEO Service Title Khmer
+													</Label>
+													<Input
+														type="text"
+														className="form-control"
+														id="service-seo_title_km-input"
+														placeholder="Enter service seo title khmer"
+														name="seo_title_km"
+														onChange={serviceValidation.handleChange}
+														onBlur={serviceValidation.handleBlur}
+														value={serviceValidation.values.seo_title_km}
+													/>
+												</div>
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-seo_description_km-input">
+														SEO Service Description Khmer
+													</Label>
+													<Input
+														type="textarea"
+														className="form-control"
+														id="service-seo_description_km-input"
+														placeholder="Enter service seo description khmer"
+														name="seo_description_km"
+														onChange={serviceValidation.handleChange}
+														onBlur={serviceValidation.handleBlur}
+														value={serviceValidation.values.seo_description_km}
+													/>
+												</div>
+											</TabPane>
+										</TabContent>
+										<div className="mb-3">
+											<Label className="form-label" htmlFor="service-keywords-input">
+												SEO Service Keywords
 											</Label>
 											<Input
-												id="metaKeyword"
-												name="metaKeyword"
-												type="textarea"
+												type="text"
 												className="form-control"
-												placeholder="Enter text"
+												id="service-keywords-input"
+												placeholder="Enter service seo keywords"
+												name="keywords"
 												onChange={serviceValidation.handleChange}
 												onBlur={serviceValidation.handleBlur}
-												value={serviceValidation.values.metaKeyword || ""}
-											/>
-										</div>
-										<div className="mb-2" hidden>
-											<Label htmlFor="metaDesc" className="form-label">
-												Meta Description
-											</Label>
-											<Input
-												id="metaDesc"
-												name="metaDesc"
-												type="textarea"
-												className="form-control"
-												placeholder="Enter text"
-												onChange={serviceValidation.handleChange}
-												onBlur={serviceValidation.handleBlur}
-												value={serviceValidation.values.metaDesc || ""}
+												value={serviceValidation.values.keywords}
 											/>
 										</div>
 									</CardBody>

@@ -96,6 +96,12 @@ const ProductForm = (props) => {
 			titleKm: product ? product.titleKm : "",
 			description: product ? product.description : "",
 			descriptionKm: product ? product.descriptionKm : "",
+			slug: product ? product.slug : "",
+			seo_title_eng: product ? product?.seo_title_eng : "",
+			seo_title_km: product ? product?.seo_title_km : "",
+			seo_description_eng: product ? product?.seo_description_eng : "",
+			seo_description_km: product ? product?.seo_description_km : "",
+			keywords: product ? product?.keywords : "",
 			type: product ? product.type : "",
 			country: product ? product.country : "",
 			ordering: product ? product.ordering : 0,
@@ -194,7 +200,12 @@ const ProductForm = (props) => {
 														placeholder="Enter product title"
 														name="title"
 														onChange={productValidation.handleChange}
-														onBlur={productValidation.handleBlur}
+														onBlur={(e) => {
+															productValidation.handleBlur(e);
+															if(!productValidation.values.seo_title_eng) {
+																productValidation.setFieldValue("seo_title_eng", e.target.value);
+															}
+														}}
 														value={productValidation.values.title}
 														invalid={productValidation.touched.title && productValidation.errors.title ? true : false}
 													/>
@@ -345,34 +356,85 @@ const ProductForm = (props) => {
 												value={productValidation.values.ordering}
 											/>
 										</div>
-										<div className="mb-2" hidden>
-											<Label htmlFor="metaKeyword" className="form-label">
-												Meta Keyword
+										<TabContent activeTab={titleTap}>
+											<TabPane tabId={"ENG"} id="eng">
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-title-input">
+														SEO Product Title
+													</Label>
+													<Input
+														type="text"
+														className="form-control"
+														id="service-seo_title_eng-input"
+														placeholder="Enter product seo title"
+														name="seo_title_eng"
+														onChange={productValidation.handleChange}
+														onBlur={productValidation.handleBlur}
+														value={productValidation.values.seo_title_eng}
+													/>
+												</div>
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-seo_description_eng-input">
+														SEO Product Description
+													</Label>
+													<Input
+														type="textarea"
+														className="form-control"
+														id="service-seo_description_eng-input"
+														placeholder="Enter product seo description"
+														name="seo_description_eng"
+														onChange={productValidation.handleChange}
+														onBlur={productValidation.handleBlur}
+														value={productValidation.values.seo_description_eng}
+													/>
+												</div>
+											</TabPane>
+											<TabPane tabId={"KHM"} id="khm">
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-seo_title_km-input">
+														SEO Product Title Khmer
+													</Label>
+													<Input
+														type="text"
+														className="form-control"
+														id="service-seo_title_km-input"
+														placeholder="Enter product seo title khmer"
+														name="seo_title_km"
+														onChange={productValidation.handleChange}
+														onBlur={productValidation.handleBlur}
+														value={productValidation.values.seo_title_km}
+													/>
+												</div>
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-seo_description_km-input">
+														SEO Product Description Khmer
+													</Label>
+													<Input
+														type="textarea"
+														className="form-control"
+														id="service-seo_description_km-input"
+														placeholder="Enter product seo description khmer"
+														name="seo_description_km"
+														onChange={productValidation.handleChange}
+														onBlur={productValidation.handleBlur}
+														value={productValidation.values.seo_description_km}
+													/>
+												</div>
+											</TabPane>
+										</TabContent>
+										<div className="mb-3">
+											<Label className="form-label" htmlFor="service-keywords-input">
+												SEO Product Keywords
 											</Label>
 											<Input
-												id="metaKeyword"
-												name="metaKeyword"
-												type="textarea"
+												type="text"
 												className="form-control"
-												placeholder="Enter text"
+												id="service-keywords-input"
+												placeholder="Enter product seo keywords"
+												name="keywords"
 												onChange={productValidation.handleChange}
 												onBlur={productValidation.handleBlur}
-												value={productValidation.values.metaKeyword || ""}
-											/>
-										</div>
-										<div className="mb-2" hidden>
-											<Label htmlFor="metaDesc" className="form-label">
-												Meta Description
-											</Label>
-											<Input
-												id="metaDesc"
-												name="metaDesc"
-												type="textarea"
-												className="form-control"
-												placeholder="Enter text"
-												onChange={productValidation.handleChange}
-												onBlur={productValidation.handleBlur}
-												value={productValidation.values.metaDesc || ""}
+												value={productValidation.values.keywords}
 											/>
 										</div>
 									</CardBody>

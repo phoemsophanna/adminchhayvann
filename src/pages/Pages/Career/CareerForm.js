@@ -117,6 +117,12 @@ const CareerForm = (props) => {
 			location: career ? career.location : "",
 			locationKm: career ? career.locationKm : "",
 			deadline: career ? career.deadline : "",
+			slug: career ? career.slug : "",
+			seo_title_eng: career ? career?.seo_title_eng : "",
+			seo_title_km: career ? career?.seo_title_km : "",
+			seo_description_eng: career ? career?.seo_description_eng : "",
+			seo_description_km: career ? career?.seo_description_km : "",
+			keywords: career ? career?.keywords : "",
 			type: career ? career.type : "",
 			ordering: career ? career.ordering : 0,
 			isActive: career ? (career.isActive === 1 ? true : false) : true,
@@ -214,7 +220,12 @@ const CareerForm = (props) => {
 														placeholder="Enter career title"
 														name="title"
 														onChange={careerValidation.handleChange}
-														onBlur={careerValidation.handleBlur}
+														onBlur={(e) => {
+															careerValidation.handleBlur(e);
+															if (!careerValidation.values.seo_title_eng) {
+																careerValidation.setFieldValue("seo_title_eng", e.target.value);
+															}
+														}}
 														value={careerValidation.values.title}
 														invalid={careerValidation.touched.title && careerValidation.errors.title ? true : false}
 													/>
@@ -372,6 +383,87 @@ const CareerForm = (props) => {
 											<Label className="form-check-label" for="isActive">
 												Status: <span className="fw-bolder">{careerValidation.values.isActive ? "Active" : "In-Active"}</span>
 											</Label>
+										</div>
+										<TabContent activeTab={titleTap}>
+											<TabPane tabId={"ENG"} id="eng">
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-title-input">
+														SEO Careers Title
+													</Label>
+													<Input
+														type="text"
+														className="form-control"
+														id="service-seo_title_eng-input"
+														placeholder="Enter careers seo title"
+														name="seo_title_eng"
+														onChange={careerValidation.handleChange}
+														onBlur={careerValidation.handleBlur}
+														value={careerValidation.values.seo_title_eng}
+													/>
+												</div>
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-seo_description_eng-input">
+														SEO Careers Description
+													</Label>
+													<Input
+														type="textarea"
+														className="form-control"
+														id="service-seo_description_eng-input"
+														placeholder="Enter careers seo description"
+														name="seo_description_eng"
+														onChange={careerValidation.handleChange}
+														onBlur={careerValidation.handleBlur}
+														value={careerValidation.values.seo_description_eng}
+													/>
+												</div>
+											</TabPane>
+											<TabPane tabId={"KHM"} id="khm">
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-seo_title_km-input">
+														SEO Careers Title Khmer
+													</Label>
+													<Input
+														type="text"
+														className="form-control"
+														id="service-seo_title_km-input"
+														placeholder="Enter career seo title khmer"
+														name="seo_title_km"
+														onChange={careerValidation.handleChange}
+														onBlur={careerValidation.handleBlur}
+														value={careerValidation.values.seo_title_km}
+													/>
+												</div>
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-seo_description_km-input">
+														SEO Careers Description Khmer
+													</Label>
+													<Input
+														type="textarea"
+														className="form-control"
+														id="service-seo_description_km-input"
+														placeholder="Enter careers seo description khmer"
+														name="seo_description_km"
+														onChange={careerValidation.handleChange}
+														onBlur={careerValidation.handleBlur}
+														value={careerValidation.values.seo_description_km}
+													/>
+												</div>
+											</TabPane>
+										</TabContent>
+										<div className="mb-3">
+											<Label className="form-label" htmlFor="service-keywords-input">
+												SEO Careers Keywords
+											</Label>
+											<Input
+												type="text"
+												className="form-control"
+												id="service-keywords-input"
+												placeholder="Enter careers seo keywords"
+												name="keywords"
+												onChange={careerValidation.handleChange}
+												onBlur={careerValidation.handleBlur}
+												value={careerValidation.values.keywords}
+											/>
 										</div>
 									</CardBody>
 								</Card>

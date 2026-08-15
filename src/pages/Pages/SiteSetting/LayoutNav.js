@@ -69,6 +69,61 @@ const LayoutNav = (props) => {
 				<NavItem>
 					<NavLink
 						style={{ cursor: "pointer" }}
+						className={classnames({ active: props.router.location.pathname === "/site-setting/organization-chart" })}
+						onClick={() => {
+							toggle("organization-chart");
+						}}
+					>
+						Organization Chart
+					</NavLink>
+				</NavItem>
+				<NavItem>
+					<NavLink
+						style={{ cursor: "pointer" }}
+						className={classnames({ active: props.router.location.pathname === "/site-setting/services" })}
+						onClick={() => {
+							toggle("services");
+						}}
+					>
+						Gold
+					</NavLink>
+				</NavItem>
+				<NavItem>
+					<NavLink
+						style={{ cursor: "pointer" }}
+						className={classnames({ active: props.router.location.pathname === "/site-setting/services" })}
+						onClick={() => {
+							toggle("services");
+						}}
+					>
+						Exchange Rate
+					</NavLink>
+				</NavItem>
+				<NavItem>
+					<NavLink
+						style={{ cursor: "pointer" }}
+						className={classnames({ active: props.router.location.pathname === "/site-setting/platform" })}
+						onClick={() => {
+							toggle("platform");
+						}}
+					>
+						Platform
+					</NavLink>
+				</NavItem>
+				<NavItem>
+					<NavLink
+						style={{ cursor: "pointer" }}
+						className={classnames({ active: props.router.location.pathname === "/site-setting/career" })}
+						onClick={() => {
+							toggle("career");
+						}}
+					>
+						Career
+					</NavLink>
+				</NavItem>
+				<NavItem>
+					<NavLink
+						style={{ cursor: "pointer" }}
 						className={classnames({ active: props.router.location.pathname === "/site-setting/contact-us" })}
 						onClick={() => {
 							toggle("contact-us");
@@ -99,17 +154,6 @@ const LayoutNav = (props) => {
 						How To Trade
 					</NavLink>
 				</NavItem>
-				<NavItem>
-					<NavLink
-						style={{ cursor: "pointer" }}
-						className={classnames({ active: props.router.location.pathname === "/site-setting/services" })}
-						onClick={() => {
-							toggle("services");
-						}}
-					>
-						Exchange Rate
-					</NavLink>
-				</NavItem>
 				{/* <NavItem>
 					<NavLink
 						style={{ cursor: "pointer" }}
@@ -124,45 +168,12 @@ const LayoutNav = (props) => {
 				<NavItem>
 					<NavLink
 						style={{ cursor: "pointer" }}
-						className={classnames({ active: props.router.location.pathname === "/site-setting/organization-chart" })}
-						onClick={() => {
-							toggle("organization-chart");
-						}}
-					>
-						Organization Chart
-					</NavLink>
-				</NavItem>
-				<NavItem>
-					<NavLink
-						style={{ cursor: "pointer" }}
-						className={classnames({ active: props.router.location.pathname === "/site-setting/career" })}
-						onClick={() => {
-							toggle("career");
-						}}
-					>
-						Career
-					</NavLink>
-				</NavItem>
-				<NavItem>
-					<NavLink
-						style={{ cursor: "pointer" }}
 						className={classnames({ active: props.router.location.pathname === "/site-setting/individual" })}
 						onClick={() => {
 							toggle("individual");
 						}}
 					>
 						Open Account
-					</NavLink>
-				</NavItem>
-				<NavItem>
-					<NavLink
-						style={{ cursor: "pointer" }}
-						className={classnames({ active: props.router.location.pathname === "/site-setting/platform" })}
-						onClick={() => {
-							toggle("platform");
-						}}
-					>
-						Platform
 					</NavLink>
 				</NavItem>
 				{/* <NavItem>

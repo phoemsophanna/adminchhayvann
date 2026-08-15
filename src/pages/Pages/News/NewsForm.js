@@ -148,6 +148,12 @@ const NewsForm = (props) => {
 			category_id: news ? news.category_id : "",
 			metaKeyword: news ? news.metaKeyword : "",
 			metaDesc: news ? news.metaDesc : "",
+			slug: news ? news.slug : "",
+			seo_title_eng: news ? news?.seo_title_eng : "",
+			seo_title_km: news ? news?.seo_title_km : "",
+			seo_description_eng: news ? news?.seo_description_eng : "",
+			seo_description_km: news ? news?.seo_description_km : "",
+			keywords: news ? news?.keywords : "",
 			ordering: news ? news.ordering : 0,
 			isActive: news ? (news.isActive === 1 ? true : false) : true,
 			isDisplayHomepage: news ? (news.isDisplayHomepage === 1 ? true : false) : false,
@@ -246,7 +252,12 @@ const NewsForm = (props) => {
 														placeholder="Enter news title"
 														name="title"
 														onChange={newsValidation.handleChange}
-														onBlur={newsValidation.handleBlur}
+														onBlur={(e) => {
+															newsValidation.handleBlur(e);
+															if (!newsValidation.values.seo_title_eng) {
+																newsValidation.setFieldValue("seo_title_eng", e.target.value);
+															}
+														}}
 														value={newsValidation.values.title}
 														invalid={newsValidation.touched.title && newsValidation.errors.title ? true : false}
 													/>
@@ -419,34 +430,85 @@ const NewsForm = (props) => {
 												value={newsValidation.values.ordering}
 											/>
 										</div>
-										<div className="mb-2">
-											<Label htmlFor="metaKeyword" className="form-label">
-												Meta Keyword
+										<TabContent activeTab={titleTap}>
+											<TabPane tabId={"ENG"} id="eng">
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-title-input">
+														SEO News Title
+													</Label>
+													<Input
+														type="text"
+														className="form-control"
+														id="service-seo_title_eng-input"
+														placeholder="Enter news seo title"
+														name="seo_title_eng"
+														onChange={newsValidation.handleChange}
+														onBlur={newsValidation.handleBlur}
+														value={newsValidation.values.seo_title_eng}
+													/>
+												</div>
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-seo_description_eng-input">
+														SEO News Description
+													</Label>
+													<Input
+														type="textarea"
+														className="form-control"
+														id="service-seo_description_eng-input"
+														placeholder="Enter news seo description"
+														name="seo_description_eng"
+														onChange={newsValidation.handleChange}
+														onBlur={newsValidation.handleBlur}
+														value={newsValidation.values.seo_description_eng}
+													/>
+												</div>
+											</TabPane>
+											<TabPane tabId={"KHM"} id="khm">
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-seo_title_km-input">
+														SEO News Title Khmer
+													</Label>
+													<Input
+														type="text"
+														className="form-control"
+														id="service-seo_title_km-input"
+														placeholder="Enter news seo title khmer"
+														name="seo_title_km"
+														onChange={newsValidation.handleChange}
+														onBlur={newsValidation.handleBlur}
+														value={newsValidation.values.seo_title_km}
+													/>
+												</div>
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-seo_description_km-input">
+														SEO News Description Khmer
+													</Label>
+													<Input
+														type="textarea"
+														className="form-control"
+														id="service-seo_description_km-input"
+														placeholder="Enter news seo description khmer"
+														name="seo_description_km"
+														onChange={newsValidation.handleChange}
+														onBlur={newsValidation.handleBlur}
+														value={newsValidation.values.seo_description_km}
+													/>
+												</div>
+											</TabPane>
+										</TabContent>
+										<div className="mb-3">
+											<Label className="form-label" htmlFor="service-keywords-input">
+												SEO News Keywords
 											</Label>
 											<Input
-												id="metaKeyword"
-												name="metaKeyword"
-												type="textarea"
+												type="text"
 												className="form-control"
-												placeholder="Enter text"
+												id="service-keywords-input"
+												placeholder="Enter news seo keywords"
+												name="keywords"
 												onChange={newsValidation.handleChange}
 												onBlur={newsValidation.handleBlur}
-												value={newsValidation.values.metaKeyword || ""}
-											/>
-										</div>
-										<div className="mb-2">
-											<Label htmlFor="metaDesc" className="form-label">
-												Meta Description
-											</Label>
-											<Input
-												id="metaDesc"
-												name="metaDesc"
-												type="textarea"
-												className="form-control"
-												placeholder="Enter text"
-												onChange={newsValidation.handleChange}
-												onBlur={newsValidation.handleBlur}
-												value={newsValidation.values.metaDesc || ""}
+												value={newsValidation.values.keywords}
 											/>
 										</div>
 									</CardBody>

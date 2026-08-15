@@ -24,7 +24,7 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const TeamForm = (props) => {
 	const { id } = useParams();
-	document.title = `Team: ${id ? "Edit" : "create"} | Admin & Dashboards`;
+	document.title = `Co-Founder: ${id ? "Edit" : "create"} | Admin & Dashboards`;
 	const dispatch = useDispatch();
 	const [file, setFile] = useState([]);
 
@@ -100,6 +100,12 @@ const TeamForm = (props) => {
 			experienceKm: team ? team.experienceKm : "",
 			description: team ? team?.description : "",
 			descriptionKm: team ? team?.descriptionKm : "",
+			slug: team ? team.slug : "",
+			seo_title_eng: team ? team?.seo_title_eng : "",
+			seo_title_km: team ? team?.seo_title_km : "",
+			seo_description_eng: team ? team?.seo_description_eng : "",
+			seo_description_km: team ? team?.seo_description_km : "",
+			keywords: team ? team?.keywords : "",
 			facebook: team ? team.facebook : "",
 			telegram: team ? team.telegram : "",
 			linkedin: team ? team.linkedin : "",
@@ -123,14 +129,14 @@ const TeamForm = (props) => {
 		<React.Fragment>
 			<div className="page-content">
 				<Container fluid>
-					<BreadCrumb title="Team" pageTitle="Dashboard" pageLink="/team-menu" />
+					<BreadCrumb title="Co-Founder" pageTitle="Dashboard" pageLink="/team-menu" />
 					<Row>
 						<Col lg={12}>
 							<Card>
 								<CardHeader>
 									<Row className="justify-content-between align-items-center gy-3">
 										<Col lg={3}>
-											<h5 className="mt-2">{id ? "Edit" : "Create"} Team</h5>
+											<h5 className="mt-2">{id ? "Edit" : "Create"} Co-Founder</h5>
 										</Col>
 										<Col className="col-lg-auto">
 											<div className="d-md-flex text-nowrap gap-2">
@@ -200,7 +206,12 @@ const TeamForm = (props) => {
 														placeholder="Enter name"
 														name="name"
 														onChange={teamValidation.handleChange}
-														onBlur={teamValidation.handleBlur}
+														onBlur={(e) => {
+															teamValidation.handleBlur(e);
+															if (!teamValidation.values.seo_title_eng) {
+																teamValidation.setFieldValue("seo_title_eng", e.target.value);
+															}
+														}}
 														value={teamValidation.values.name}
 														invalid={teamValidation.touched.name && teamValidation.errors.name ? true : false}
 													/>
@@ -413,6 +424,87 @@ const TeamForm = (props) => {
 												onChange={teamValidation.handleChange}
 												onBlur={teamValidation.handleBlur}
 												value={teamValidation.values.ordering}
+											/>
+										</div>
+										<TabContent activeTab={titleTap}>
+											<TabPane tabId={"ENG"} id="eng">
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-title-input">
+														SEO Team Title
+													</Label>
+													<Input
+														type="text"
+														className="form-control"
+														id="service-seo_title_eng-input"
+														placeholder="Enter teams seo title"
+														name="seo_title_eng"
+														onChange={teamValidation.handleChange}
+														onBlur={teamValidation.handleBlur}
+														value={teamValidation.values.seo_title_eng}
+													/>
+												</div>
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-seo_description_eng-input">
+														SEO Team Description
+													</Label>
+													<Input
+														type="textarea"
+														className="form-control"
+														id="service-seo_description_eng-input"
+														placeholder="Enter teams seo description"
+														name="seo_description_eng"
+														onChange={teamValidation.handleChange}
+														onBlur={teamValidation.handleBlur}
+														value={teamValidation.values.seo_description_eng}
+													/>
+												</div>
+											</TabPane>
+											<TabPane tabId={"KHM"} id="khm">
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-seo_title_km-input">
+														SEO Team Title Khmer
+													</Label>
+													<Input
+														type="text"
+														className="form-control"
+														id="service-seo_title_km-input"
+														placeholder="Enter teams seo title khmer"
+														name="seo_title_km"
+														onChange={teamValidation.handleChange}
+														onBlur={teamValidation.handleBlur}
+														value={teamValidation.values.seo_title_km}
+													/>
+												</div>
+												<div className="mb-3">
+													<Label className="form-label" htmlFor="service-seo_description_km-input">
+														SEO Team Description Khmer
+													</Label>
+													<Input
+														type="textarea"
+														className="form-control"
+														id="service-seo_description_km-input"
+														placeholder="Enter teams seo description khmer"
+														name="seo_description_km"
+														onChange={teamValidation.handleChange}
+														onBlur={teamValidation.handleBlur}
+														value={teamValidation.values.seo_description_km}
+													/>
+												</div>
+											</TabPane>
+										</TabContent>
+										<div className="mb-3">
+											<Label className="form-label" htmlFor="service-keywords-input">
+												SEO Team Keywords
+											</Label>
+											<Input
+												type="text"
+												className="form-control"
+												id="service-keywords-input"
+												placeholder="Enter teams seo keywords"
+												name="keywords"
+												onChange={teamValidation.handleChange}
+												onBlur={teamValidation.handleBlur}
+												value={teamValidation.values.keywords}
 											/>
 										</div>
 									</CardBody>

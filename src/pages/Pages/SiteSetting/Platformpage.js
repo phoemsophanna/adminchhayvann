@@ -146,8 +146,15 @@ const Platformpage = () => {
 	});
 
 	const refreshForm = () => {
+		setImage([]);
+		setImage2([]);
+		setPlatform1([]);
+		setPlatform2([]);
+		setPlatform3([]);
+		setVideoImage([]);
+		setContent(null);
+		setContentKm(null);
 		dispatch(getSiteSetting("PLATFORM"));
-		window.location.reload();
 	};
 
 	useEffect(() => {
