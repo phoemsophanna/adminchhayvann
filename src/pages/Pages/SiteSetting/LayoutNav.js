@@ -80,9 +80,9 @@ const LayoutNav = (props) => {
 				<NavItem>
 					<NavLink
 						style={{ cursor: "pointer" }}
-						className={classnames({ active: props.router.location.pathname === "/site-setting/services" })}
+						className={classnames({ active: props.router.location.pathname === "/site-setting/gold" })}
 						onClick={() => {
-							toggle("services");
+							toggle("gold");
 						}}
 					>
 						Gold

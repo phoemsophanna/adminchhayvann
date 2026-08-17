@@ -46,6 +46,7 @@ const Organization = () => {
 	useEffect(() => {
 		setContentDesc("");
 		setContentKmDesc("");
+		settingForm.resetForm();
 		dispatch(getSiteSetting("ORGANIZATION"));
 		return () => {
 			dispatch(resetSiteSettingFlag());

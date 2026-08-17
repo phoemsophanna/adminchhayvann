@@ -90,6 +90,7 @@ const Platformpage = () => {
 	const { siteSetting, message, isLoading, success, error } = useSelector(siteSettingSelector);
 
 	useEffect(() => {
+		settingForm.resetForm();
 		dispatch(getSiteSetting("PLATFORM"));
 		dispatch(fetchTradingList());
 		return () => {
@@ -102,6 +103,13 @@ const Platformpage = () => {
 
 		initialValues: {
 			type: "PLATFORM",
+			// SEO
+			seo_title_eng: siteSetting ? siteSetting?.seo_title_eng : "",
+			seo_title_km: siteSetting ? siteSetting?.seo_title_km : "",
+			seo_description_eng: siteSetting ? siteSetting?.seo_description_eng : "",
+			seo_description_km: siteSetting ? siteSetting?.seo_description_km : "",
+			seo_keywords: siteSetting ? siteSetting?.seo_keywords : "",
+			// END
 			title: siteSetting ? siteSetting.title : "",
 			titleKm: siteSetting ? siteSetting.titleKm : "",
 			description: siteSetting ? siteSetting?.description : "",
@@ -379,6 +387,89 @@ const Platformpage = () => {
 											</span>
 										) : (
 											<Row>
+												<Col xl={12}>
+													<TabContent activeTab={titleTap}>
+														<TabPane tabId={"ENG"} id="eng">
+															<div className="mb-3">
+																<Label className="form-label" htmlFor="seo_title_eng-input">
+																	SEO Title
+																</Label>
+																<Input
+																	type="text"
+																	className="form-control"
+																	id="seo_title_eng-input"
+																	placeholder="Enter text"
+																	name="seo_title_eng"
+																	onChange={settingForm.handleChange}
+																	onBlur={settingForm.handleBlur}
+																	value={settingForm.values.seo_title_eng}
+																/>
+															</div>
+															<div className="mb-3">
+																<Label className="form-label" htmlFor="seo_description_eng-input">
+																	SEO Description
+																</Label>
+																<Input
+																	type="textarea"
+																	className="form-control"
+																	id="seo_description_eng-input"
+																	placeholder="Enter text"
+																	name="seo_description_eng"
+																	onChange={settingForm.handleChange}
+																	onBlur={settingForm.handleBlur}
+																	value={settingForm.values.seo_description_eng}
+																/>
+															</div>
+														</TabPane>
+														<TabPane tabId={"KHM"} id="khm">
+															<div className="mb-3">
+																<Label className="form-label" htmlFor="seo_title_km-input">
+																	SEO Title Khmer
+																</Label>
+																<Input
+																	type="text"
+																	className="form-control"
+																	id="seo_title_km-input"
+																	placeholder="Enter text"
+																	name="seo_title_km"
+																	onChange={settingForm.handleChange}
+																	onBlur={settingForm.handleBlur}
+																	value={settingForm.values.seo_title_km}
+																/>
+															</div>
+															<div className="mb-3">
+																<Label className="form-label" htmlFor="seo_description_km-input">
+																	SEO Description Khmer
+																</Label>
+																<Input
+																	type="textarea"
+																	className="form-control"
+																	id="seo_description_km-input"
+																	placeholder="Enter text"
+																	name="seo_description_km"
+																	onChange={settingForm.handleChange}
+																	onBlur={settingForm.handleBlur}
+																	value={settingForm.values.seo_description_km}
+																/>
+															</div>
+														</TabPane>
+													</TabContent>
+													<div className="mb-3">
+														<Label className="form-label" htmlFor="seo_keywords-input">
+															Keywords
+														</Label>
+														<Input
+															type="text"
+															className="form-control"
+															id="seo_keywords-input"
+															placeholder="Enter text"
+															name="seo_keywords"
+															onChange={settingForm.handleChange}
+															onBlur={settingForm.handleBlur}
+															value={settingForm.values.seo_keywords}
+														/>
+													</div>
+												</Col>
 												<Col xl={12}>
 													<TabContent activeTab={titleTap}>
 														<TabPane tabId={"ENG"} id="eng">

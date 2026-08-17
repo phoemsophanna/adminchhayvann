@@ -66,6 +66,7 @@ import IndividualMenu from "../pages/Pages/Individual";
 import HistoryPage from "../pages/Pages/SiteSetting/HistoryPage";
 import Teampage from "../pages/Pages/SiteSetting/Teampage";
 import Platformpage from "../pages/Pages/SiteSetting/Platformpage";
+import Gold from "../pages/Pages/SiteSetting/Gold";
 
 const authProtectedRoutes = [
 	{ path: "/dashboard", component: <Dashboard />, role: "dashboard" },
@@ -106,6 +107,7 @@ const authProtectedRoutes = [
 	{ path: "/site-setting/why-choose", component: <WhyChoose />, role: "site-setting" },
 	{ path: "/site-setting/history", component: <HistoryPage />, role: "site-setting" },
 	{ path: "/site-setting/team", component: <Teampage />, role: "site-setting" },
+	{ path: "/site-setting/gold", component: <Gold />, role: "site-setting" },
 
 	// New
 	{ path: "/site-setting/platform", component: <Platformpage />, role: "site-setting" },

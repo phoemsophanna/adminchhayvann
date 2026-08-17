@@ -55,6 +55,7 @@ const Homepage = () => {
 
 	useEffect(() => {
 		setFile([]);
+		settingForm.resetForm();
 		dispatch(getSiteSetting("HOMEPAGE"));
 		return () => {
 			dispatch(resetSiteSettingFlag());

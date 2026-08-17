@@ -46,6 +46,7 @@ const Teampage = () => {
 
 	useEffect(() => {
 		setFile([]);
+		settingForm.resetForm();
 		dispatch(getSiteSetting("TEAMPAGE"));
 		return () => {
 			dispatch(resetSiteSettingFlag());

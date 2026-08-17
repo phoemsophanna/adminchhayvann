@@ -1,44 +1,24 @@
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
-import { Button, Card, CardBody, CardHeader, Nav, NavItem, NavLink, Col, Container, Form, Input, Label, Row, Spinner, TabContent, TabPane, Modal, ModalHeader, ModalBody } from "reactstrap";
+import { Button, Card, CardBody, CardHeader, Nav, NavItem, NavLink, Col, Container, Form, Input, Label, Row, Spinner, TabContent, TabPane } from "reactstrap";
 import { api } from "../../../config";
 import TinymceEditor from "../../../Components/Common/TinymceEditor";
 
 import { useDispatch, useSelector } from "react-redux";
-// Import React FilePond
-import { FilePond, registerPlugin } from "react-filepond";
-// Import FilePond styles
-import "filepond/dist/filepond.min.css";
-import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
-import FilePondPluginImagePreview from "filepond-plugin-image-preview";
-import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { getSiteSetting, resetSiteSettingFlag, saveSiteSetting } from "../../../store/actions";
 import { createSelector } from "reselect";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 
 import withRouter from "../../../Components/Common/withRouter";
 import LayoutNav from "./LayoutNav";
-// Register the plugins
-registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-const HistoryPage = () => {
+const Gold = () => {
 	document.title = "Site Setting | Admin & Dashboard";
 
 	const dispatch = useDispatch();
 	const [titleTap, settitleTap] = useState("ENG");
 	const titleTapToggle = (lang) => {
 		settitleTap(lang);
-	}
-
-	const [contentDesc, setContentDesc] = useState("");
-	const [contentKmDesc, setContentKmDesc] = useState("");
-
-	const handleEditorChange = (e) => {
-		setContentDesc(e.target.getContent());
-	}
-
-	const handleEditorChangeKm = (e) => {
-		setContentKmDesc(e.target.getContent());
 	}
 
 	const siteSettingSelector = createSelector(
@@ -55,7 +35,7 @@ const HistoryPage = () => {
 
 	useEffect(() => {
 		settingForm.resetForm();
-		dispatch(getSiteSetting("HISTORY"));
+		dispatch(getSiteSetting("GOLD"));
 		return () => {
 			dispatch(resetSiteSettingFlag());
 		};
@@ -63,9 +43,8 @@ const HistoryPage = () => {
 
 	const settingForm = useFormik({
 		enableReinitialize: true,
-
 		initialValues: {
-			type: "HISTORY",
+			type: "GOLD",
 			// SEO
 			seo_title_eng: siteSetting ? siteSetting?.seo_title_eng : "",
 			seo_title_km: siteSetting ? siteSetting?.seo_title_km : "",
@@ -73,31 +52,18 @@ const HistoryPage = () => {
 			seo_description_km: siteSetting ? siteSetting?.seo_description_km : "",
 			seo_keywords: siteSetting ? siteSetting?.seo_keywords : "",
 			// END
-			history_description_eng: siteSetting ? siteSetting.history_description_eng : "",
-			history_description_km: siteSetting ? siteSetting.history_description_km : "",
 		},
 		onSubmit: (values) => {
-			values.history_description_eng = contentDesc;
-			values.history_description_km = contentKmDesc;
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
-				setTimeout(() => {
-					refreshForm();
-				}, 100);
+				refreshForm();
 			}
 		},
 	});
 
 	const refreshForm = () => {
-		dispatch(getSiteSetting("HISTORY"));
+		dispatch(getSiteSetting("GOLD"));
 	};
-
-	useEffect(() => {
-		if(siteSetting){
-			setContentDesc(siteSetting.history_description_eng);
-			setContentKmDesc(siteSetting.history_description_km);
-		}
-	},[siteSetting]);
 
 	return (
 		<React.Fragment>
@@ -246,22 +212,6 @@ const HistoryPage = () => {
 														/>
 													</div>
 												</Col>
-												<Col xl={12}>
-													<TabContent activeTab={titleTap}>
-														<TabPane tabId={"ENG"} id="eng">
-															<div className="mb-3">
-																<Label>History Company</Label>
-																<TinymceEditor onUploadImage={handleEditorChange} initDataValue={contentDesc} />
-															</div>
-														</TabPane>
-														<TabPane tabId={"KHM"} id="khm">
-															<div className="mb-3">
-																<Label>History Company Khmer</Label>
-																<TinymceEditor onUploadImage={handleEditorChangeKm} initDataValue={contentKmDesc} />
-															</div>
-														</TabPane>
-													</TabContent>
-												</Col>
 											</Row>
 										)}
 									</CardBody>
@@ -294,4 +244,4 @@ const HistoryPage = () => {
 	);
 };
 
-export default withRouter(HistoryPage);
+export default withRouter(Gold);

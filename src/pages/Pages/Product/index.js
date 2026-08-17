@@ -69,8 +69,8 @@ const ProductMenu = () => {
 						<div className="d-flex align-items-center">
 							<div className="flex-shrink-0 me-3">
 								<div className="avatar-sm bg-light rounded p-1 d-flex align-items-center">
-									{product.row.original.image ? (
-										<img src={api.FILE_URI + product.row.original.image} alt="" className="img-fluid d-block" />
+									{product.row.original.gallery[0] ? (
+										<img src={api.FILE_URI + product.row.original.gallery[0]} alt="" className="img-fluid d-block" />
 									) : (
 										<div className="mx-auto w-100 h-100">
 											<div className="avatar-title bg-success-subtle text-success fs-24">

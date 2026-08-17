@@ -93,6 +93,7 @@ const AboutCompany = () => {
 
 	useEffect(() => {
 		setFile([]);
+		settingForm.resetForm();
 		dispatch(getSiteSetting("ABOUTCOMPANY"));
 		return () => {
 			dispatch(resetSiteSettingFlag());
