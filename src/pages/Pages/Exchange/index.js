@@ -219,7 +219,9 @@ const ExchangeMenu = () => {
 				const items = exchanges.map((q,index) => {
 					return {
 						from: q.from,
+						fromKm: q.fromKm,
 						to: q.to,
+						toKm: q.toKm,
 						buy: q.buy,
 						sell: q.sell,
 						isMultiply: q.isMultiply,
