@@ -228,7 +228,7 @@ const ProductForm = (props) => {
 														className="form-control"
 														id="product-title-km-input"
 														placeholder="Enter product title"
-														name="title"
+														name="titleKm"
 														onChange={productValidation.handleChange}
 														onBlur={productValidation.handleBlur}
 														value={productValidation.values.titleKm}
