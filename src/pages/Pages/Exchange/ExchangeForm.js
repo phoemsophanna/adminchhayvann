@@ -187,85 +187,93 @@ const ExchangeForm = (props) => {
 										<Row>
 											<TabContent activeTab={titleTap}>
 												<TabPane tabId={"ENG"} id="eng">
-													<Col md={6}>
-														<div className="mb-3">
-															<Label className="form-label" htmlFor="exchange-rate-from-input">
-																From <small className="text-danger">(Required)</small>
-															</Label>
-															<Input
-																type="text"
-																className="form-control"
-																id="exchange-rate-from-input"
-																placeholder="Enter exchange rate from"
-																name="from"
-																onChange={exchangeValidation.handleChange}
-																onBlur={exchangeValidation.handleBlur}
-																value={exchangeValidation.values.from}
-																invalid={exchangeValidation.touched.from && exchangeValidation.errors.from ? true : false}
-															/>
-															{exchangeValidation.touched.from && exchangeValidation.errors.from ? (
-																<FormFeedback type="invalid">{exchangeValidation.errors.from}</FormFeedback>
-															) : null}
-														</div>
-													</Col>
-													<Col md={6}>
-														<div className="mb-3">
-															<Label className="form-label" htmlFor="exchange-rate-to-input">
-																To <small className="text-danger">(Required)</small>
-															</Label>
-															<Input
-																type="text"
-																className="form-control"
-																id="exchange-rate-to-input"
-																placeholder="Enter exchange rate to"
-																name="to"
-																onChange={exchangeValidation.handleChange}
-																onBlur={exchangeValidation.handleBlur}
-																value={exchangeValidation.values.to}
-																invalid={exchangeValidation.touched.to && exchangeValidation.errors.to ? true : false}
-															/>
-															{exchangeValidation.touched.to && exchangeValidation.errors.to ? (
-																<FormFeedback type="invalid">{exchangeValidation.errors.to}</FormFeedback>
-															) : null}
-														</div>
+													<Col md={12}>
+														<Row>
+															<Col md={6}>
+																<div className="mb-3">
+																	<Label className="form-label" htmlFor="exchange-rate-from-input">
+																		From <small className="text-danger">(Required)</small>
+																	</Label>
+																	<Input
+																		type="text"
+																		className="form-control"
+																		id="exchange-rate-from-input"
+																		placeholder="Enter exchange rate from"
+																		name="from"
+																		onChange={exchangeValidation.handleChange}
+																		onBlur={exchangeValidation.handleBlur}
+																		value={exchangeValidation.values.from}
+																		invalid={exchangeValidation.touched.from && exchangeValidation.errors.from ? true : false}
+																	/>
+																	{exchangeValidation.touched.from && exchangeValidation.errors.from ? (
+																		<FormFeedback type="invalid">{exchangeValidation.errors.from}</FormFeedback>
+																	) : null}
+																</div>
+															</Col>
+															<Col md={6}>
+																<div className="mb-3">
+																	<Label className="form-label" htmlFor="exchange-rate-to-input">
+																		To <small className="text-danger">(Required)</small>
+																	</Label>
+																	<Input
+																		type="text"
+																		className="form-control"
+																		id="exchange-rate-to-input"
+																		placeholder="Enter exchange rate to"
+																		name="to"
+																		onChange={exchangeValidation.handleChange}
+																		onBlur={exchangeValidation.handleBlur}
+																		value={exchangeValidation.values.to}
+																		invalid={exchangeValidation.touched.to && exchangeValidation.errors.to ? true : false}
+																	/>
+																	{exchangeValidation.touched.to && exchangeValidation.errors.to ? (
+																		<FormFeedback type="invalid">{exchangeValidation.errors.to}</FormFeedback>
+																	) : null}
+																</div>
+															</Col>
+														</Row>
 													</Col>
 												</TabPane>
 												<TabPane tabId={"KHM"} id="khm">
-													<Col md={6}>
-														<div className="mb-3">
-															<Label className="form-label" htmlFor="exchange-rate-from-khmer-input">
-																From Khmer
-															</Label>
-															<Input
-																type="text"
-																className="form-control"
-																id="exchange-rate-from-khmer-input"
-																placeholder="Enter exchange rate from khmer"
-																name="fromKm"
-																onChange={exchangeValidation.handleChange}
-																onBlur={exchangeValidation.handleBlur}
-																value={exchangeValidation.values.fromKm}
-																invalid={exchangeValidation.touched.fromKm && exchangeValidation.errors.fromKm ? true : false}
-															/>
-														</div>
-													</Col>
-													<Col md={6}>
-														<div className="mb-3">
-															<Label className="form-label" htmlFor="exchange-rate-to-khmer-input">
-																To Khmer
-															</Label>
-															<Input
-																type="text"
-																className="form-control"
-																id="exchange-rate-to-khmer-input"
-																placeholder="Enter exchange rate to khmer"
-																name="toKm"
-																onChange={exchangeValidation.handleChange}
-																onBlur={exchangeValidation.handleBlur}
-																value={exchangeValidation.values.toKm}
-																invalid={exchangeValidation.touched.toKm && exchangeValidation.errors.toKm ? true : false}
-															/>
-														</div>
+													<Col md={12}>
+														<Row>
+															<Col md={6}>
+																<div className="mb-3">
+																	<Label className="form-label" htmlFor="exchange-rate-from-khmer-input">
+																		From Khmer
+																	</Label>
+																	<Input
+																		type="text"
+																		className="form-control"
+																		id="exchange-rate-from-khmer-input"
+																		placeholder="Enter exchange rate from khmer"
+																		name="fromKm"
+																		onChange={exchangeValidation.handleChange}
+																		onBlur={exchangeValidation.handleBlur}
+																		value={exchangeValidation.values.fromKm}
+																		invalid={exchangeValidation.touched.fromKm && exchangeValidation.errors.fromKm ? true : false}
+																	/>
+																</div>
+															</Col>
+															<Col md={6}>
+																<div className="mb-3">
+																	<Label className="form-label" htmlFor="exchange-rate-to-khmer-input">
+																		To Khmer
+																	</Label>
+																	<Input
+																		type="text"
+																		className="form-control"
+																		id="exchange-rate-to-khmer-input"
+																		placeholder="Enter exchange rate to khmer"
+																		name="toKm"
+																		onChange={exchangeValidation.handleChange}
+																		onBlur={exchangeValidation.handleBlur}
+																		value={exchangeValidation.values.toKm}
+																		invalid={exchangeValidation.touched.toKm && exchangeValidation.errors.toKm ? true : false}
+																	/>
+																</div>
+															</Col>
+														</Row>
 													</Col>
 												</TabPane>
 											</TabContent>
