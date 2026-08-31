@@ -73,7 +73,7 @@ const PrivacyPolicy = () => {
 			thumbnail: siteSetting ? siteSetting.thumbnail : "",
 		},
 		onSubmit: (values) => {
-			values.thumbnail = file?.length > 0 ? file[0]?.serverId : siteSetting.thumbnail;
+			values.thumbnail = file?.length > 0 ? file[0]?.serverId : "";
 			values.description = contentDesc;
 			values.descriptionKm = contentDescKm;
 			dispatch(saveSiteSetting(values));
