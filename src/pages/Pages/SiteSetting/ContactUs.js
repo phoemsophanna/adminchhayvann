@@ -114,6 +114,7 @@ const ContactUs = () => {
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
 				setTimeout(() => {
+					dispatch(getSiteSetting("CONTACT"));
 					refreshForm();
 				}, 500);
 			}

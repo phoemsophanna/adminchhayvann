@@ -82,8 +82,9 @@ const HistoryPage = () => {
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
 				setTimeout(() => {
+					dispatch(getSiteSetting("GOLD"));
 					refreshForm();
-				}, 100);
+				}, 500);
 			}
 		},
 	});

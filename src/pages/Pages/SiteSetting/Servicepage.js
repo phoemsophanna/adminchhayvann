@@ -90,7 +90,10 @@ const Homepage = () => {
 			values.descriptionKm = contentKmDesc ? contentKmDesc : "";
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
-				refreshForm();
+				setTimeout(() => {
+					dispatch(getSiteSetting("SERVICE"));
+					refreshForm();
+				}, 500);
 			}
 		},
 	});

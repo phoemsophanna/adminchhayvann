@@ -148,7 +148,10 @@ const Platformpage = () => {
 			values.descriptionKm = contentKm;
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
-				refreshForm();
+				setTimeout(() => {
+					dispatch(getSiteSetting("PLATFORM"));
+					refreshForm();
+				}, 500);
 			}
 		},
 	});

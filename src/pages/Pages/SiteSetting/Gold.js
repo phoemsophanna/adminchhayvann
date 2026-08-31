@@ -56,7 +56,10 @@ const Gold = () => {
 		onSubmit: (values) => {
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
-				refreshForm();
+				setTimeout(() => {
+					dispatch(getSiteSetting("GOLD"));
+					refreshForm();
+				}, 500);
 			}
 		},
 	});

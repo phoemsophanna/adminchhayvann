@@ -73,7 +73,10 @@ const Organization = () => {
 			values.desKm = contentKmDesc ? contentKmDesc : "";
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
-				refreshForm();
+				setTimeout(() => {
+					dispatch(getSiteSetting("ORGANIZATION"));
+					refreshForm();
+				}, 500);
 			}
 		},
 	});

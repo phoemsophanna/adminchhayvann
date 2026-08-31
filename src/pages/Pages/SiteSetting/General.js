@@ -75,7 +75,10 @@ const General = () => {
 			values.popup_thumbnail = fileThree?.length > 0 ? fileThree[0]?.serverId : "";
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
-				refreshForm();
+				setTimeout(() => {
+					dispatch(getSiteSetting("GENERAL"));
+					refreshForm();
+				}, 500);
 			}
 		},
 	});

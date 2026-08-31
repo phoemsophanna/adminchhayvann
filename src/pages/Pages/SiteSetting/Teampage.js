@@ -73,7 +73,10 @@ const Teampage = () => {
 			values.backgroundCover = fileTwo?.length > 0 ? (fileTwo[0]?.serverId ? fileTwo[0]?.serverId : fileTwo[0]?.source) : "";
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
-				refreshForm();
+				setTimeout(() => {
+					dispatch(getSiteSetting("TEAMPAGE"));
+					refreshForm();
+				}, 500);
 			}
 		},
 	});

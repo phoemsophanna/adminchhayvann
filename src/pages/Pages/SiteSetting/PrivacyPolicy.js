@@ -58,6 +58,7 @@ const PrivacyPolicy = () => {
 			dispatch(resetSiteSettingFlag());
 		};
 	}, [dispatch]);
+
 	const refreshForm = () => {
 		setFile([]);
 		dispatch(getSiteSetting("PRIVACY_POLICY"));
@@ -78,7 +79,10 @@ const PrivacyPolicy = () => {
 			values.descriptionKm = contentDescKm;
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
-				refreshForm();
+				setTimeout(() => {
+					dispatch(getSiteSetting("PRIVACY_POLICY"));
+					refreshForm();
+				}, 500);
 			}
 		},
 	});
@@ -103,6 +107,7 @@ const PrivacyPolicy = () => {
 			setContentDesc("");
 			setContentDescKm("");
 		}
+		console.log(siteSetting?.thumbnail);
 	}, [siteSetting]);
 
 	return (

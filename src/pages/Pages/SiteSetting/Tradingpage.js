@@ -92,7 +92,10 @@ const Tradingpage = () => {
 		onSubmit: (values) => {
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
-				refreshForm();
+				setTimeout(() => {
+					dispatch(getSiteSetting("TRADING"));
+					refreshForm();
+				}, 500);
 			}
 		},
 	});

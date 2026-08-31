@@ -163,7 +163,10 @@ const AboutCompany = () => {
 			values.image5 = fileFive?.length > 0 ? fileFive[0]?.serverId : "";
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
-				refreshForm();
+				setTimeout(() => {
+					dispatch(getSiteSetting("ABOUTCOMPANY"));
+					refreshForm();
+				}, 500);
 			}
 		},
 	});

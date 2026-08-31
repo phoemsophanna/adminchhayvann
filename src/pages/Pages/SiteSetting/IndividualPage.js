@@ -80,8 +80,9 @@ const Careerpage = () => {
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
 				setTimeout(() => {
+					dispatch(getSiteSetting("INDIVIDUAL"));
 					refreshForm();
-				}, 100);
+				}, 500);
 			}
 		},
 	});

@@ -94,7 +94,10 @@ const Homepage = () => {
 			values.aboutCompanyKm = contentKmDesc ? contentKmDesc : "";
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
-				refreshForm();
+				setTimeout(() => {
+					dispatch(getSiteSetting("HOMEPAGE"));
+					refreshForm();
+				}, 500);
 			}
 		},
 	});

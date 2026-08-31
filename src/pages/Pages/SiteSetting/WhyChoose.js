@@ -112,7 +112,10 @@ const WhyChoose = () => {
 			values.image6 = fileSix?.length > 0 ? fileSix[0]?.serverId : "";
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
-				refreshForm();
+				setTimeout(() => {
+					dispatch(getSiteSetting("WHYCHOOSE"));
+					refreshForm();
+				}, 500);
 			}
 		},
 	});

@@ -82,7 +82,10 @@ const HowTrade = () => {
 			values.desKm = contentKmDesc ? contentKmDesc : "";
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
-				refreshForm();
+				setTimeout(() => {
+					dispatch(getSiteSetting("HOWTRADE"));
+					refreshForm();
+				}, 500);
 			}
 		},
 	});
