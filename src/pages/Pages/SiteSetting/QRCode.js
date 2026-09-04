@@ -17,6 +17,11 @@ const QRCode = () => {
     const [deleteId, setDeleteId] = useState(null);
     const [form, setForm] = useState({ link: "" });
     const [selected, setSelected] = useState(null);
+    const [showQRModal, setShowQRModal] = useState(false);
+    const mainItem = {
+        id: 0,
+        link: api.WEBSITE
+    };
 
     const headers = useMemo(() => ({
         "Content-Type": "application/json",
@@ -82,16 +87,44 @@ const QRCode = () => {
     };
 
     const downloadQRCode = async (item) => {
+        const SIZE = 2400;
+
         const response = await fetch(qrUrl(item.link));
         const blob = await response.blob();
-        const downloadUrl = URL.createObjectURL(blob);
-        const anchor = document.createElement("a");
-        anchor.href = downloadUrl;
-        anchor.download = `qr-code-${item.id || "image"}-${QR_SIZE}x${QR_SIZE}.png`;
-        document.body.appendChild(anchor);
-        anchor.click();
-        anchor.remove();
-        URL.revokeObjectURL(downloadUrl);
+
+        const imageUrl = URL.createObjectURL(blob);
+
+        const img = new Image();
+
+        img.onload = () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = SIZE;
+            canvas.height = SIZE;
+
+            const ctx = canvas.getContext("2d");
+
+            // Disable smoothing for sharper QR code pixels
+            ctx.imageSmoothingEnabled = false;
+
+            ctx.drawImage(img, 0, 0, SIZE, SIZE);
+
+            canvas.toBlob((pngBlob) => {
+                const downloadUrl = URL.createObjectURL(pngBlob);
+
+                const anchor = document.createElement("a");
+                anchor.href = downloadUrl;
+                anchor.download = `qr-code-${item.id || "image"}-${SIZE}x${SIZE}.png`;
+
+                document.body.appendChild(anchor);
+                anchor.click();
+                anchor.remove();
+
+                URL.revokeObjectURL(downloadUrl);
+                URL.revokeObjectURL(imageUrl);
+            }, "image/png");
+        };
+
+        img.src = imageUrl;
     };
 
     return (
@@ -110,37 +143,7 @@ const QRCode = () => {
                     </div>
 
                     <Row className="g-4">
-                        <Col xl={4} lg={5}>
-                            <Card className="border-0 shadow-sm h-100">
-                                <CardBody className="p-4">
-                                    <div className="d-flex justify-content-between align-items-center mb-3">
-                                        <div>
-                                            <h5 className="mb-1">Live preview</h5>
-                                            <span className="text-muted small">{selected ? "Selected destination" : "Choose a code to preview"}</span>
-                                        </div>
-                                        <span className="badge bg-light text-primary">HD {QR_SIZE}px</span>
-                                    </div>
-                                    {selected ? (
-                                        <React.Fragment>
-                                            <div className="bg-light rounded-3 p-3 text-center mb-3 position-relative">
-                                                <img src={qrUrl(selected.link)} alt="QR code preview" className="img-fluid" style={{ maxHeight: 300 }} />
-                                            </div>
-                                            <div className="text-truncate fw-semibold mb-1">{selected.link}</div>
-                                            <div className="text-muted small mb-3">Download produces a {QR_SIZE} x {QR_SIZE} PNG.</div>
-                                            <Button color="dark" className="w-100" onClick={() => downloadQRCode(selected)}>
-                                                <i className="ri-download-2-line me-1" /> Download PNG
-                                            </Button>
-                                        </React.Fragment>
-                                    ) : (
-                                        <div className="text-center text-muted py-5">
-                                            <i className="ri-qr-code-line display-4 d-block mb-3 text-primary" />
-                                            Select a saved QR code to see it here.
-                                        </div>
-                                    )}
-                                </CardBody>
-                            </Card>
-                        </Col>
-                        <Col xl={8} lg={7}>
+                        <Col lg={12}>
                             <Card className="border-0 shadow-sm h-100">
                                 <CardBody className="p-0">
                                     <div className="p-4 border-bottom">
@@ -149,26 +152,80 @@ const QRCode = () => {
                                     </div>
                                     {loading ? <div className="text-center p-5"><Spinner /></div> : items.length === 0 ? (
                                         <div className="text-center text-muted p-5">No QR codes yet. Create your first one.</div>
-                                    ) : items.map((item) => (
-                                        <div key={item.id} className={`d-flex align-items-center gap-3 p-3 border-bottom ${selected?.id === item.id ? "bg-light" : ""}`}>
-                                            <img src={qrUrl(item.link)} alt="" width="68" height="68" className="rounded border p-1" />
-                                            <div className="flex-grow-1 min-width-0">
-                                                <div className="text-truncate fw-semibold">{item.link}</div>
+                                    ) : (
+                                        <>
+                                            <div key={mainItem.id} className={`d-flex align-items-center gap-3 p-3 border-bottom ${selected?.id === mainItem.id ? "bg-light" : ""}`}>
+                                                <img src={qrUrl(mainItem.link)} alt="" width="68" height="68" className="rounded border p-1" />
+                                                <div className="flex-grow-1 min-width-0">
+                                                    <div className="text-truncate fw-semibold">{mainItem.link}</div>
+                                                </div>
+                                                <div className="d-flex gap-1">
+                                                    <Button color="light" title="Preview" onClick={() => {
+                                                        setSelected(mainItem);
+                                                        setShowQRModal(true);
+                                                    }}><i className="ri-eye-line" /></Button>
+                                                    <Button color="light" title="Download" onClick={() => downloadQRCode(mainItem)}><i className="ri-download-2-line" /></Button>
+                                                </div>
                                             </div>
-                                            <div className="d-flex gap-1">
-                                                <Button color="light" title="Preview" onClick={() => setSelected(item)}><i className="ri-eye-line" /></Button>
-                                                <Button color="light" title="Download" onClick={() => downloadQRCode(item)}><i className="ri-download-2-line" /></Button>
-                                                <Button color="light" title="Edit" onClick={() => openEdit(item)}><i className="ri-pencil-line" /></Button>
-                                                <Button color="light" title="Delete" onClick={() => setDeleteId(item.id)}><i className="ri-delete-bin-line text-danger" /></Button>
-                                            </div>
-                                        </div>
-                                    ))}
+                                            {items.map((item) => (
+                                                <div key={item.id} className={`d-flex align-items-center gap-3 p-3 border-bottom ${selected?.id === item.id ? "bg-light" : ""}`}>
+                                                    <img src={qrUrl(item.link)} alt="" width="68" height="68" className="rounded border p-1" />
+                                                    <div className="flex-grow-1 min-width-0">
+                                                        <div className="text-truncate fw-semibold">{item.link}</div>
+                                                    </div>
+                                                    <div className="d-flex gap-1">
+                                                        <Button color="light" title="Preview" onClick={() => {
+                                                            setSelected(item);
+                                                            setShowQRModal(true);
+                                                        }}><i className="ri-eye-line" /></Button>
+                                                        <Button color="light" title="Download" onClick={() => downloadQRCode(item)}><i className="ri-download-2-line" /></Button>
+                                                        <Button color="light" title="Edit" onClick={() => openEdit(item)}><i className="ri-pencil-line" /></Button>
+                                                        <Button color="light" title="Delete" onClick={() => setDeleteId(item.id)}><i className="ri-delete-bin-line text-danger" /></Button>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </>
+                                    )}
                                 </CardBody>
                             </Card>
                         </Col>
                     </Row>
                 </Container>
             </div>
+
+            <Modal isOpen={showQRModal} centered toggle={() => setShowQRModal(false)}>
+                <ModalHeader toggle={() => setShowQRModal(false)}></ModalHeader>
+                <ModalBody>
+                    <Card className="border-0 shadow-sm h-100">
+                        <CardBody className="p-4">
+                            <div className="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <h5 className="mb-1">Live preview</h5>
+                                    <span className="text-muted small">{selected ? "Selected destination" : "Choose a code to preview"}</span>
+                                </div>
+                                <span className="badge bg-light text-primary">HD {QR_SIZE}px</span>
+                            </div>
+                            {selected ? (
+                                <React.Fragment>
+                                    <div className="bg-light rounded-3 p-3 text-center mb-3 position-relative">
+                                        <img src={qrUrl(selected.link)} alt="QR code preview" className="img-fluid" style={{ maxHeight: 300 }} />
+                                    </div>
+                                    <div className="text-truncate fw-semibold mb-1">{selected.link}</div>
+                                    <div className="text-muted small mb-3">Download produces a {QR_SIZE} x {QR_SIZE} PNG.</div>
+                                    <Button color="dark" className="w-100" onClick={() => downloadQRCode(selected)}>
+                                        <i className="ri-download-2-line me-1" /> Download PNG
+                                    </Button>
+                                </React.Fragment>
+                            ) : (
+                                <div className="text-center text-muted py-5">
+                                    <i className="ri-qr-code-line display-4 d-block mb-3 text-primary" />
+                                    Select a saved QR code to see it here.
+                                </div>
+                            )}
+                        </CardBody>
+                    </Card>
+                </ModalBody>                   
+            </Modal>
 
             <Modal isOpen={showModal} centered toggle={() => setShowModal(false)}>
                 <ModalHeader toggle={() => setShowModal(false)}>{editId ? "Edit QR code" : "Create QR code"}</ModalHeader>

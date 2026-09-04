@@ -8,6 +8,6 @@ module.exports = {
 		FILE_URI: "https://apidemo.chhayvann.com.kh/uploads",
 		// BASE_URL: "http://127.0.0.1:8000/api",
 		// FILE_URI: "http://127.0.0.1:8000/uploads",
-		// WEBSITE: "https://camgotech.com",
+		WEBSITE: "https://demo.chhayvann.com.kh/",
 	},
 };
