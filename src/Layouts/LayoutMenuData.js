@@ -223,6 +223,16 @@ const Navdata = () => {
 			},
 		},
 		{
+			id: "qr-code",
+			label: "QR Code Studio",
+			icon: "mdi mdi-qrcode",
+			link: "/qr-code",
+			role: useCan("site-setting"),
+			click: function (e) {
+				e.preventDefault();
+			},
+		},
+		{
 			id: "exchange-rate",
 			label: "Exchange Rate",
 			icon: "mdi mdi-cash-multiple",

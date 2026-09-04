@@ -18,6 +18,7 @@ import BreadCrumb from "../../../Components/Common/BreadCrumb";
 
 import withRouter from "../../../Components/Common/withRouter";
 import LayoutNav from "./LayoutNav";
+import VideoTradingComponents from "./VideoTradingComponents";
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
@@ -178,102 +179,97 @@ const HowTrade = () => {
 											</span>
 										) : (
 											<Row>
-												<Col xl={8}>
+												<Col xl={12}>
 													<TabContent activeTab={titleTap}>
 														<TabPane tabId={"ENG"} id="eng">
-															<div className="mb-3">
-																<Label className="form-label" htmlFor="subtitle-input">
-																	Subtitle
-																</Label>
-																<Input
-																	type="text"
-																	className="form-control"
-																	id="subtitle-input"
-																	placeholder="Enter text"
-																	name="subtitle"
-																	onChange={settingForm.handleChange}
-																	onBlur={settingForm.handleBlur}
-																	value={settingForm.values.subtitle}
-																	invalid={settingForm.touched.subtitle && settingForm.errors.subtitle ? true : false}
-																/>
-															</div>
-															<div className="mb-3">
-																<Label className="form-label" htmlFor="title-input">
-																	Title
-																</Label>
-																<Input
-																	type="text"
-																	className="form-control"
-																	id="title-input"
-																	placeholder="Enter text"
-																	name="title"
-																	onChange={settingForm.handleChange}
-																	onBlur={settingForm.handleBlur}
-																	value={settingForm.values.title}
-																	invalid={settingForm.touched.title && settingForm.errors.title ? true : false}
-																/>
-															</div>
+															<Row>
+																<Col md={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="subtitle-input">
+																			Subtitle
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="subtitle-input"
+																			placeholder="Enter text"
+																			name="subtitle"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.subtitle}
+																			invalid={settingForm.touched.subtitle && settingForm.errors.subtitle ? true : false}
+																		/>
+																	</div>
+																</Col>
+																<Col md={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="title-input">
+																			Title
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="title-input"
+																			placeholder="Enter text"
+																			name="title"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.title}
+																			invalid={settingForm.touched.title && settingForm.errors.title ? true : false}
+																		/>
+																	</div>
+																</Col>
+															</Row>
 															<div className="mb-3">
 																<Label>Description</Label>
 																<TinymceEditor onUploadImage={handleEditorChange} initDataValue={contentDesc} />
 															</div>
 														</TabPane>
 														<TabPane tabId={"KHM"} id="khm">
-															<div className="mb-3">
-																<Label className="form-label" htmlFor="subtitle-km-input">
-																	Subtitle Khmer
-																</Label>
-																<Input
-																	type="text"
-																	className="form-control"
-																	id="subtitle-km-input"
-																	placeholder="Enter text"
-																	name="subtitleKm"
-																	onChange={settingForm.handleChange}
-																	onBlur={settingForm.handleBlur}
-																	value={settingForm.values.subtitleKm}
-																	invalid={settingForm.touched.subtitleKm && settingForm.errors.subtitleKm ? true : false}
-																/>
-															</div>
-															<div className="mb-3">
-																<Label className="form-label" htmlFor="companyName-km-input">
-																	Title Khmer
-																</Label>
-																<Input
-																	type="text"
-																	className="form-control"
-																	id="titleKm-input"
-																	placeholder="Enter text"
-																	name="titleKm"
-																	onChange={settingForm.handleChange}
-																	onBlur={settingForm.handleBlur}
-																	value={settingForm.values.titleKm}
-																	invalid={settingForm.touched.titleKm && settingForm.errors.titleKm ? true : false}
-																/>
-															</div>
+															<Row>
+																<Col md={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="subtitle-km-input">
+																			Subtitle Khmer
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="subtitle-km-input"
+																			placeholder="Enter text"
+																			name="subtitleKm"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.subtitleKm}
+																			invalid={settingForm.touched.subtitleKm && settingForm.errors.subtitleKm ? true : false}
+																		/>
+																	</div>
+																</Col>
+																<Col md={6}>
+																	<div className="mb-3">
+																		<Label className="form-label" htmlFor="companyName-km-input">
+																			Title Khmer
+																		</Label>
+																		<Input
+																			type="text"
+																			className="form-control"
+																			id="titleKm-input"
+																			placeholder="Enter text"
+																			name="titleKm"
+																			onChange={settingForm.handleChange}
+																			onBlur={settingForm.handleBlur}
+																			value={settingForm.values.titleKm}
+																			invalid={settingForm.touched.titleKm && settingForm.errors.titleKm ? true : false}
+																		/>
+																	</div>
+																</Col>
+															</Row>
 															<div className="mb-3">
 																<Label>Description Khmer</Label>
 																<TinymceEditor onUploadImage={handleEditorChangeKm} initDataValue={contentKmDesc} />
 															</div>
 														</TabPane>
 													</TabContent>
-
-													<div className="mb-3">
-														<Label className="form-label" htmlFor="video-link-input">
-															Video Link
-														</Label>
-														<Input
-															type="text"
-															className="form-control"
-															id="video-link-input"
-															placeholder="Enter link"
-															name="linkVideo"
-															onChange={settingForm.handleChange}
-															onBlur={settingForm.handleBlur}
-															value={settingForm.values.linkVideo}
-															invalid={settingForm.touched.linkVideo && settingForm.errors.linkVideo ? true : false}
-														/>
-													</div>
 
 													<div className="mb-3">
 														<Label className="form-label" htmlFor="link-input">
@@ -290,27 +286,6 @@ const HowTrade = () => {
 															value={settingForm.values.link}
 															invalid={settingForm.touched.link && settingForm.errors.link ? true : false}
 														/>
-													</div>
-												</Col>
-												<Col xl={4}>
-													<div className="mb-3">
-														<Label className="form-label" htmlFor="thumbnail-input">
-															Thumbnail <small className="text-danger">(570x450 pixel)</small>
-														</Label>
-														<div className="position-relative d-block mx-auto">
-															<div style={{ width: "100%" }}>
-																<FilePond
-																	labelIdle='<span class="filepond--label-action">Choose Image</span>'
-																	files={file}
-																	onupdatefiles={setFile}
-																	allowMultiple={false}
-																	maxFiles={1}
-																	name="file"
-																	server={`${api.BASE_URL}/save-image/site-setting`}
-																	className="filepond filepond-input-multiple"
-																/>
-															</div>
-														</div>
 													</div>
 												</Col>
 											</Row>
@@ -340,7 +315,9 @@ const HowTrade = () => {
 						</Col>
 					</Row>
 				</Container>
+				<VideoTradingComponents />
 			</div>
+			
 		</React.Fragment>
 	);
 };
