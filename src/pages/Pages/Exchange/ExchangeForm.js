@@ -68,6 +68,11 @@ const ExchangeForm = (props) => {
 		};
 	}, [id, dispatch]);
 
+	const cutHttps = (value) => {
+		const item = String(value).split("uploads");
+		return item.length > 1 ? item[1] : "";
+	}
+
 	useEffect(() => {
 		if (exchange) {
 			setContentDesc(exchange.content);
@@ -75,7 +80,7 @@ const ExchangeForm = (props) => {
 			if (exchange.image) {
 				setFile([
 					{
-						source: exchange.image,
+						source: cutHttps(exchange.image) ? cutHttps(exchange.image) : exchange.image,
 						options: {
 							type: "local",
 						},

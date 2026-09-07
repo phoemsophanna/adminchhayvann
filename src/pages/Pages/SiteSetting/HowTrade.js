@@ -135,7 +135,8 @@ const HowTrade = () => {
 									settingForm.handleSubmit();
 									return false;
 								}}
-								action="#"
+								action="#" 
+								style={{display: "none"}}
 							>
 								{/* <h5 className="fs-14 mb-3">General</h5> */}
 								<Card>

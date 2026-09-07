@@ -48,6 +48,13 @@ const VideoTradingComponents = () => {
         initialValues: {
             id: editId || "",
             videoLink: "",
+            subtitle_eng: "",
+            subtitle_km: "",
+            title_eng: "",
+            title_km: "",
+            des_eng: "",
+            des_km: "",
+            link: "",
             image: "",
             ordering: "",
             status: true,
@@ -80,6 +87,13 @@ const VideoTradingComponents = () => {
                     form.setValues({
                         id: d.id,
                         videoLink: d.videoLink || "",
+                        subtitle_eng: d.subtitle_eng || "",
+                        subtitle_km: d.subtitle_km || "",
+                        title_eng: d.title_eng || "",
+                        title_km: d.title_km || "",
+                        des_eng: d.des_eng || "",
+                        des_km: d.des_km || "",
+                        link: d.link || "",
                         image: d.image || "",
                         ordering: d.ordering || "",
                         status: d.status ? true : false,
@@ -96,6 +110,8 @@ const VideoTradingComponents = () => {
 
     const columns = useMemo(() => [
         { Header: "ID", accessor: "id", Cell: ({ row }) => <span className="fw-semibold">{row.original.id}</span> },
+        { Header: "Title (ENG)", accessor: "title_eng" },
+        { Header: "Title (KHM)", accessor: "title_km" },
         { Header: "Video Link", accessor: "videoLink" },
         { Header: "Image", accessor: "image", Cell: (cell) => <img src={cell.value ? api.FILE_URI + cell.value : defaultImage} alt="" style={{ width: 64, height: 36, objectFit: "cover" }} /> },
         { Header: "Ordering", accessor: "ordering" },
@@ -161,14 +177,81 @@ const VideoTradingComponents = () => {
                 </Row>
             </Container>
 
-            <Modal isOpen={showModal} backdrop={"static"} centered>
-                <ModalHeader toggle={() => { setShowModal(false); setEditId(null); }}>{editId ? 'Update Trading Video' : 'Create Trading Video'}</ModalHeader>
-                <ModalBody>
+            <Modal isOpen={showModal} backdrop={"static"} centered size="xl" scrollable>
+                <ModalHeader className="border-bottom bg-light" toggle={() => { setShowModal(false); setEditId(null); }}>
+                    <div className="d-flex align-items-center gap-2">
+                        <span className="avatar-xs rounded-circle bg-primary-subtle text-primary d-flex align-items-center justify-content-center">
+                            <i className="ri-video-line"></i>
+                        </span>
+                        <span>{editId ? 'Update Trading Video' : 'Create Trading Video'}</span>
+                    </div>
+                </ModalHeader>
+                <ModalBody className="p-4">
                     <Form onSubmit={(e) => { e.preventDefault(); form.handleSubmit(); return false; }}>
-                        <div className="mb-3">
-                            <Label className="form-label">Video Link</Label>
-                            <Input type="text" name="videoLink" onChange={form.handleChange} value={form.values.videoLink} />
+                        <div className="border-bottom pb-2 mb-3">
+                            <h6 className="text-primary mb-1">Content</h6>
+                            <p className="text-muted mb-0 small">Add the video copy in both supported languages.</p>
                         </div>
+
+                        <Row>
+                            <Col md={6}>
+                                <div className="mb-3">
+                                    <Label className="form-label" htmlFor="title_eng">Title (English)</Label>
+                                    <Input id="title_eng" name="title_eng" placeholder="Enter English title" onChange={form.handleChange} value={form.values.title_eng} />
+                                </div>
+                            </Col>
+                            <Col md={6}>
+                                <div className="mb-3">
+                                    <Label className="form-label" htmlFor="title_km">Title (Khmer)</Label>
+                                    <Input id="title_km" name="title_km" placeholder="Enter Khmer title" onChange={form.handleChange} value={form.values.title_km} />
+                                </div>
+                            </Col>
+                            <Col md={6}>
+                                <div className="mb-3">
+                                    <Label className="form-label" htmlFor="subtitle_eng">Subtitle (English)</Label>
+                                    <Input id="subtitle_eng" name="subtitle_eng" placeholder="Enter English subtitle" onChange={form.handleChange} value={form.values.subtitle_eng} />
+                                </div>
+                            </Col>
+                            <Col md={6}>
+                                <div className="mb-3">
+                                    <Label className="form-label" htmlFor="subtitle_km">Subtitle (Khmer)</Label>
+                                    <Input id="subtitle_km" name="subtitle_km" placeholder="Enter Khmer subtitle" onChange={form.handleChange} value={form.values.subtitle_km} />
+                                </div>
+                            </Col>
+                            <Col md={6}>
+                                <div className="mb-3">
+                                    <Label className="form-label" htmlFor="des_eng">Description (English)</Label>
+                                    <Input type="textarea" rows="4" id="des_eng" name="des_eng" placeholder="Enter English description" onChange={form.handleChange} value={form.values.des_eng} />
+                                </div>
+                            </Col>
+                            <Col md={6}>
+                                <div className="mb-3">
+                                    <Label className="form-label" htmlFor="des_km">Description (Khmer)</Label>
+                                    <Input type="textarea" rows="4" id="des_km" name="des_km" placeholder="Enter Khmer description" onChange={form.handleChange} value={form.values.des_km} />
+                                </div>
+                            </Col>
+                        </Row>
+
+                        <div className="border-bottom pb-2 mb-3 mt-2">
+                            <h6 className="text-primary mb-1">Media &amp; Links</h6>
+                            <p className="text-muted mb-0 small">Connect the video and its call-to-action destination.</p>
+                        </div>
+
+                        <Row>
+                            <Col md={6}>
+                                <div className="mb-3">
+                                    <Label className="form-label" htmlFor="videoLink">Video Link</Label>
+                                    <Input type="text" id="videoLink" name="videoLink" placeholder="https://youtube.com/..." onChange={form.handleChange} value={form.values.videoLink} />
+                                </div>
+                            </Col>
+                            <Col md={6}>
+                                <div className="mb-3">
+                                    <Label className="form-label" htmlFor="link">Button Link</Label>
+                                    <Input type="text" id="link" name="link" placeholder="https://example.com/..." onChange={form.handleChange} value={form.values.link} />
+                                </div>
+                            </Col>
+                        </Row>
+
                         <div className="mb-3">
                             <Label className="form-label">Image</Label>
                             <FilePond
@@ -183,19 +266,27 @@ const VideoTradingComponents = () => {
                             />
                         </div>
 
-                        <div className="mb-3">
-                            <Label className="form-label">Ordering</Label>
-                            <Input type="number" name="ordering" onChange={form.handleChange} value={form.values.ordering || ""} />
-                        </div>
+                        <Row className="align-items-end">
+                            <Col md={6}>
+                                <div className="mb-3">
+                                    <Label className="form-label" htmlFor="ordering">Ordering</Label>
+                                    <Input type="number" id="ordering" name="ordering" onChange={form.handleChange} value={form.values.ordering || ""} />
+                                </div>
+                            </Col>
+                            <Col md={6}>
+                                <div className="form-check form-switch mb-3">
+                                    <Input type="checkbox" id="status" name="status" onChange={(e) => form.setFieldValue('status', e.target.checked)} checked={form.values.status} />
+                                    <Label htmlFor="status" className="form-check-label ms-2">Status: {form.values.status ? 'Active' : 'Inactive'}</Label>
+                                </div>
+                            </Col>
+                        </Row>
 
-                        <div className="form-check form-switch mb-3">
-                            <Input type="checkbox" name="status" onChange={(e) => form.setFieldValue('status', e.target.checked)} checked={form.values.status} />
-                            <Label className="form-check-label ms-2">Status: {form.values.status ? 'Active' : 'Inactive'}</Label>
-                        </div>
-
-                        <div className="text-end">
-                            <Button color="light" className="me-2" onClick={() => { setShowModal(false); setEditId(null); }}>Cancel</Button>
-                            <Button type="submit" color="primary">Save</Button>
+                        <div className="d-flex justify-content-end gap-2 border-top pt-3 mt-2">
+                            <Button color="light" onClick={() => { setShowModal(false); setEditId(null); }}>Cancel</Button>
+                            <Button type="submit" color="primary" disabled={form.isSubmitting}>
+                                {form.isSubmitting ? <Spinner size="sm" className="me-1" /> : <i className="ri-save-line me-1"></i>}
+                                Save
+                            </Button>
                         </div>
                     </Form>
                 </ModalBody>
