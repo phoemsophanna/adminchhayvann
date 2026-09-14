@@ -78,7 +78,6 @@ const ExchangeMenu = () => {
 				// Get first sheet
 				const sheetName = workbook.SheetNames[0];
 				const worksheet = workbook.Sheets[sheetName];
-
 				// Convert to JSON
 				const jsonData = XLSX.utils.sheet_to_json(worksheet);
 				setExcelData(jsonData);
