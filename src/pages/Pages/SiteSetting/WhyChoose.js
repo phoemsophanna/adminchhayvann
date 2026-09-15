@@ -113,6 +113,7 @@ const WhyChoose = () => {
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
 				setTimeout(() => {
+					dispatch(resetSiteSettingFlag());
 					dispatch(getSiteSetting("WHYCHOOSE"));
 					refreshForm();
 				}, 1000);

@@ -91,6 +91,7 @@ const Homepage = () => {
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
 				setTimeout(() => {
+					dispatch(resetSiteSettingFlag());
 					dispatch(getSiteSetting("SERVICE"));
 					refreshForm();
 				}, 1000);

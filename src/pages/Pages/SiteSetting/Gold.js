@@ -57,6 +57,7 @@ const Gold = () => {
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
 				setTimeout(() => {
+					dispatch(resetSiteSettingFlag());
 					dispatch(getSiteSetting("GOLD"));
 					refreshForm();
 				}, 1000);

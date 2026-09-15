@@ -164,6 +164,7 @@ const AboutCompany = () => {
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
 				setTimeout(() => {
+					dispatch(resetSiteSettingFlag());
 					dispatch(getSiteSetting("ABOUTCOMPANY"));
 					refreshForm();
 				}, 1000);

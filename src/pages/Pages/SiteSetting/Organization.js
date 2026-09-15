@@ -74,6 +74,7 @@ const Organization = () => {
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
 				setTimeout(() => {
+					dispatch(resetSiteSettingFlag());
 					dispatch(getSiteSetting("ORGANIZATION"));
 					refreshForm();
 				}, 1000);

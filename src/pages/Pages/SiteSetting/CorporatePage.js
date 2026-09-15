@@ -72,6 +72,7 @@ const CorporatePage = () => {
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
 				setTimeout(() => {
+					dispatch(resetSiteSettingFlag());
 					dispatch(getSiteSetting("CORPORATE"));
 					refreshForm();
 				}, 500);

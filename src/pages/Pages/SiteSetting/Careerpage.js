@@ -73,6 +73,7 @@ const Careerpage = () => {
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
 				setTimeout(() => {
+					dispatch(resetSiteSettingFlag());
 					dispatch(getSiteSetting("CAREER"));
 					refreshForm();
 				}, 1000);

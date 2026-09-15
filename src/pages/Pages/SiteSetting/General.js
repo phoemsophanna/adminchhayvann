@@ -76,6 +76,7 @@ const General = () => {
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
 				setTimeout(() => {
+					dispatch(resetSiteSettingFlag());
 					dispatch(getSiteSetting("GENERAL"));
 					refreshForm();
 				}, 1000);

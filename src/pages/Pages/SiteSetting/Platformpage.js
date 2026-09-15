@@ -149,6 +149,7 @@ const Platformpage = () => {
 			dispatch(saveSiteSetting(values));
 			if (!isLoading && success) {
 				setTimeout(() => {
+					dispatch(resetSiteSettingFlag());
 					dispatch(getSiteSetting("PLATFORM"));
 					refreshForm();
 				}, 1000);
