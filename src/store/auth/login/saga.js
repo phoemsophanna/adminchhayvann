@@ -6,7 +6,7 @@ import { apiError, loginSuccess, logoutUserSuccess, updateUserFailed, updateUser
 
 //Include Both Helper File with needed methods
 import { getFirebaseBackend } from "../../../helpers/firebase_helper";
-import { getUserDetail, postFakeLogin, postJwtLogin, postLogin, postSocialLogin, putUpdateUser } from "../../../helpers/fakebackend_helper";
+import { getUserDetail, getUserLogout, postFakeLogin, postJwtLogin, postLogin, postSocialLogin, putUpdateUser } from "../../../helpers/fakebackend_helper";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -88,6 +88,7 @@ function* userDetail() {
 
 function* logoutUser() {
 	try {
+		const response = yield call(getUserLogout);
 		sessionStorage.removeItem("authUser");
 		if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
 			const fireBaseBackend = getFirebaseBackend();

@@ -17,6 +17,7 @@ export const POST_LOGIN = "/auth/login";
 export const USER_DETAIL = "/auth/user-profile";
 export const UPDATE_USER = "/auth/update-user";
 export const UPDATE_PWD_USER = "/auth/change-password";
+export const USER_LOGOUT = "/auth/logout";
 export const FILE_STORAGE_UPLOAD = "/file-storage/save-image";
 // User Management
 export const USER_MANAGEMENT_URI = "/users";
