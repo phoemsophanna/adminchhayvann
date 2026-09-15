@@ -68,6 +68,7 @@ import Teampage from "../pages/Pages/SiteSetting/Teampage";
 import Platformpage from "../pages/Pages/SiteSetting/Platformpage";
 import Gold from "../pages/Pages/SiteSetting/Gold";
 import QRCode from "../pages/Pages/SiteSetting/QRCode";
+import ActivityMenu from "../pages/Pages/Activity";
 
 const authProtectedRoutes = [
 	{ path: "/dashboard", component: <Dashboard />, role: "dashboard" },
@@ -110,6 +111,7 @@ const authProtectedRoutes = [
 	{ path: "/site-setting/team", component: <Teampage />, role: "site-setting" },
 	{ path: "/site-setting/gold", component: <Gold />, role: "site-setting" },
 	{ path: "/qr-code", component: <QRCode />, role: "site-setting" },
+	{ path: "/activities", component: <ActivityMenu />, role: "activities.view" },
 
 	// New
 	{ path: "/site-setting/platform", component: <Platformpage />, role: "site-setting" },

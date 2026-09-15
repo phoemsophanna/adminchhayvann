@@ -242,6 +242,16 @@ const Navdata = () => {
 				e.preventDefault();
 			},
 		},
+		{
+			id: "activities",
+			label: "Activities Log",
+			icon: "mdi mdi-cash-multiple",
+			link: "/activities",
+			role: useCan("activities.view"),
+			click: function (e) {
+				e.preventDefault();
+			},
+		},
 		// {
 		// 	id: "currency-convert",
 		// 	label: "Currency Convert",

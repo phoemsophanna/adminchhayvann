@@ -120,6 +120,7 @@ const ServiceForm = (props) => {
 			values.content = contentDesc;
 			values.contentKm = contentKmDesc;
 			values.image = file?.length > 0 ? file[0]?.serverId : "";
+			values.slug = String(values.title).toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-");
 			dispatch(createService(values, props.router.navigate));
 		},
 	});

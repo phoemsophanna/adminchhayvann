@@ -483,26 +483,26 @@ const RoleForm = (props) => {
 														<div className="form-checkbox">
 															<Input
 																type="checkbox"
-																id={`check-corporate-form`}
-																className="checkPermission"
-																name={`check-corporate-form`}
-																value={`corporate-form`}
-																checked={activePermission?.some((q) => q.includes("corporate-form")) || false}
-																onChange={(e) => addGroupPermission(e)}
-															/> <label htmlFor="check-corporate-form">Corporate Register List</label>
-														</div>
-													</div>
-													<div className="mb-3">
-														<div className="form-checkbox">
-															<Input
-																type="checkbox"
 																id={`check-individual-form`}
 																className="checkPermission"
 																name={`check-individual-form`}
 																value={`individual-form`}
 																checked={activePermission?.some((q) => q.includes("individual-form")) || false}
 																onChange={(e) => addGroupPermission(e)}
-															/> <label htmlFor="check-individual-form">Individual Register List</label>
+															/> <label htmlFor="check-individual-form">Open Account Register List</label>
+														</div>
+													</div>
+													<div className="mb-3">
+														<div className="form-checkbox">
+															<Input
+																type="checkbox"
+																id={`check-activities`}
+																className="checkPermission"
+																name={`check-activities`}
+																value={`activities`}
+																checked={activePermission?.some((q) => q.includes("activities")) || false}
+																onChange={(e) => addGroupPermission(e)}
+															/> <label htmlFor="check-activities">Activity Logs</label>
 														</div>
 													</div>
 												</TabPane>
@@ -939,13 +939,13 @@ const RoleForm = (props) => {
 															</div>
 														</div>
 													</div>
-													
+
 													<div className="mb-3">
 														<div className="form-checkbox">
-															<h6 htmlFor="check-corporate-form">Corporate Register List</h6>
+															<h6 htmlFor="check-individual-form">Open Account Register List</h6>
 															<div className="mb-3 mt-1 subPermission">
 																{
-																	permission[`corporate-form`]?.map((q,index) => {
+																	permission[`individual-form`]?.map((q,index) => {
 																		return <div key={index} className="subItemPermission">
 																			<Input
 																				type="checkbox"
@@ -965,10 +965,10 @@ const RoleForm = (props) => {
 
 													<div className="mb-3">
 														<div className="form-checkbox">
-															<h6 htmlFor="check-individual-form">Individual Register List</h6>
+															<h6 htmlFor="check-activities">Activity Log</h6>
 															<div className="mb-3 mt-1 subPermission">
 																{
-																	permission[`individual-form`]?.map((q,index) => {
+																	permission[`activities`]?.map((q,index) => {
 																		return <div key={index} className="subItemPermission">
 																			<Input
 																				type="checkbox"

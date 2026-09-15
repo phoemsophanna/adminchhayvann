@@ -167,6 +167,7 @@ const NewsForm = (props) => {
 			values.contentKm = contentDescKm;
 			values.category_id = selectedItem ? selectedItem?.value : "";
 			values.image = file?.length > 0 ? file[0]?.serverId : "";
+			values.slug = String(values.title).toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-");
 			dispatch(createNews(values, props.router.navigate));
 		},
 	});
