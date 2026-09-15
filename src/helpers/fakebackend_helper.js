@@ -66,7 +66,7 @@ export const postSocialLogin = (data) => api.create(url.SOCIAL_LOGIN, data);
 // User
 export const postLogin = (data) => api.create(url.POST_LOGIN, data);
 export const getUserDetail = () => api.get(url.USER_DETAIL, null);
-export const getUserLogout = () => api.get(url.USER_LOGOUT, null);
+export const getUserLogout = () => api.create(url.USER_LOGOUT, null);
 export const putUpdateUser = (body) => api.put(url.UPDATE_USER, body);
 export const putChangePwdUser = (body) => api.put(url.UPDATE_PWD_USER, body);
 
