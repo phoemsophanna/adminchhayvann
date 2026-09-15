@@ -33,6 +33,26 @@ const Navdata = () => {
 			},
 		},
 		{
+			id: "exchange-rate",
+			label: "Exchange Rate",
+			icon: "mdi mdi-cash-multiple",
+			link: "/exchange-menu",
+			role: useCan("exchange-menu.view"),
+			click: function (e) {
+				e.preventDefault();
+			},
+		},
+		{
+			id: "product-menu",
+			label: "Product",
+			icon: "mdi mdi-package",
+			link: "/product-menu",
+			role: useCan("product-menu.view"),
+			click: function (e) {
+				e.preventDefault();
+			},
+		},
+		{
 			id: "service",
 			label: "Service",
 			role: useCan("service-menu.view"),
@@ -98,16 +118,6 @@ const Navdata = () => {
 			icon: "mdi mdi-seal",
 			link: "/award-menu",
 			role: useCan("award-menu.view"),
-			click: function (e) {
-				e.preventDefault();
-			},
-		},
-		{
-			id: "product-menu",
-			label: "Product",
-			icon: "mdi mdi-package",
-			link: "/product-menu",
-			role: useCan("product-menu.view"),
 			click: function (e) {
 				e.preventDefault();
 			},
@@ -223,31 +233,21 @@ const Navdata = () => {
 			},
 		},
 		{
+			id: "page-banner",
+			label: "Page Setting",
+			icon: "mdi mdi-image-album",
+			link: "/page-banner",
+			role: useCan("page-banner.view"),
+			click: function (e) {
+				e.preventDefault();
+			},
+		},
+		{
 			id: "qr-code",
 			label: "QR Code Studio",
 			icon: "mdi mdi-qrcode",
 			link: "/qr-code",
 			role: useCan("site-setting"),
-			click: function (e) {
-				e.preventDefault();
-			},
-		},
-		{
-			id: "exchange-rate",
-			label: "Exchange Rate",
-			icon: "mdi mdi-cash-multiple",
-			link: "/exchange-menu",
-			role: useCan("exchange-menu.view"),
-			click: function (e) {
-				e.preventDefault();
-			},
-		},
-		{
-			id: "activities",
-			label: "Activities Log",
-			icon: "mdi mdi-cash-multiple",
-			link: "/activities",
-			role: useCan("activities.view"),
 			click: function (e) {
 				e.preventDefault();
 			},
@@ -262,16 +262,6 @@ const Navdata = () => {
 		// 		e.preventDefault();
 		// 	},
 		// },
-		{
-			id: "page-banner",
-			label: "Page Setting",
-			icon: "mdi mdi-image-album",
-			link: "/page-banner",
-			role: useCan("page-banner.view"),
-			click: function (e) {
-				e.preventDefault();
-			},
-		},
 		{
 			id: "role",
 			label: "Role",
@@ -288,6 +278,16 @@ const Navdata = () => {
 			icon: "mdi mdi-account-group",
 			link: "/user-management",
 			role: useCan("user-management.view"),
+			click: function (e) {
+				e.preventDefault();
+			},
+		},
+		{
+			id: "activities",
+			label: "Activities Log",
+			icon: "mdi mdi-cash-multiple",
+			link: "/activities",
+			role: useCan("activities.view"),
 			click: function (e) {
 				e.preventDefault();
 			},
