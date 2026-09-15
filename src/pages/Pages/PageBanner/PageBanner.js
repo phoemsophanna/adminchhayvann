@@ -60,6 +60,7 @@ const PageBanner = () => {
 			metaDesc: pageBannerDetail.pageBanner?.metaDesc || "",
 			isActive: pageBannerDetail.pageBanner ? (pageBannerDetail.pageBanner.isActive ? true : false) : true,
 			image: pageBannerDetail.pageBanner?.image || "",
+			isHide: pageBannerDetail?.pageBanner?.isHide || 0
 		},
 		onSubmit: (values) => {
 			values.image = file?.length > 0 ? file[0]?.serverId : "";
@@ -266,6 +267,22 @@ const PageBanner = () => {
 							<Label className="form-check-label" for="isActive">
 								Status: <span className="fw-bolder">{pageBannerValidation.values.isActive ? "Active" : "In-Active"}</span>
 							</Label>
+						</div>
+
+						<div className="form-check form-switch form-switch-md mb-2" dir="ltr">
+							<Label className="form-check-label" for="isHide">
+								Is Hide
+							</Label>
+							<Input
+								type="checkbox"
+								className="form-check-input"
+								id="isHide"
+								name="isHide"
+								onChange={() => {
+									pageBannerValidation.setFieldValue("isHide", !pageBannerValidation.values.isHide);
+								}}
+								checked={pageBannerValidation.values.isHide}
+							/>
 						</div>
 
 						<div className="text-end">
