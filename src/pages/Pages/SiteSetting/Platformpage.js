@@ -151,7 +151,7 @@ const Platformpage = () => {
 				setTimeout(() => {
 					dispatch(getSiteSetting("PLATFORM"));
 					refreshForm();
-				}, 500);
+				}, 1000);
 			}
 		},
 	});

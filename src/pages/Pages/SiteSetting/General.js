@@ -78,7 +78,7 @@ const General = () => {
 				setTimeout(() => {
 					dispatch(getSiteSetting("GENERAL"));
 					refreshForm();
-				}, 500);
+				}, 1000);
 			}
 		},
 	});

@@ -166,7 +166,7 @@ const AboutCompany = () => {
 				setTimeout(() => {
 					dispatch(getSiteSetting("ABOUTCOMPANY"));
 					refreshForm();
-				}, 500);
+				}, 1000);
 			}
 		},
 	});

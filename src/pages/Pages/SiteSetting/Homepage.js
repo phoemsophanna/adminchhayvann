@@ -97,7 +97,7 @@ const Homepage = () => {
 				setTimeout(() => {
 					dispatch(getSiteSetting("HOMEPAGE"));
 					refreshForm();
-				}, 500);
+				}, 1000);
 			}
 		},
 	});

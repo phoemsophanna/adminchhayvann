@@ -86,7 +86,7 @@ const HowTrade = () => {
 				setTimeout(() => {
 					dispatch(getSiteSetting("HOWTRADE"));
 					refreshForm();
-				}, 500);
+				}, 1000);
 			}
 		},
 	});

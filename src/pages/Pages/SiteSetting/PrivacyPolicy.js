@@ -82,7 +82,7 @@ const PrivacyPolicy = () => {
 				setTimeout(() => {
 					dispatch(getSiteSetting("PRIVACY_POLICY"));
 					refreshForm();
-				}, 500);
+				}, 1000);
 			}
 		},
 	});

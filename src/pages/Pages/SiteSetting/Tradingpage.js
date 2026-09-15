@@ -95,7 +95,7 @@ const Tradingpage = () => {
 				setTimeout(() => {
 					dispatch(getSiteSetting("TRADING"));
 					refreshForm();
-				}, 500);
+				}, 1000);
 			}
 		},
 	});

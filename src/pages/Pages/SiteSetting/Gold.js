@@ -59,7 +59,7 @@ const Gold = () => {
 				setTimeout(() => {
 					dispatch(getSiteSetting("GOLD"));
 					refreshForm();
-				}, 500);
+				}, 1000);
 			}
 		},
 	});

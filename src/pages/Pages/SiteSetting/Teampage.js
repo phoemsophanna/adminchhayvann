@@ -76,7 +76,7 @@ const Teampage = () => {
 				setTimeout(() => {
 					dispatch(getSiteSetting("TEAMPAGE"));
 					refreshForm();
-				}, 500);
+				}, 1000);
 			}
 		},
 	});

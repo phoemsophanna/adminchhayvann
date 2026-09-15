@@ -75,7 +75,7 @@ const Careerpage = () => {
 				setTimeout(() => {
 					dispatch(getSiteSetting("CAREER"));
 					refreshForm();
-				}, 500);
+				}, 1000);
 			}
 		},
 	});

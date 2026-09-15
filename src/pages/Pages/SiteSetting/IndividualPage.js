@@ -82,7 +82,7 @@ const Careerpage = () => {
 				setTimeout(() => {
 					dispatch(getSiteSetting("INDIVIDUAL"));
 					refreshForm();
-				}, 500);
+				}, 1000);
 			}
 		},
 	});

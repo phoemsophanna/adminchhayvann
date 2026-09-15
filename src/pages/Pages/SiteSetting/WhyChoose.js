@@ -115,7 +115,7 @@ const WhyChoose = () => {
 				setTimeout(() => {
 					dispatch(getSiteSetting("WHYCHOOSE"));
 					refreshForm();
-				}, 500);
+				}, 1000);
 			}
 		},
 	});

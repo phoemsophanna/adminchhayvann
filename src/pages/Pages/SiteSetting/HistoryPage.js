@@ -84,7 +84,7 @@ const HistoryPage = () => {
 				setTimeout(() => {
 					dispatch(getSiteSetting("HISTORY"));
 					refreshForm();
-				}, 500);
+				}, 1000);
 			}
 		},
 	});

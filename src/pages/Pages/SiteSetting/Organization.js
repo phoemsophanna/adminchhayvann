@@ -76,7 +76,7 @@ const Organization = () => {
 				setTimeout(() => {
 					dispatch(getSiteSetting("ORGANIZATION"));
 					refreshForm();
-				}, 500);
+				}, 1000);
 			}
 		},
 	});

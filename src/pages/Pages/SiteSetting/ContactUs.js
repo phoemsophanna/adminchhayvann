@@ -116,7 +116,7 @@ const ContactUs = () => {
 				setTimeout(() => {
 					dispatch(getSiteSetting("CONTACT"));
 					refreshForm();
-				}, 500);
+				}, 1000);
 			}
 		},
 	});
