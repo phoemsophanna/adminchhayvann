@@ -114,6 +114,20 @@ const IndividualMenu = () => {
 					</div>
 				),
 			},
+			{
+				Header: "Open Account",
+				accessor: "create_at",
+				filterable: false,
+				Cell: (career) => (
+					<div className="d-flex align-items-center">
+						<div className="flex-grow-1">
+							<h5 className="fs-14 mb-1">
+								{career.row.original.create_at}
+							</h5>
+						</div>
+					</div>
+				),
+			},
 			// {
 			// 	Header: "Status",
 			// 	accessor: "isActive",
